@@ -3,8 +3,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="author" value="Jonathan Cowling">
-  <meta name="date" value="1 Feb 2017">
+  <meta name="author" content="Jonathan Cowling">
+  <meta name="date created" content="1 Feb 2017">
+  <meta name="date edited" content="13 Feb 2017">
   <title>Just Play</title>
 </head>
 <body>
@@ -76,7 +77,6 @@
       print "Location not recognised";
     }
   }
-
 
   ?>
 
