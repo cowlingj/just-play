@@ -35,6 +35,8 @@
     if($errors == FALSE)
     {
       // ROBBIE'S FUNCTION TO SEND INPUTS TO DB...
+    
+    sendRequest(); 
 
  
     $_POST["name"] = $_SESSION["name"];
@@ -57,6 +59,35 @@
       htmlspecialchars($input);
       return $input;
   }
+
+  // Function to send to the database.
+  function sendRequest()
+  {
+    require_once('../config.inc.php');
+    $conn = new msqli(database_host, database_user, database_pass,
+                      group_dbnames[0]);
+    if($conn->connect_error
+    {
+      die("Connection failed: " . $conn->connect_error);
+    } 
+
+    $opponent = "SELECT name FROM users";
+    $result = $conn->query($sql);
+   
+    if ($result->num_rows > 0)
+    {
+      while($row = $result->fetch_assoc())
+      {
+        echo "You have been matched with " . $row["name"];
+      }
+    }
+    else
+    {
+      echo "No oppent found";
+    } 
+    $conn->close();
+  } 
+      
 
   // will check each input matches an expression
   function validateInput()
