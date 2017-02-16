@@ -15,8 +15,38 @@
     
     <?php
     
+      require("../lib/konstantinsFCN.php")
+    
+      //adapted from joel's maps.js file
+      var lat = None;
+      var lng = None;
+      
+      // if GeoLocation API is supported in browser
+      if (navigator.geolocation)
+      {
+        navigator.geolocation.getCurrentPosition
+        (
+        // taking the position reference of user's location 
+        // information from the GeoLocation API to 
+        // create new LatLng object with new center
+          function getPosition(position)
+          {
+            // getting the user's gps position
+            global lat = position.coords.latitude;
+            global lng = position.coords.longitude;
+          },
+          // incompatable with firefox
+          function errorCallback(error) {
+            if (error.code == error.PERMISSION_DENIED)
+            {
+              permissionDeniedContainer.innerHTML = "You denied location permission, silly!";
+            } // end if geoLocation denied
+          }
+        );
+      }
+    
       // an ordered array cointaining references to all matches
-      $rankedMatches = getrankedMatches(uerserID);
+      $rankedMatches = getrankedRequests($_SESSION[userID], lat, lng);
     
       foreach ($rankedMatches as $rankedMatch)
       {
@@ -28,7 +58,7 @@
   </div>
 
 <script type="text/javascript" src="../api/mapsApi.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHxR3s78HL9NqdVy4FiUulKGyAQre04_w&callback=createMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=key=AIzaSyDP9ofPjKpQ3eRwJFOwPgP-BBXgTn9phis&callback=createMap"></script>
 
 </body>
 </html>
