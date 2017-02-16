@@ -66,13 +66,13 @@
     require_once('../config.inc.php');
     $conn = new msqli(database_host, database_user, database_pass,
                       group_dbnames[0]);
-    if($conn->connect_error
+    if($conn->connect_error())
     {
-      die("Connection failed: " . $conn->connect_error);
+      die("Connection failed: " . $conn->connect_error());
     } 
 
     $opponent = "SELECT name FROM users";
-    $result = $conn->query($sql);
+    $result = $conn->query($opponent);
    
     if ($result->num_rows > 0)
     {
