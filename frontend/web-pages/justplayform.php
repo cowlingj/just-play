@@ -29,25 +29,33 @@
     $_SESSION["locationY"] = makeSafe($_POST["locationY"]);
     $_SESSION["disabled"] = makeSafe($_POST["disabled"]);
 
+    // ROBBIE'S FUNCTION TO SEND INPUTS TO DB...
+    
+    // go to new page
+    header('location:justplayformresponse.php');
+
+/*
     // check inputs are valid
     $errors = validateInput();
 
-    if($errors == FALSE)
+    if(! $errors)
     {
       // ROBBIE'S FUNCTION TO SEND INPUTS TO DB...
     
     sendRequest(); 
 
  
+
     $_POST["name"] = $_SESSION["name"];
     $_POST["sport"] = $_SESSION["sport"];
     $_POST["locationX"] = $_SESSION["locationX"];
     $_POST["locationY"] = $_SESSION["locationY"];
     $_POST["disabled"] = $_SESSION["disabled"];
 
-    // go to new page
-    header('location:justplayformresponse.php');
+
+    
     }
+  */
 
   }
 
@@ -96,30 +104,40 @@
     if (!preg_match("/^[a-zA-Z ]*$/",$_SESSION["name"]))
     {
       print "Invalid name: only letters and white space allowed";
+      return TRUE;
     }
     //check locatonX is a number
-    if (!preg_match("/^[0-9.,]*$/",$_SESSION["locationX"]))
+    else if (!preg_match("/^[0-9.,]*$/",$_SESSION["locationX"]))
     {
       print "Location not recognised";
+      return TRUE;
     }
     //check locationY is a number
-    if (!preg_match("/^[0-9.,]*$/",$_SESSION["locationY"]))
+    else if (!preg_match("/^[0-9.,]*$/",$_SESSION["locationY"]))
     {
       print "Location not recognised";
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
     }
   }
+*/
 
   ?>
 
   <form method="post" action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>">
-    Name:<input type="text" name="name"><br>
+    Name:<input type="text" name="name"
+                pattern="[A-Za-z ]+" title="Letters and spaces only"><br>
     Sport:<select name="sport">
             <option value="football">Football</option>
             <option value="rugby">Rugby</option>
             <option value="basketball">Basketball</option>
             <option value="tennis">Tennis</option>
           </select><br>
-    Location x y:<input type="number" name="locationX"><input type="number" name="locationY"><br>
+    Location x:<input type="number" name="locationX">
+    Location y:<input type="number" name="locationY"><br>
     Disabled:<input type="checkbox" name="disabled"><br>
     <input type="submit" value="submit">
   </form>
