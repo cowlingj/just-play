@@ -54,6 +54,7 @@
   // Function to send to the database.
   function sendRequest()
   {
+    /* this function needs to be updated to 'INSERT' data into the database */
     require_once('../lib/config.inc.php');
     $conn = new msqli(database_host, database_user, database_pass,
                       group_dbnames[0]);
