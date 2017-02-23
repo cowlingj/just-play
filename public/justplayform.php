@@ -15,8 +15,8 @@
   // declare values in the form
   $_SESSION["name"] = null;
   $_SESSION["sport"] = null;
-  $_SESSION["locationX"] = null;
-  $_SESSION["locationY"] = null;
+  $_SESSION["latitude"] = null;
+  $_SESSION["longitude"] = null;
   $_SESSION["disabled"] = null;
 
   // when form has been submitted carry out the following
@@ -25,38 +25,21 @@
     // make inputs safe (prevent XXS)
     $_SESSION["name"] = makeSafe($_POST["name"]);
     $_SESSION["sport"] = makeSafe($_POST["sport"]);
-    $_SESSION["locationX"] = makeSafe($_POST["locationX"]);
-    $_SESSION["locationY"] = makeSafe($_POST["locationY"]);
+    $_SESSION["latitude"] = makeSafe($_POST["latitude"]);
+    $_SESSION["longitude"] = makeSafe($_POST["longitude"]);
     $_SESSION["disabled"] = makeSafe($_POST["disabled"]);
 
-    // ROBBIE'S FUNCTION TO SEND INPUTS TO DB...
-    
-    // go to new page
-    header('location:justplayformresponse.php');
-
-/*
-    // check inputs are valid
-    $errors = validateInput();
-
-    if(! $errors)
-    {
-      // ROBBIE'S FUNCTION TO SEND INPUTS TO DB...
-    
+    // robbie's function
     sendRequest(); 
-
  
-
     $_POST["name"] = $_SESSION["name"];
     $_POST["sport"] = $_SESSION["sport"];
     $_POST["locationX"] = $_SESSION["locationX"];
     $_POST["locationY"] = $_SESSION["locationY"];
     $_POST["disabled"] = $_SESSION["disabled"];
 
-
-    
-    }
-  */
-
+    // go to new page
+    header('location:justplayformresponse.php');
   }
 
   // get rid of extra spaces, slashes and other nasty things
@@ -71,7 +54,7 @@
   // Function to send to the database.
   function sendRequest()
   {
-    require_once('../config.inc.php');
+    require_once('../lib/config.inc.php');
     $conn = new msqli(database_host, database_user, database_pass,
                       group_dbnames[0]);
     if($conn->connect_error())
@@ -95,50 +78,24 @@
     } 
     $conn->close();
   } 
-      
-
-  // will check each input matches an expression
-  function validateInput()
-  {
-    //first check for valid name
-    if (!preg_match("/^[a-zA-Z ]*$/",$_SESSION["name"]))
-    {
-      print "Invalid name: only letters and white space allowed";
-      return TRUE;
-    }
-    //check locatonX is a number
-    else if (!preg_match("/^[0-9.,]*$/",$_SESSION["locationX"]))
-    {
-      print "Location not recognised";
-      return TRUE;
-    }
-    //check locationY is a number
-    else if (!preg_match("/^[0-9.,]*$/",$_SESSION["locationY"]))
-    {
-      print "Location not recognised";
-      return TRUE;
-    }
-    else
-    {
-      return FALSE;
-    }
-  }
-*/
-
+  
   ?>
 
   <form method="post" action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>">
-    Name:<input type="text" name="name"
-                pattern="[A-Za-z ]+" title="Letters and spaces only"><br>
-    Sport:<select name="sport">
+    Name:<input type="text" name="name" required><br>
+    Sport:<select name="sport" required>
             <option value="football">Football</option>
             <option value="rugby">Rugby</option>
             <option value="basketball">Basketball</option>
             <option value="tennis">Tennis</option>
           </select><br>
-    Location x:<input type="number" name="locationX">
-    Location y:<input type="number" name="locationY"><br>
+    <!-- 
+        by the end of sprint 2 this information will be obtained
+        via javascript, so no form inputs will be required
+    -->
+    Location x y:<input type="number" name="latitude" required><input type="number" name="longitude" required><br>
     Disabled:<input type="checkbox" name="disabled"><br>
+
     <input type="submit" value="submit">
   </form>
 </body>

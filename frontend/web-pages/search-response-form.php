@@ -17,6 +17,8 @@
     
       require("../lib/konstantinsFCN.php")
     
+    ?>
+    <script type="text/javascript">
       //adapted from joel's maps.js file
       var lat = None;
       var lng = None;
@@ -44,7 +46,10 @@
           }
         );
       }
+    </script>
     
+    <?php
+
       // an ordered array cointaining references to all matches
       $rankedMatches = getrankedRequests($_SESSION[userID], lat, lng);
     
