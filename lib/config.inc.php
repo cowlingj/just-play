@@ -7,5 +7,4 @@ $database_name = "mbaxarm3";
 $group_dbnames = array(
     "2016_comp10120_m3",);
 
-
 ?>
