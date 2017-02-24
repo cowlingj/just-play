@@ -17,8 +17,7 @@ function downloadURL(url, callback) {
 } // end downloadURL
 
 
-// actually calling the function downloadURL()
-
+// actually calling the function downloadURL() to generate the markers from XML
 
 downloadURL("../../lib/generateXML.php", function (data) {
   var xml = data.responseXML;
@@ -34,7 +33,11 @@ downloadURL("../../lib/generateXML.php", function (data) {
       parseFloat(latitude), parseFloat(longitude)
     );
 
-
-    
+    // this creates a marker at a given point, with a name
+    var marker = new google.maps.Marker({
+      lat: latitude,
+      lng: longitude,
+      label: name
+    });
   }
 });
