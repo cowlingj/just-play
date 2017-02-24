@@ -66,5 +66,56 @@
 			
 			return $requests;
 		}
+		abstract class MatchOutCome
+		{
+		    const WIN =0;
+		    const LOSE=1;
+		    const DRAW=2;
+		    // etc.
+		}
+		/**
+		 * Returns an array with the updated player scores. Indexed by "ply1" and "ply2"
+		 * @param float $ply1Elo Elo of player 1 
+		 * @param float $ply2Elo Elo of player 2 
+		 * @param $outcome a MatchOutCome enum
+		 * @return An array with the scores
+		 */
+		function recalculateElo($ply1Elo ,$ply2Elo ,$outcome)
+		{
+			//Calculate transformed rating for each player 
+			$R1=pow(10,$ply1Elo/400);//Player 1
+			$R2=pow(10,$ply2Elo/400);//Player 2
+
+			//Calculate expecter score for each player
+			$e1=$R1/($R1+$R2);
+			$e2=$R2/($R1+$R2);
+
+			//Not-so magic constants
+			$s1=-1;
+			$s2=-1;
+			switch ($outcome)
+			{
+				//Player 1 WON
+				case MatchOutCome::WIN:
+					$s1=1;
+					$s2=0;
+					break;
+				//Player 1 LOST the match
+				case MatchOutCome::LOSE:
+					$s1=0;
+					$s2=0;
+					break;
+				//Match ended in a draw
+				case MatchOutCome::DRAW;
+					$s1=0.5;
+					$s2=0.5;
+			}
+
+			$updatedElos = array(
+   				"ply1" =>$ply1Elo+$k_constant*($s1-$e1),
+    			"ply2" =>$ply2Elo+$k_constant*($s2-$e2) ,
+			);
+			return $updatedElos;
+		}
 		//TODO:Implement this https://www.cs.cmu.edu/~wjh/go/Ratings.pseudo-code 
       ?>
