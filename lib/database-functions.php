@@ -1,4 +1,6 @@
 <?php
+// get database connection variables from config file
+require_once("config.inc.php");
 
 // function that connects to the database
 // n.b. config.inc.php must be required
@@ -29,7 +31,7 @@ function fetchOrderedRequests($broadcasts) {
     $query = "SELECT * FROM broadcast WHERE id='" . $marker . ";'";
     $markers[$markerCounter] = $mysqli->query($query);;
     $markerCounter++;
-  }
+  } // end for every marker
 
   return $markers; 
 } // end fetchOrderedRequests()
