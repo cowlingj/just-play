@@ -8,7 +8,7 @@
   $disabled = null;
 
   // when form has been submitted carry out the following
-  if($_SERVER["REQUEST_METHOD"] == "POST") {
+  function submitSearch {
 
     // make inputs safe (prevent XXS)
     $userID = makeSafe($_POST["userID"]);
