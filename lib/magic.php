@@ -1,7 +1,7 @@
 <?php
-// Database variables will come from the parent database-functions.php file	
+// Database variables will come from the parent database-functions.php file
 $dist_att = 1; 		 //Distance attenuation
-$elo_att = 1;  		   //Elo attenuation
+$elo_att = 100;  		   //Elo attenuation
 $disabled_att = 1;	 //Disabled status attenuation
 $k_constant = 32;
 
@@ -32,6 +32,15 @@ function vincentyGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo,
   return $angle * $earthRadius;
 }
 
+//A comparison function used for sorting the recommended broadcasts by matchStrength
+function cmp($a, $b)
+{
+  if ($a["matchStrength"] == $b["matchStrength"]) {
+    return 0;
+  }
+
+  return ($a["matchStrength"] < $b["matchStrength"]) ? -1 : 1;
+}
 
 /**
  * Returns a list of the best matches for a given person. Frees $queryResults
@@ -43,36 +52,50 @@ function vincentyGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo,
  * @return array An ordered array where the best mach is first index - keys is userID and values are distances
  */
 function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $playerELO, $maximumDistance) {
-	//Requests are store here
-	$requests = array();
+  //Auxilary array for sorting the positions
+  $auxilaryArray = array();
 
 	// loop through each row for
 	while ($row = $queryResults->fetch_array()) {
-		$latitude = $row["latitude"];
+    $broadcaster = $row["broadcaster"];
+    $latitude = $row["latitude"];
 		$longitude = $row["longitude"];
-		$broadcaster = $row["broadcaster"];
-		$distance = vincentyGreatCircleDistance($playerLatitude, $playerLongitude, $latitude, $longitude);
+    $elo = $row["elo"];
+
+ 		$distance = vincentyGreatCircleDistance($playerLatitude, $playerLongitude, $latitude, $longitude);
+    $ELODiff = $elo-$playerELO;
+
     // if this broadcast is inside the player radius
     if ($distance < $maximumDistance) {
-      $requests[$broadcaster] = $distance;
+      //--
+      $auxilaryArray[$broadcaster]=array (
+                                  "distance"  => $distance,
+                                  "ELODiff" => $ELODiff,
+                                  "matchStrength" =>  $distance * $dist_att + abs($eloDifference) * $elo_att
+      );
+      //--
     }
   }
 
-  // orders the requests by 'best match'
-	arsort($requests);
-	//Free given results
-  
-  /* TODO: re-order results to match the pattern (where 0th result is best )
-      $requests = (
-        [0] = (
-                [distance] => ""
-                [ELODiff] => ""
-              )
+  // orders the auxilary array  by 'best match'
+	uasort($a, "cmp");
+  //Move sorted data in a convinient to use array
+
+  $returnArray = array();
+
+  foreach ($auxilaryArrr as $key => $value) {
+      array_push(
+          $returnArray,array (
+                                  "broadcaster" => $key,
+                                  "distance"  => $value["distance"],
+                                  "ELODiff" => $value["ELODiff"]
       )
-  */
+    );
+  }
+
 	$queryResults::free();
-	 
-	return $requests;
+
+	return $returnArray;
 }
 
 abstract class MatchOutCome {
@@ -84,12 +107,12 @@ abstract class MatchOutCome {
 
 /**
  * Returns an array with the updated player scores. Indexed by "ply1" and "ply2"
- * @param float $player1ELOELO Elo of player 1 
- * @param float $player2ELO Elo of player 2 
+ * @param float $player1ELOELO Elo of player 1
+ * @param float $player2ELO Elo of player 2
  * @param $outcome a MatchOutCome enum
  * @return An array with the scayer1ELO */
 function recalculateElo($player1ELO ,$player2ELO, $outcome) {
-	//Calculate transformed rating for each player 
+	//Calculate transformed rating for each player
 	$R1 = pow(10, $player1ELOELO / 400);//Player 1
 	$R2 = pow(10, $player2ELO / 400);//Player 2
 
@@ -124,5 +147,5 @@ function recalculateElo($player1ELO ,$player2ELO, $outcome) {
 	);
 	return $updatedElos;
 }
-//TODO:Implement this https://www.cs.cmu.edu/~wjh/go/Ratings.pseudo-code 
+//TODO:Implement this https://www.cs.cmu.edu/~wjh/go/Ratings.pseudo-code
 ?>
