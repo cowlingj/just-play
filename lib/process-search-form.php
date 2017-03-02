@@ -22,13 +22,13 @@
     $_SESSION["longitude"] = $longitude;
     $_SESSION["latitude"] = $latitude;
 
-    // All the current broadcasts
-    $allBroadCasts = databaseConnect() -> query("SELECT * FROM broadcasts")
+    // All the current broadcasts for desired sport
+    $allBroadcasts = databaseConnect() -> query("SELECT * FROM broadcasts WHERE sport='" . $sport ."'");
 
     // An array of broadcast recomendation IDs 
     $_SESSION["recomendations"] = getRankedRequests($_SESSION["latitude"],
                                                     $_SESSION["longitude"],
-                                                    $allBroadCasts,
+                                                    $allBroadcasts,
                                                     getElo($userID));
 
     // go to results page
