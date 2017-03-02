@@ -18,7 +18,7 @@ function databaseConnect() {
 
 
 // retrieves array of information about each broadcast request, when given broadcast IDs (from session variable)
-function fetchOrderedRequests($broadcasts) {
+function fetchOrderedRequests($broadcasts, $sport) {
   $mysqli = databaseConnect();
 
   // initialises the loop counter and the 2-d array that markers will be stored in
@@ -28,7 +28,7 @@ function fetchOrderedRequests($broadcasts) {
   // for every marker given as argument
   foreach ($broadcast as $marker) {
     // fetches unique row for desired broadcast request and stores in array
-    $query = "SELECT * FROM broadcast WHERE id='" . $marker . ";'";
+    $query = "SELECT * FROM broadcast WHERE id='" . $marker . ";' AND sport='". $sport . "'";
     $markers[$markerCounter] = $mysqli->query($query);;
     $markerCounter++;
   } // end for every marker
