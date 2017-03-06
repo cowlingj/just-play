@@ -11,6 +11,8 @@ require_once("../conf/routes.php");
 
 $router = compileRoutes();
 
+echo $_SERVER["REQUEST_METHOD"]." ".$_SERVER["REQUEST_URI"]."\n";
+
 $res = $router->resolve($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
 
 foreach ($res as $key => $value) {
