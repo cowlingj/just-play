@@ -96,25 +96,26 @@ class RouteNode {
 
 class Router {
   
-  private static $routes;
+  private $routes = array();
 
-  public static addRoute($method, $uri, $target) {
-    if (!is_array(self::$routes)) self::$routes = array();
+  public function addRoute($method, $uri, $target) {
+    if (!is_array($this->$routes)) $this->$routes = array();
     $route = explode("/", $uri);
     $node = NULL;
-    if (self::$routes[$method]) {
-      $node = self::$routes[$method];
+    if ($this->$routes[$method]) {
+      $node = $this->$routes[$method];
     } else {
-      self::$routes[$method] = $node = new RouteNode($method);
+      $this->$routes[$method] = $node = new RouteNode($method);
     }
     $node->addRoute($route, $target);
+    return $this;
   }
 
-  public static resolve($method, $uri) {
-    if (!is_array(self::$routes)) self::$routes = array();
+  public function resolve($method, $uri) {
+    if (!is_array($this->$routes)) $this->$routes = array();
     $route = explode("/", $uri);
-    if (self::$routes[$method]) {
-      return self::$routes[$method]->resolve($route, array());
+    if ($this->$routes[$method]) {
+      return $this->$routes[$method]->resolve($route, array());
     } else {
       return array("target"=>404, "params"=>array());
     }

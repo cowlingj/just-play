@@ -6,9 +6,16 @@
 // parameters in the URL, along with the connection, to the method that matches
 // a given route
 
-include_once("config.inc.php");
+require_once("config.inc.php");
+require_once("../conf/routes.php");
 
-$routes = $mysql_cnf = parse_ini_file("../conf/routes.ini");
+$router = compileRoutes();
+
+$res = $router->resolve($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
+
+foreach ($res as $key => $value) {
+  echo "Key: $key; Value: $value\n";
+}
 
 
 ?>
