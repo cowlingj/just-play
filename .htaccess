@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /mbax4msk/just_play/
+RewriteCond %{REQUEST_URI} !-f
+ 
+RewriteRule ^.*$ lib/server.php
