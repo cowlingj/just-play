@@ -3,4 +3,4 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_URI} !-f
  
-RewriteRule ^.*$ ./index.php
+RewriteRule ^.*$ ./lib/server.php
