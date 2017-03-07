@@ -75,7 +75,7 @@ class RouteNode {
       $rest = array_slice($route, 1);
 
       // If we have a path with the given segment name
-      if (array_key_exists($method, $this->routes)) {
+      if (array_key_exists($segment, $this->paths)) {
         // We follow that path
         return $this->paths[$segment]->resolve($rest, $params);
       } 
