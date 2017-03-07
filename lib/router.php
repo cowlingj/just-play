@@ -80,7 +80,7 @@ class RouteNode {
       // If not, it may be a parameter
       else if ($this->nextParameter) {
         // We store the parameter
-        $params[$this->nextParameter->$id] = $segment;
+        $params[$this->nextParameter->id] = $segment;
         // And follow the path
         return $this->nextParameter->resolve($rest, $params);
       }
