@@ -16,7 +16,3 @@ along side others such as AJAX and the google maps API.
 All of this will be implemented in the form of an elegant web-application,
 with intuative controls and responsive layout; to ensure maxamum user experience
 regardless of device.
-
-*[LAMP]: Linux, Appache, MySQL, PHP
-*[AJAX]: Asyncronous Javascript And XML
-*[API]: Application Program Interface
