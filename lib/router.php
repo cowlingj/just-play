@@ -75,7 +75,7 @@ class RouteNode {
       $rest = array_slice($route, 1);
 
       // If we have a path with the given segment name
-      if ($this->paths[$segment]) {
+      if (array_key_exists($method, $this->routes)) {
         // We follow that path
         return $this->paths[$segment]->resolve($rest, $params);
       } 
@@ -102,7 +102,7 @@ class Router {
     if (!is_array($this->routes)) $this->routes = array();
     $route = explode("/", $uri);
     $node = NULL;
-    if ($this->routes[$method]) {
+    if (array_key_exists($method, $this->routes)) {
       $node = $this->routes[$method];
     } else {
       $this->routes[$method] = $node = new RouteNode($method);
@@ -114,7 +114,7 @@ class Router {
   public function resolve($method, $uri) {
     if (!is_array($this->routes)) $this->routes = array();
     $route = explode("/", $uri);
-    if ($this->routes[$method]) {
+    if (array_key_exists($method, $this->routes)) {
       return $this->routes[$method]->resolve($route, array());
     } else {
       return array("target"=>404, "params"=>array());
