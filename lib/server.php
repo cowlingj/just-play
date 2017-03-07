@@ -13,10 +13,18 @@ $router = compileRoutes();
 
 $res = $router->resolve($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
 
+function layout($name) {
+  require("../public/layouts/$name.php");
+}
+
 if ($res["target"] == 404) {
   echo 404;
 } else {
-  echo "found";
+  $name = $res["target"];
+  require("controllers/$name.php");
+  switch ($_SERVER["REQUEST_METHOD"]) {
+    case "GET": read(NULL, NULL, NULL); break;
+  }
 }
 
 
