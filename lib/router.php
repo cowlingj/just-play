@@ -56,10 +56,8 @@ class RouteNode {
       if ($this->target) die("Target for ".$this->id." already set");
       else $this->target = $file;
     } else {
-      $this
-        // Create the node. The new node is returned to us
-        ->addNode($route[0])
-        ->addRoute(array_slice($route, 1), $file);
+      // Create the node. The new node is returned to us
+      $this->addNode($route[0])->addRoute(array_slice($route, 1), $file);
     }
   }
 
