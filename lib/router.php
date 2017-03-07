@@ -100,7 +100,7 @@ class Router {
 
   public function addRoute($method, $uri, $target) {
     if (!is_array($this->routes)) $this->routes = array();
-    $route = explode("/", $uri);
+    $route = array_filter(explode("/", $uri));
     $node = NULL;
     if (array_key_exists($method, $this->routes)) {
       $node = $this->routes[$method];
@@ -118,7 +118,7 @@ class Router {
 
   public function resolve($method, $uri) {
     if (!is_array($this->routes)) $this->routes = array();
-    $route = array_slice(explode("/", $uri), 2);
+    $route = array_filter(array_slice(explode("/", $uri), 2));
     if (count($route) == 0) $route = array('@root');
     if (array_key_exists($method, $this->routes)) {
       return $this->routes[$method]->resolve($route, array());
