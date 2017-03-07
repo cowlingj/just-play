@@ -6,7 +6,7 @@
 // parameters in the URL, along with the connection, to the method that matches
 // a given route
 
-require_once("config.inc.php");
+require_once("../config.inc.php");
 require_once("../conf/routes.php");
 
 $router = compileRoutes();
