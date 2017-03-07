@@ -20,6 +20,7 @@ class RouteNode {
 
   function __construct($segment, $file = FALSE) {
     // Parameters have a leading colon
+    if (empty($segment)) die("Each node requires a name");
     if ($segment[0] == ':') {
       $this->isParameter = true;
       $segment = substr($segment, 1);
