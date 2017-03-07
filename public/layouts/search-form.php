@@ -1,6 +1,6 @@
 <?
-  php session_start();
-  require("../lib/process-search-form.php");
+  // php session_start();
+  // require("../lib/process-search-form.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
 
   
 
-  <form method="post" action="<?php submitSearch(); ?>">
+  <form method="post" action="/">
     Name:<input type="text" name="name" required><br>
     Sport:<select name="sport" required>
             <option value="football">Football</option>

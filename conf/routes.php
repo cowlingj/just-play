@@ -6,7 +6,7 @@ function compileRoutes() {
   $router = new Router();
     
   // Add new routes here
-  $router->addRoute("GET", "/", "home.php");
+  $router->addRoute("GET", "/", "home");
 
   return $router;
 }
