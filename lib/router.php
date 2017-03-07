@@ -106,6 +106,8 @@ class Router {
     } else {
       $this->routes[$method] = $node = new RouteNode($method);
     }
+
+    if (count($route) == 0) $route = array('@root');
     $node->addRoute($route, $target);
     return $this;
   }
@@ -113,6 +115,7 @@ class Router {
   public function resolve($method, $uri) {
     if (!is_array($this->routes)) $this->routes = array();
     $route = array_slice(explode("/", $uri), 2);
+    if (count($route) == 0) $route = array('@root');
     if (array_key_exists($method, $this->routes)) {
       return $this->routes[$method]->resolve($route, array());
     } else {
