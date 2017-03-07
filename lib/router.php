@@ -111,7 +111,7 @@ class Router {
 
   public function resolve($method, $uri) {
     if (!is_array($this->routes)) $this->routes = array();
-    $route = explode("/", $uri);
+    $route = array_slice(explode("/", $uri), 2);
     if (array_key_exists($method, $this->routes)) {
       return $this->routes[$method]->resolve($route, array());
     } else {
