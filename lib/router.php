@@ -4,13 +4,13 @@
 
 class RouteNode {
   // The name given to the node
-  public final $id;
+  public const $id;
 
   // An array of all the other paths from this node
   private $paths = array();
 
   // True if the segment should be treated as a parameter
-  public final $isParameter;
+  public const $isParameter;
 
   // Stores the next parameter node for this node
   private $nextParameter;
