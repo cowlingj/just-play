@@ -32,7 +32,6 @@ class RouteNode {
   }
 
   private function addNode($segment) {
-    echo "Segment: ".$segment;
     $node = new RouteNode($segment);
     if ($node->isParameter) {
       // We can only have one parameter per node
@@ -107,9 +106,7 @@ class Router {
     } else {
       $this->routes[$method] = $node = new RouteNode($method);
     }
-    echo "Registering ".$uri, PHP_EOL;
     if (count($route) == 0) {
-      echo "This is root", PHP_EOL;
       $route = array('@root');
     }
     $node->addRoute($route, $target);

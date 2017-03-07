@@ -46,5 +46,10 @@
   function getElo($userId) {
     databaseConnect() -> query("SELECT elo FROM users WHERE id = $userID");
   }
+
+  function create($query, $uri, $db) {
+
+    layout("search-response")
+  }
   
-  ?>
+?>

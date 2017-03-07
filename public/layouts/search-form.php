@@ -9,7 +9,7 @@
   <meta name="author" content="Jonathan Cowling">
   <meta name="date created" content="1 Feb 2017">
   <meta name="date edited" content="13 Feb 2017">
-  <title>Just Play</title>
+  <title><?= $title ?></title>
 </head>
 <body>
 

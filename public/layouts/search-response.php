@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <?= $somevar ?>
     <meta name="author" content="Jonathan Cowling">
     <meta name="date" content="2 Feb 2017">
     <meta name="date edited" content="13 Feb 2017">
