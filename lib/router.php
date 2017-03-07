@@ -32,6 +32,7 @@ class RouteNode {
   }
 
   private function addNode($segment) {
+    echo "Segment: ".$segment;
     $node = new RouteNode($segment);
     if ($node->isParameter) {
       // We can only have one parameter per node
