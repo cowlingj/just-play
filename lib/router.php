@@ -107,8 +107,11 @@ class Router {
     } else {
       $this->routes[$method] = $node = new RouteNode($method);
     }
-
-    if (count($route) == 0) $route = array('@root');
+    echo "Registering ".$uri, PHP_EOL;
+    if (count($route) == 0) {
+      echo "This is root", PHP_EOL;
+      $route = array('@root');
+    }
     $node->addRoute($route, $target);
     return $this;
   }
