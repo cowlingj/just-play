@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Broadcast | JustPlay</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <header class="big">
+      <div class="center-container">
+        <h1 class="logo">
+          <a href="#">
+            Just<span>Play</span>
+          </a>
+        </h1>
+      </div><!-- end .center-container -->
+    </header>
+    <main class="search">
+      <div class="center-container">
+        <div class="page-heading">
+          <h1>Create a more detailed Broadcast Request</h1>
+        </div>
+        <div class="form">
+          <form action="" method="GET">
+            <div class="text-inputs">
+              <div class="input">
+                <label for="name">Sport: </label>
+                <select name="sport" id="sport">
+                  <option value="tennis">Tennis</option>
+                  <option value="badminton">Badminton</option>
+                </select>
+              </div><!-- end .input -->
+              <div class="input">
+                <label for="location">Location: </label>
+                <input type="text" /><!-- this is a dropdown menu from google maps api -->
+                <input type="hidden" name="latitude" value="google will autofill in this field" />
+                <input type="hidden" name="longitude" value="google will autofill in this field" />
+              </div>
+              <div class="submit">
+                <input type="submit" value="Place Request" />
+              </div><!-- end .submit -->
+            </div><!-- end .text-inputs -->
+          </form>
+        </div><!-- end .form -->
+      </div><!-- end .center-container -->
+    </main>
+    <footer>
+      <div class="center-container">
+        <em>Copyright &copy; 2017 &mdash; Group M3</em>
+      </div><!-- end .center-container -->
+    </footer>
+  </body>
+</html>
