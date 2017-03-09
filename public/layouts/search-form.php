@@ -1,21 +1,19 @@
-<?
-  // php session_start();
-  // require("../lib/process-search-form.php");
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="author" content="Jonathan Cowling">
   <meta name="date created" content="1 Feb 2017">
-  <meta name="date edited" content="13 Feb 2017">
+  <meta name="date edited" content="9 Mar 2017">
+  <script type="text/javascript" src="../assets.js/maps.js"></script>
   <title>Just Play</title>
 </head>
 <body>
 
   
 
-  <form method="post" action="/">
+  <form method="get" action="search-response.php">
     Name:<input type="text" name="name" required><br>
     Sport:<select name="sport" required>
             <option value="football">Football</option>
@@ -30,7 +28,7 @@
     Location x y:<input type="hidden" name="latitude"><input type="hidden" name="longitude"><br>
     Disabled:<input type="checkbox" name="disabled"><br>
 
-    <input type="submit" value="submit">
+    <input type="submit" value="submit" onclick="getUserPosition()">
   </form>
 </body>
 </html>
