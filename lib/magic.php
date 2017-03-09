@@ -102,6 +102,20 @@ abstract class MatchOutCome {
     const WIN = 0;
     const LOSE = 1;
     const DRAW = 2;
+    //A function to convert numerical representation of a match outcome to a string
+    function toString($outcome){
+		switch ($outcome) {
+		    case 0:
+		        return "WIN";
+		        break;
+		    case 1:
+		        return "LOSE";
+		        break;
+		    case 2:
+		        return "DRAW";
+		        break;
+		}
+    }
     // etc.
 }
 

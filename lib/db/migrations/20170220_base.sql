@@ -72,8 +72,14 @@ CREATE TABLE broadcast (
     REFERENCES  sport(id)
 ) ENGINE=InnoDB;
 
+
+--Clarification:
+--Broadcaster turns into player1
+--Receiver turns into player2
 CREATE TABLE game (
   id SERIAL PRIMARY KEY,
+  player1 BIGINT UNSIGNED NOT NULL,
+  player2 BIGINT UNSIGNED NOT NULL,
   sport BIGINT UNSIGNED NOT NULL,
   location BIGINT UNSIGNED NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -87,6 +93,27 @@ CREATE TABLE game (
 
   CONSTRAINT location_match_fk_con
     FOREIGN KEY location_match_fk(location)
-    REFERENCES  location(id)
+    REFERENCES  location(id),
+  --The 2 players of a game
+  CONSTRAINT player1_game_fk_con
+    FOREIGN KEY player1_game_fk(player1)
+    REFERENCES  user(id),
+
+  CONSTRAINT player2_game_fk_con
+    FOREIGN KEY player2_game_fk(player2)
+    REFERENCES  user(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE gamebuffer (
+  game_id SERIAL PRIMARY KEY,
+  player1_elo BIGINT UNSIGNED NOT NULL,             --Player1 elo at the start of this game
+  player2_elo BIGINT UNSIGNED NOT NULL,             --Player2 elo at the start of this game
+  --If feedback is null the playedr hasn't given feedback
+  player1_feedback ENUM('WIN', 'LOSE', 'DRAW'),     --Feedback of player 1 given after game is played
+  player2_feedback ENUM('WIN', 'LOSE', 'DRAW'),     --Feedback of player 2 given after game is played
+
+  CONSTRAINT gameid_gamebuffer_fk_con
+    FOREIGN KEY gameid_gamebuffer_fk(game_id)
+    REFERENCES  game(id)
 ) ENGINE=InnoDB;
 
