@@ -20,7 +20,7 @@ class RouteNode {
   private $isParameter;
 
   // Stores the next parameter node for this node
-  private $nextParameter;
+  private $nextParameter = NULL;
 
   // Target file
   private $target;
@@ -30,9 +30,9 @@ class RouteNode {
     if (empty($segment)) die("Each node requires a name");
     // Parameters have a leading colon
     if ($segment[0] == ':') {
-      $this->isParameter = true;
+      $this->isParameter = TRUE;
       $segment = substr($segment, 1);
-    } else $this->isParameter = true;
+    } else $this->isParameter = FALSE;
 
     $this->id = $segment;
     $this->target = $file;
@@ -60,7 +60,6 @@ class RouteNode {
 
   public function addRoute($route, $file) {
     // If there are no more segments to follow
-    echo "Next Segment: ".$route[1]."<br>";
     if (count($route) == 0) {
       // We cannot overwrite targets
       if ($this->target) die("Target for ".$this->id." already set");
