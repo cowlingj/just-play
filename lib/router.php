@@ -131,9 +131,9 @@ class Router {
   public function resolve($method, $uri) {
     // We slice te first two segments off because they will be
     // <username> and 'just-play'
-    $route = array_values(array_filter(array_slice(explode("/", $uri), 2)));
+    $route = array_values(array_filter(array_slice(explode("/", $uri), 3)));
     if (count($route) == 0) $route = array('@root');
-    echo "Resolving ".implode('/', $route);
+    echo "Resolving ".$uri;
     return array_key_exists($method, $this->routes)
       ? $this->routes[$method]->resolve($route, array())
       : array("target"=>404, "params"=>array())
