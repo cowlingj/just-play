@@ -23,7 +23,7 @@ class RouteNode {
   private $nextParameter = NULL;
 
   // Target file
-  private $target == NULL;
+  private $target = NULL;
 
   function __construct($segment, $file = FALSE) {
 
