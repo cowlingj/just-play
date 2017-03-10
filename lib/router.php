@@ -116,7 +116,8 @@ class Router {
     echo "Adding ".$uri."<br>";
     // Split the uri into an array of segments, filtering out empty strings
     $route = array_filter(explode("/", $uri));
-    echo "Segments: ".count($route)."<br>";
+    for (explode("/", $uri) as $segment)
+      echo "Segments: ".$segment."<br>";
     // Check if the node for a route exists
     $node = array_key_exists($method, $this->routes)
       ? $this->routes[$method]
