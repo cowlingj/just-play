@@ -49,7 +49,7 @@ class RouteNode {
       } else die("Next parameter already set for segment ".$this->id);
     } else {
       // We cannot overwite segments
-      if ($this->paths[$segment]) {
+      if (isset($this->paths[$segment])) {
         die("Path $segment already set for segment ".$this->id);
       } else {
         $this->paths[$segment] = $node;
