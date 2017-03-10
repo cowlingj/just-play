@@ -113,11 +113,8 @@ class Router {
   }
 
   public function addRoute($method, $uri, $target) {
-    echo "Adding ".$uri."<br>";
     // Split the uri into an array of segments, filtering out empty strings
-    $route = array_filter(explode("/", $uri));
-    foreach (explode("/", $uri) as $segment)
-      echo "Segments: ".$segment."<br>";
+    $route = array_values(array_filter(explode("/", $uri)));
     // Check if the node for a route exists
     $node = array_key_exists($method, $this->routes)
       ? $this->routes[$method]
@@ -135,7 +132,7 @@ class Router {
   public function resolve($method, $uri) {
     // We slice te first two segments off because they will be
     // <username> and 'just-play'
-    $route = array_filter(array_slice(explode("/", $uri), 2));
+    $route = array_values(array_filter(array_slice(explode("/", $uri), 2)));
     if (count($route) == 0) $route = array('@root');
     return array_key_exists($method, $this->routes)
       ? $this->routes[$method]->resolve($route, array())
