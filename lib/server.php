@@ -18,7 +18,7 @@ function controller($name) {
 }
 
 function databaseConnection($host, $user, $pass, $db) {
-  $connection = new mysqli($host, $user, $pass, $name);
+  $connection = new mysqli($host, $user, $pass, $db);
 
   if ($connection->connect_error)
     die('Connect Error ('.$mysqli->connect_errno.') '.$mysqli->connect_error);
