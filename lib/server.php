@@ -13,6 +13,10 @@ function layout($name) {
   require("../public/layouts/$name.php");
 }
 
+function controller($name) {
+  require("controllers/$name.php");
+}
+
 function databaseConnection($host, $user, $pass, $db) {
   $connection = new mysqli($host, $user, $pass, $name);
 
@@ -38,9 +42,13 @@ function main () {
       $group_dbnames[0]
     );
 
-    require("controllers/$name.php");
+    controller($name);
+
     switch ($_SERVER["REQUEST_METHOD"]) {
-      case "GET": read($res["params"], $_GET, $connection); break;
+      case "POST":    create($res["params"], $_GET, $connection);   break;
+      case "GET":     read($res["params"], $_GET, $connection);     break;
+      case "PATCH":   update($res["params"], $_GET, $connection);   break;
+      case "DELETE":  destroy($res["params"], $_GET, $connection);  break;
     }
 
     $connection->close();

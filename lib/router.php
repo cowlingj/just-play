@@ -26,6 +26,7 @@ class RouteNode {
   private $target;
 
   function __construct($segment, $file = FALSE) {
+
     if (empty($segment)) die("Each node requires a name");
     // Parameters have a leading colon
     if ($segment[0] == ':') {
@@ -59,6 +60,7 @@ class RouteNode {
 
   public function addRoute($route, $file) {
     // If there are no more segments to follow
+    echo "Adding ".implode('/', $route);
     if (count($route) == 0) {
       // We cannot overwrite targets
       if ($this->target) die("Target for ".$this->id." already set");
