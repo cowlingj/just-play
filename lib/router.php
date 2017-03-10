@@ -60,7 +60,6 @@ class RouteNode {
 
   public function addRoute($route, $file) {
     // If there are no more segments to follow
-    echo "Adding ".implode('/', $route)."<br>";
     echo "Next Segment: ".$route[1]."<br>";
     if (count($route) == 0) {
       // We cannot overwrite targets
@@ -114,8 +113,10 @@ class Router {
   }
 
   public function addRoute($method, $uri, $target) {
+    echo "Adding ".$uri."<br>";
     // Split the uri into an array of segments, filtering out empty strings
     $route = array_filter(explode("/", $uri));
+    echo "Segments: ".count($route)."<br>";
     // Check if the node for a route exists
     $node = array_key_exists($method, $this->routes)
       ? $this->routes[$method]
