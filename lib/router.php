@@ -60,8 +60,8 @@ class RouteNode {
 
   public function addRoute($route, $file) {
     // If there are no more segments to follow
-    echo "Adding ".implode('/', $route)."\n";
-    echo "Current Segment: ".$route[0]."\n";
+    echo "Adding ".implode('/', $route)."<br>";
+    echo "Current Segment: ".$route[0]."<br>";
     if (count($route) == 0) {
       // We cannot overwrite targets
       if ($this->target) die("Target for ".$this->id." already set");
