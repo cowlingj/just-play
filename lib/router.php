@@ -23,7 +23,7 @@ class RouteNode {
   private $nextParameter = NULL;
 
   // Target file
-  private $target;
+  private $target == NULL;
 
   function __construct($segment, $file = FALSE) {
 
@@ -62,7 +62,7 @@ class RouteNode {
     // If there are no more segments to follow
     if (count($route) == 0) {
       // We cannot overwrite targets
-      if ($this->target) die("Target for ".$this->id." already set");
+      if ($this->target != NULL) die("Target for ".$this->id." already set");
       else $this->target = $file;
     } else {
       // Create the node. The new node is returned to us
@@ -133,6 +133,7 @@ class Router {
     // <username> and 'just-play'
     $route = array_values(array_filter(array_slice(explode("/", $uri), 2)));
     if (count($route) == 0) $route = array('@root');
+    echo "Resolving ".implode('/', $route)
     return array_key_exists($method, $this->routes)
       ? $this->routes[$method]->resolve($route, array())
       : array("target"=>404, "params"=>array())
