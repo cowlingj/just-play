@@ -5,9 +5,8 @@
   <meta charset="utf-8">
   <meta name="author" content="Jonathan Cowling">
   <meta name="date created" content="1 Feb 2017">
-  <meta name="date edited" content="9 Mar 2017">
-  <script type="text/javascript" src="../assets.js/maps.js"></script>
-  <title>Just Play</title>
+  <meta name="date edited" content="13 Feb 2017">
+  <title><?= $title ?></title>
 </head>
 <body>
 
