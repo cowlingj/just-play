@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><?= $title ?></title>
+    <?= script("marker-generator") ?>
   </head>
   <body>
     <div>
