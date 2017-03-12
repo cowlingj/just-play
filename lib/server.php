@@ -13,11 +13,11 @@ $publicDirectory = "/mbac4msk/just-play/public";
 $title = "Just Play";
 
 function layout($name) {
-  require("../public/layouts/$name.php");
+  return "../public/layouts/$name.php";
 }
 
 function controller($name) {
-  require("controllers/$name.php");
+  return "controllers/$name.php";
 }
 
 function script($name) {
@@ -53,7 +53,7 @@ function main () {
       $group_dbnames[0]
     );
 
-    controller($name);
+    require controller($name);
 
     switch ($_SERVER["REQUEST_METHOD"]) {
       case "POST":    create($res["params"], $_GET, $connection);   break;
