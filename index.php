@@ -9,7 +9,7 @@
 require_once("config.inc.php");
 require_once("conf/routes.php");
 
-define('PUBLIC_DIRECTORY', "/mbax4msk/just_play/public");
+define('PUBLIC_DIRECTORY', "/mbax4msk/just_play/public/assets");
 $title = "Just Play";
 
 function layout($name) {
@@ -21,11 +21,11 @@ function controller($name) {
 }
 
 function script($name) {
-  return "<script src='".PUBLIC_DIRECTORY."/scripts/$name.js'></script>";
+  return "<script src='".PUBLIC_DIRECTORY."/js/$name.js'></script>";
 }
 
 function style($name) {
-  return "<link rel='stylesheet' href='".PUBLIC_DIRECTORY."/styles/$name.css' />";
+  return "<link rel='stylesheet' href='".PUBLIC_DIRECTORY."/css/$name.css' />";
 }
 
 function databaseConnection($host, $user, $pass, $db) {
@@ -39,7 +39,6 @@ function databaseConnection($host, $user, $pass, $db) {
 
 function main () {
 
-  echo implode(", ", scandir($_SERVER['DOCUMENT_ROOT']."/mbax4msk/just_play"));
   // config.inc.php declares variables in the global scope
   global $database_host, $database_user, $database_pass, $group_dbnames;
   $router = compileRoutes();
