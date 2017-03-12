@@ -39,7 +39,7 @@ function databaseConnection($host, $user, $pass, $db) {
 
 function main () {
 
-  echo implode(", ", scandir($_SERVER['DOCUMENT_ROOT']));
+  echo implode(", ", scandir($_SERVER['DOCUMENT_ROOT']."/mbax4msk/just_play"));
   // config.inc.php declares variables in the global scope
   global $database_host, $database_user, $database_pass, $group_dbnames;
   $router = compileRoutes();
