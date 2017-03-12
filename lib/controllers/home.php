@@ -1,8 +1,8 @@
 <?php
 
 function read($pathArgs, $queryArgs, $database) {
-  
-  layout("search-form");
+  global $title = "Home | Just Play", $text = "Welcome!";
+  layout("home");
 }
 
 ?>

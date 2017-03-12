@@ -9,6 +9,9 @@
 require_once("../config.inc.php");
 require_once("../conf/routes.php");
 
+$publicDirectory = "/mbac4msk/just-play/public";
+$title = "Just Play";
+
 function layout($name) {
   require("../public/layouts/$name.php");
 }
@@ -17,8 +20,16 @@ function controller($name) {
   require("controllers/$name.php");
 }
 
+function script(name) {
+  return "<script src='$publicDirectory/scripts/$name.js'></script>";
+}
+
+function style(name) {
+  return "<link rel='stylesheet' href='$publicDirectory/styles/$name.css' />";
+}
+
 function databaseConnection($host, $user, $pass, $db) {
-  $connection = new mysqli($host, $user, $pass, $name);
+  $connection = new mysqli($host, $user, $pass, $db);
 
   if ($connection->connect_error)
     die('Connect Error ('.$mysqli->connect_errno.') '.$mysqli->connect_error);
