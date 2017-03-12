@@ -1,3 +1,3 @@
 RewriteEngine On
 RewriteBase /mbax4msk/just_play
-RewriteRule ^.*$ .
+RewriteRule ^.*$ index.php
