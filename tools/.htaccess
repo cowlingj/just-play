@@ -1,4 +1,3 @@
 RewriteEngine On
-RewriteBase /mbax4msk/just_play/
 
-RewriteRule ^.*$ public/server.php
+RewriteRule ^.*$ /mbax4msk/just_play/
