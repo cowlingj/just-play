@@ -20,11 +20,11 @@ function controller($name) {
   require("controllers/$name.php");
 }
 
-function script(name) {
+function script($name) {
   return "<script src='$publicDirectory/scripts/$name.js'></script>";
 }
 
-function style(name) {
+function style($name) {
   return "<link rel='stylesheet' href='$publicDirectory/styles/$name.css' />";
 }
 
