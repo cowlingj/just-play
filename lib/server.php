@@ -9,7 +9,7 @@
 require_once("../config.inc.php");
 require_once("../conf/routes.php");
 
-define('PUBLIC_DIRECTORY', "/mbax4msk/just-play/public");
+define('PUBLIC_DIRECTORY', "/mbax4msk/just_play/public");
 $title = "Just Play";
 
 function layout($name) {
@@ -39,6 +39,7 @@ function databaseConnection($host, $user, $pass, $db) {
 
 function main () {
 
+  echo $_SERVER['DOCUMENT_ROOT'];
   // config.inc.php declares variables in the global scope
   global $database_host, $database_user, $database_pass, $group_dbnames;
   $router = compileRoutes();
