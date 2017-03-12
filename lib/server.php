@@ -9,6 +9,8 @@
 require_once("../config.inc.php");
 require_once("../conf/routes.php");
 
+$title = "Just Play";
+
 function layout($name) {
   require("../public/layouts/$name.php");
 }
