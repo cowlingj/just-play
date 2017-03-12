@@ -6,18 +6,18 @@
 // parameters in the URL, along with the connection, to the method that matches
 // a given route
 
-require_once("../config.inc.php");
-require_once("../conf/routes.php");
+require_once("config.inc.php");
+require_once("conf/routes.php");
 
 define('PUBLIC_DIRECTORY', "/mbax4msk/just_play/public");
 $title = "Just Play";
 
 function layout($name) {
-  return "../public/layouts/$name.php";
+  return "public/layouts/$name.php";
 }
 
 function controller($name) {
-  return "controllers/$name.php";
+  return "lib/controllers/$name.php";
 }
 
 function script($name) {
