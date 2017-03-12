@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>$title</title>
+    <title<?= $title ?></title>
   </head>
   <body>
     <div>
-      <span>$text</span>
+      <span><?= $text ?></span>
     </div>
   </body>
 </html>
