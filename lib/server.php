@@ -39,6 +39,8 @@ function databaseConnection($host, $user, $pass, $db) {
 
 function main () {
 
+  // config.inc.php declares variables in the global scope
+  global $database_host, $database_user, $database_pass, $group_dbnames;
   $router = compileRoutes();
   $res = $router->resolve($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
 
