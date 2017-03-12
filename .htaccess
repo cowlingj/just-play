@@ -1,6 +1,7 @@
 RewriteEngine On
 RewriteBase /mbax4msk/just_play/
 RewriteCond %{REQUEST_URI} /mbax4msk/just_play([\S\s]+)
-RewriteCond %{DOCUMENT_ROOT}/mbax4msk/just_play/public/assets/%1 !-f
+RewriteCond %{DOCUMENT_ROOT}/mbax4msk/just_play/public/assets/%1 -f
+RewriteRule ^.*$ public/assets/$0 [L]
  
 RewriteRule ^.*$ lib/server.php
