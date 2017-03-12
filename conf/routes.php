@@ -1,6 +1,6 @@
 <?php
 
-require_once("../lib/router.php");
+require_once("lib/router.php");
 
 function compileRoutes() {
   $router = new Router();
