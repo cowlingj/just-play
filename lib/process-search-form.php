@@ -19,6 +19,9 @@
 
     // All the current broadcasts for desired sport
     $allBroadcasts = databaseConnect() -> query("SELECT * FROM broadcasts WHERE sport='" . $sport ."'");
+    
+    $_SESSION["latitude"] = $latitude;
+    $_SESSION["longitude"] = $longitude;
 
     // An ordered array of broadcast recomendation IDs 
     $_SESSION["recomendations"] = getRankedRequests($latitude,
@@ -41,7 +44,7 @@
 
   function create($query, $uri, $db) {
 
-    layout("search-response")
+    layout("search-response");
   }
   
 ?>
