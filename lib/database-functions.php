@@ -55,13 +55,12 @@ function givePlayerFeedback($gameID, $playerID, $outcome){
    //if ($outcome<0 || $outcome>2) throw new Exception('Invalid match oucome supplied.'); 
 
    //First check if such a game still exists in the gamebuffer
-   $query = "SELECT * FROM gamebuffer WHERE game_id=" . $gameID . ";";
-
+   $query = "SELECT * FROM gamebuffer WHERE game_id=" . $gameID . ";";
    $gamebufferResult = $mysqli->query($query);
    if($gamebufferResult->num_rows==0)  return false;
 
    //Find the game which the player says they played
-   $query = "SELECT * FROM game WHERE id=" . $gameID . ";";
+   $query = "SELECT * FROM game WHERE id=" . $gameID . ";";
    $gameResult = $mysqli->query($query)->fetch_assoc();
 
    //Check if the player is player1
@@ -103,5 +102,10 @@ function givePlayerFeedback($gameID, $playerID, $outcome){
  */
 function shouldPlayerGiveFeedback($plyId){
    //TODO:
+}
+
+function getCorrespondingBroadcast(){
+  return = $mysqli -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')
+    ->fetch_assoc();
 }
 ?>
