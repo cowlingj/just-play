@@ -1,6 +1,6 @@
 <?php
-  require('../lib/database-functions.php');
-  require('../lib/process-search-form.php'); 
+  require('../../lib/database-functions.php');
+  require('../../lib/process-search-form.php'); 
 ?>
 <?php submitSearch(); ?>
 <!DOCTYPE html>
