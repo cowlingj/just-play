@@ -24,6 +24,7 @@
 
          foreach ($orderedRequests as $request) {
 // testing
+echo "i'm not broken yet"
 foreach ($request as $thing) {echo $thing;}
            echo "<p>" . $request->broadcaster . " is " . $request->dist . " (units) away</p><hr>";  
          }
