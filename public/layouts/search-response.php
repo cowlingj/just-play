@@ -23,7 +23,7 @@
          $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
 
          foreach ($orderedRequests as $request) {
-           echo "<p>" . $request["broadcaster"] . " is " . $request["dist"] . " (units) away</p><hr>";  
+           echo "<p>" . $request->broadcaster . " is " . $request->dist . " (units) away</p><hr>";  
          }
       ?>
     </div>
