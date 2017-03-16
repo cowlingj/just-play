@@ -20,7 +20,7 @@
     <div id="rankedResponses">
       <?php
         
-         $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"])
+         $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
 
          foreach ($orderedRequests as $request) {
            echo "<p>" . $request["broadcaster"] . " is " . $request["dist"] . " (units) away</p><hr>";  
