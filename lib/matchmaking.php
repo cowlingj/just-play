@@ -104,18 +104,45 @@ abstract class MatchOutCome {
     const DRAW = 2;
     //A function to convert numerical representation of a match outcome to a string
     function toString($outcome){
-		switch ($outcome) {
-		    case 0:
-		        return "WIN";
-		        break;
-		    case 1:
-		        return "LOSE";
-		        break;
-		    case 2:
-		        return "DRAW";
-		        break;
-		}
+  		switch ($outcome) {
+  		    case 0:
+  		        return "WIN";
+  		        break;
+  		    case 1:
+  		        return "LOSE";
+  		        break;
+  		    case 2:
+  		        return "DRAW";
+  		        break;
+  		}
     }
+    function getOppositeOutcome($outcome){
+      switch ($outcome) {
+          case 0:
+              return 1;
+              break;
+          case 1:
+              return 0;
+              break;
+          case 2:
+              return 2;
+              break;
+      }
+    }
+    function toNumber($outcome){
+      switch ($outcome) {
+          case "WIN":
+              return 0;
+              break;
+          case "LOSE":
+              return 1;
+              break;
+          case "DRAW":
+              return 2;
+              break;
+      }
+    }    
+
     // etc.
 }
 
@@ -128,7 +155,7 @@ abstract class MatchOutCome {
 function recalculateElo($player1ELO ,$player2ELO, $outcome) {
 	//Calculate transformed rating for each player
 	$R1 = pow(10, $player1ELOELO / 400);//Player 1
-	$R2 = pow(10, $player2ELO / 400);//Player 2
+	$R2 = pow(10, $player2ELO / 400);   //Player 2
 
 	//Calculate expecter score for each player
 	$e1 = $R1 / ($R1 + $R2);

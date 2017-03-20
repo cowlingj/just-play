@@ -4,7 +4,7 @@ require_once("config.inc.php");
 require_once("magic.php");
 // function that connects to the database
 // n.b. config.inc.php must be required
-// For simplic ity database connection never closess
+// For simplicity database connection never closess
 $mysqli = null;
 function databaseConnect() {
   if ($mysqli != null) return; 
@@ -48,64 +48,90 @@ function fetchOrderedRequests($broadcasts) {
  * @param MatchOutCome $outcome the outcome in the match represented in an enum
  * @return boolean Did the player successfully submit their feedback
  */
-function givePlayerFeedback($gameID, $playerID, $outcome){
-   //databaseConnect() should be called at the beginning but for safety call it always
+function givePlayerFeedback($gameID, $playerID, $outcome,$securityKey){
+   //databaseConnect() should be called only once in the  beginning but for safety call it always
    databaseConnect();
 
-   //if ($outcome<0 || $outcome>2) throw new Exception('Invalid match oucome supplied.'); 
+   //First get the relevant player from the player table
+   $query = "SELECT * FROM player WHERE game_id=" . $gameID . " AND player_id=".$playerID." AND key=".$securityKey.";";
 
-   //First check if such a game still exists in the gamebuffer
-   $query = "SELECT * FROM gamebuffer WHERE game_id=" . $gameID . ";";
-   $gamebufferResult = $mysqli->query($query);
-   if($gamebufferResult->num_rows==0)  return false;
+   $playerResult = $mysqli->query($query);
+   //There isn't an active player in the table or key was incorrect
+   if($playerResult->num_rows==0)  return false;
 
-   //Find the game which the player says they played
-   $query = "SELECT * FROM game WHERE id=" . $gameID . ";";
-   $gameResult = $mysqli->query($query)->fetch_assoc();
+   $player= $playerResult->fetch_assoc();
 
-   //Check if the player is player1
-   if ($result["player1"]==$playerID){
-      //player submitting feedback is player 1
-      if($gamebufferResult["player1_feedback"]!=null){
-         //Player1 already submitted feedback
-         return false;
-      }else{
-         //Submit player1 feedback
-         $query= "UPDATE gamebuffer SET gamebuffer.player1_feedback=".MatchOutCome::toString($outcome)." WHERE gamebuffer.game_id=".$gameID.";"
-      }
-   }else if ($result["player2"]==$playerID){
-      //player submitting feedback is player 2
-      if($gamebufferResult["player2_feedback"]!=null){
-         //Player2 already submitted feedback
-         return false;
-      }else{
-         //Submit player2 feedback
-         $query= "UPDATE gamebuffer SET gamebuffer.player2_feedback=".MatchOutCome::toString($outcome)." WHERE gamebuffer.game_id=".$gameID.";"
-      }
+   if($player["feedback"]==null){
+   	$query= "UPDATE player SET feedback=".MatchOutCome::toString($outcome)." WHERE player_id=".$player_id." AND game_id=".$game_id.";";
+   }else return false;
 
-
-   }else{
-      //A player tried to submit feedback for a game they haven't player
-      return false;
-   }
    //Finally execute the query
    $mysqli->query($query);
    return true;
-   //gamebuffer: game_id, player1_elo, player2_elo, player1_feedback, player2_feedback
+   //player :game_id, player_id, starting_elo, feeedback
 }
 
 /**
- * !!! ASSUMES INPUT IS STERILE
  * A function called when a player tries to give feedback
- * @param int $playerID  The ID of they player 
+ * @param int $playerID  The ID of the player 
  * @return boolean Does the player have a game they haven't given the result of 
  */
-function shouldPlayerGiveFeedback($plyId){
-   //TODO:
-}
+function shouldPlayerGiveFeedback($playerID){
+  databaseConnect();
+  //Construct query
+  $query = "SELECT * FROM player WHERE player_id=".$playerID.";";
 
+  $result= $mysqli->query($query)->fetch_assoc();
+
+  if($result==null || $result["feedback"]!=null)
+    return false;
+  else
+    return true;
+}
+/**
+ * Updates the player elo's after both players have submitted feedback or the feedback time slot has expired
+ * @param int $player1ID  The ID of  player1
+ * @param int $player2ID  The ID of  player2
+ * @return boolean Was the update successful
+ */
+function UpdatePlayersElosOnFeedback($player1ID, $player2ID){
+  databaseConnect();
+
+  //First get player 1 and player 2 elos
+  $query = "SELECT * FROM player WHERE player_id=".$player1ID.";";
+  $player1 = $mysqli->query($query)->fetch_assoc();
+
+  $query = "SELECT * FROM player WHERE player_id=".$player2ID.";";
+  $player2 = $mysqli->query($query)->fetch_assoc();
+  if($player1==null || $player2==null || $player1["feedback"]== null || $player2["feedback"]==null) return false;
+  
+  //Get get outcome of player1 from both perspectives
+  $player1Outcome=MatchOutCome::toNumber($player1["feedback"]);
+  $player2Outcome=MatchOutCome::getOppositeOutcome(MatchOutCome::toNumber($player2["feedback"]));
+  //If players disagree set outcome to DRAW otherwise set agreed outcome
+  $outcome = ($player1Outcome==$player2Outcome ? $player1Outcome : MatchOutCome::DRAW);
+  $newElo = recalculateElo($player1["starting_elo"], $player2["starting_elo"], $outcome);
+
+  //UPDATE user elos 
+
+  //Player 1 
+  $query = "UPDATE user set elo=".$newElo["ply1"]." WHERE id=".$player1ID.";";
+  $mysqli->query($query);
+
+  //Player 2
+  $query = "UPDATE user set elo=".$newElo["ply2"]." WHERE id=".$player2ID.";";
+  $mysqli->query($query);
+
+  //Finally remove the 2 player rows
+  $query = "DELETE FROM player WHERE player_id=".$player1ID.";";
+  $mysqli->query($query);
+
+  $query = "DELETE FROM player WHERE player_id=".$player2ID.";";
+  $mysqli->query($query);
+
+}
 function getCorrespondingBroadcast(){
-  return = $mysqli -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')
+  return $mysqli -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')
     ->fetch_assoc();
 }
 ?>
