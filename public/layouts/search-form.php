@@ -12,7 +12,7 @@
 
   
 
-  <form method="get" action="search-response.php">
+  <form method="get" action="/mbax4msk/just_play/response-map">
     Name:<input type="text" name="name" required><br>
     Sport:<select name="sport" required>
             <option value="football">Football</option>

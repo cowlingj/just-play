@@ -8,7 +8,7 @@
   <title>Just Play</title>
 </head>
 <body>
-  <form method="post" action="search-response.php">
+  <form method="post" action="/mbax4msk/just_play/response-map">
     Lng:<input type="number" name="BroadcastLng">
     Lat:<input type="number" name="BroadcastLat"><br>
     <input type="submit" value="submit">
