@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Search | JustPlay</title>
+    <title>Broadcast | JustPlay</title>>
     <!--
       When you want to change styles, this file must be edited, compiled and minified to create the file
       <link rel="stylesheet/less" type="text/css" href="../assets/css/style.less" />
@@ -12,8 +12,6 @@
     <?= style("style"); ?>
     <?= script("jquery-min"); ?>
     <?= script("header-toggle"); ?>
-    <?= script("slider-text"); ?>
-    <?= script("search-location-functions"); ?>
   </head>
   <body>
     <header class="big">
@@ -28,7 +26,7 @@
     <header class="small">
       <div class="center-container">
         <h1 class="logo">
-          <a href="/mbax4msk/just_play/">J<span>P</span></a>
+          <a href="#">J<span>P</span></a>
         </h1>
       </div><!-- end .center-container -->
     </header><!-- end header.small -->
@@ -36,7 +34,7 @@
     <main class="search">
       <div class="page-heading">
         <div class="center-container">
-          <h3>Search for a Match</h3>
+          <h3>Create Broadcast</h3>
         </div><!-- end .center-container -->
       </div><!-- end .page-heading -->
       <div class="center-container">
@@ -46,32 +44,29 @@
             this form action needs to be updated for processing
           -->
           <form action="" method="GET">
-            <div class="input">
-              <label for="name">Sport: </label>
-              <select name="sport" id="sport">
-                <option value="tennis">Tennis</option>
-                <option value="badminton">Badminton</option>
-              </select>
-            </div><!-- end .input -->
-            <div class="input">
-              <!--
-                TODO:
-                no functionality for this right now (might need to scrap it)
-              -->
-              <label for="radius">Distance You're Prepared to Travel: <span id="range" class="range"></span> <em class="range">(km)</em></label>
-              <input id="slider" type="range" name="radius" min="1" max="5" />
-            </div><!-- end .input -->
-            <div class="hidden-allow-location">
-              <em>You must allow Location services in order to use JustPlay.</em>
-            </div><!-- end .hidden-allow-location -->
-            <div class="submit">
-              <input id="submit-button" type="submit" value="Find a Match" />
-            </div><!-- end .submit -->
+            <div class="text-inputs">
+              <div class="input">
+                <label for="name">Sport: </label>
+                <select name="sport" id="sport">
+                  <option value="tennis">Tennis</option>
+                  <option value="badminton">Badminton</option>
+                </select>
+              </div><!-- end .input -->
+              <div class="input">
+                <label for="location">Location: </label>
+                <input type="text" /><!-- this is a dropdown menu from google maps api -->
+                <input type="hidden" name="latitude" value="google will autofill in this field" />
+                <input type="hidden" name="longitude" value="google will autofill in this field" />
+              </div>
+              <div id="map-search"><!-- google map goes here --></div>
+              <div class="submit">
+                <input type="submit" value="Place Request" />
+              </div><!-- end .submit -->
+            </div><!-- end .text-inputs -->
           </form>
         </div><!-- end .form -->
       </div><!-- end .center-container -->
     </main>
-    <div class="clear-footer"></div><!-- end .clear-footer -->
     <footer>
       <div class="center-container">
         <em>Copyright &copy; 2017 &mdash; Group M3</em>

@@ -43,7 +43,7 @@
             </td>
             <!-- 
               TODO:
-              is there functionality (or even a url) that accepts a request
+              is there functionality (or even a url) that accepts a request?
             -->
             <td class="button">
               <a href="#">Accept</a>

@@ -1,6 +1,7 @@
 <?php
-
-
+/*
+ * Need to get the user's name, the information of their broadcast request and 
+ */
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +55,10 @@
             </tr>
           </table>
         </div>
+        <!-- 
+          TODO:
+          this functionality does not exist (for either of them)!
+        -->
         <div class="delete-edit">
           <a href="#" class="edit">Edit this Broadcast</a>
           <a class="delete" href="#">Delete this Broadcast</a>
