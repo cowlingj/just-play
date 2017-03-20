@@ -2,14 +2,6 @@
   // display the map and divs relevant to the user submittin
   function read($path, $query, $db) {
 
-  // SHOULDN'T NEED TO DECLARE - Jonathan 13/03/17
-  // declare values in the form
-  // $userID = null;
-  // $sport = null;
-  // $latitude = null;
-  // $longitude = null;
-  // $disabled = null;
-
   // make inputs safe (prevent XXS)
   $sport = makeSafe($_GET["sport"]);
   $latitude = $_GET["latitude"];
@@ -26,9 +18,9 @@
                                                     $allBroadcasts,
                                                     getElo($userID));
 
-    $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
+  $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
 
-    layout("search-response");
+  layout("response-map");
 
   }
 
@@ -43,15 +35,30 @@
   $_POST["disabled"] = makeSafe($_POST[getUserInfo("disabled")]);
   $_POST["sport"] = makeSafe($_SESSION["sport"]);
   $_POST["BroadcastId"] = makeSafe($_POST[getUserInfo("uuid")]);    
-  
-  // HOW DO I DO THAT WITH THIS FRAMEWORK!?
-  sendToDb();
 
-  // SHOULDN'T USE HEADER - Jonathan 13/03/17
-  // go to new page
-  // header('location:justplayformresponse.php');
+  // insert a new broadcast request
+  $db->prepare("INSERT INTO broadcasts (?, ?, ?, ?, ?)");
+  $db->bind_param("dddsb", $_POST["BroadcastId"],
+                           $_POST["broadcastLng"],
+                           $_POST["broadcastLat"],
+                           $_POST["sport"],
+                           $_POST["disabled"]);
+  $db->execute();
   
-  layout("search-response");
+  // READ response.php  
+
+  // All the current broadcasts for desired sport
+  $allBroadcasts = $db->query("SELECT * FROM broadcasts WHERE sport='" . $_POST["sport"] ."'");
+
+  // An ordered array of broadcast recomendation IDs 
+  $_SESSION["recomendations"] = getRankedRequests($_POST["userLat"],
+                                                    $_POST["userLng"],
+                                                    $allBroadcasts,
+                                                    getElo($userID));
+
+  $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
+
+  layout("response-map");
 
   }
 
@@ -63,9 +70,8 @@
       return $input;
   }
 
-  // IF THIS SHOULDN'T BE HERE THEN WHERE DOES IT GO, AND HOW DO I USE IT!?
   function getElo($userId) {
-    databaseConnect() -> query("SELECT elo FROM users WHERE id = $userID");
+    $db -> query("SELECT elo FROM users WHERE id = $userID");
   }
     
 ?>
