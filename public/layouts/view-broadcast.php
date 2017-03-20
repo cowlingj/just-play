@@ -53,7 +53,22 @@
           <table>
             <tr>
               <td><em>Status:</em></td>
-              <td class="info"><!-- todo: some conditional for getting the status of the broadcast request --></td>
+
+              <?php
+                if ($accepted) {
+              ?>  
+                  <!-- 
+                    TODO:
+                    create links for game response
+                  -->
+                  <td class="info">
+                    Tell us the result: <a href="#">I Won</a>&nbsp;<a href="#">We Drew</a>&nbsp;<a href="#">I Lost</a>
+                  </td>
+              <?php
+                } else {
+              ?>
+                  <td class="info">Pending</td>
+              <?php } ?>
             </tr>
           </table>
         </div>
