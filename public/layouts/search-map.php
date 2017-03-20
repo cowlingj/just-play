@@ -39,7 +39,7 @@
         ?>
           <td class="pad"><!-- --></td>
             <td class="info">
-              <?=$request["broadcaster"];?> is <em><?=$request["dist"];?></em> km away
+              <?= $request["broadcaster"]; ?> is <em><?= $request["dist"]; ?></em> km away
             </td>
             <!-- 
               TODO:
@@ -59,11 +59,7 @@
     <footer>
       <div class="center-container">
         <em class="small-broadcast">
-          <!--
-            TODO:
-            this link needs to change to reflect MVC controllers
-          -->
-          <a href="#">Can't find a match? Create a Broadcast Request</a>
+          <a href="/mbax4msk/just_play/broadcast-request-form">Can't find a match? Create a Broadcast Request</a>
         </em>
       </div><!-- end .center-container -->
     </footer>
