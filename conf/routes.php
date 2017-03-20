@@ -12,8 +12,8 @@ function compileRoutes() {
 
   // Added by Jonathan
   $router->addRoute("GET", "/search-form", "search");
-  $router->addRoute("GET", "/search-response", "response");
-  $router->addRoute("POST", "/search-response", "response");
+  $router->addRoute("GET", "/response-map", "response");
+  $router->addRoute("POST", "/response-map", "response");
   $router->addRoute("GET","/broadcast-request-form","broadcast");
 
   return $router;
