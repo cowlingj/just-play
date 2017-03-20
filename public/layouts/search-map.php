@@ -8,12 +8,12 @@
       <link rel="stylesheet/less" type="text/css" href="../assets/css/style.less" />
       <script src="../assets/js/less.min.js" type="text/javascript"></script>
     -->
-    <?=style("style");?>
-    <?=script("jquery-min");?>
+    <?= style("style"); ?>
+    <?= script("jquery-min"); ?>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP9ofPjKpQ3eRwJFOwPgP-BBXgTn9phis" type="text/javascript"></script>
-    <?=script("map-functions");?>
-    <?=script("search-map");?>
-    <?=script("map-sizing");?>
+    <?= script("map-functions"); ?>
+    <?= script("search-map"); ?>
+    <?= script("map-sizing"); ?>
   </head>
   <body>
     <header class="small">

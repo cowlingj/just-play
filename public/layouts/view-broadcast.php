@@ -1,9 +1,11 @@
-<?php
-/*
- * Need to get the user's name, the information of their broadcast request and 
- */
-?>
-
+<!--
+  TODO:
+  1.) Controller must contain:
+      - Getting the name of the broadcast location from the locations table (and creating a variable so we can acces it here)
+      - Getting the broadcaster (and receiver)'s names from their ids in the broadcast table
+  2.) Functionality to delete broadcast request
+  3.) Functionality to edit broadcast request
+-->
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,12 +16,12 @@
       <link rel="stylesheet/less" type="text/css" href="../assets/css/style.less" />
       <script src="../assets/js/less.min.js" type="text/javascript"></script>
     -->
-    <?=style("style");?>
-    <?=script("jquery-min");?>
+    <?= style("style"); ?>
+    <?= script("jquery-min"); ?>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP9ofPjKpQ3eRwJFOwPgP-BBXgTn9phis" type="text/javascript"></script>
-    <?=script("map-functions");?>
-    <?=script("search-map");?>
-    <?=script("map-sizing");?>
+    <?= script("map-functions"); ?>
+    <?= script("search-map"); ?>
+    <?= script("map-sizing"); ?>
   </head>
   <body>
     <header class="small">
@@ -35,15 +37,15 @@
       <aside class="map-sidebar">
         <h3 id="search-results">Your Current Broadcast Request</h3>
         <div class="details">
-          <h4 class="user-name">John Doe</h4>
+          <h4 class="user-name"><?= // get name from OATH SOMEHOW!?!?! ?></h4>
           <table>
             <tr>
               <td><em>Sport:</em></td>
-              <td class="info">Tennis</td>
+              <td class="info"><?= $correspondingBroadcast["sport"]; ?></td>
             </tr>
             <tr>
               <td><em>Location:</em></td>
-              <td class="info">Plattfields Park</td>
+              <td class="info"><?= $correspondingBroadcast["location"]; ?></td>
             </tr>
           </table>
         </div><!-- end .details -->
@@ -51,7 +53,7 @@
           <table>
             <tr>
               <td><em>Status:</em></td>
-              <td class="info">Pending</td>
+              <td class="info"><!-- todo: some conditional for getting the status of the broadcast request --></td>
             </tr>
           </table>
         </div>
