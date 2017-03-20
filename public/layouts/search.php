@@ -41,6 +41,10 @@
       </div><!-- end .page-heading -->
       <div class="center-container">
         <div class="form">
+          <!--
+            TODO: 
+            this form action needs to be updated for processing
+          -->
           <form action="" method="GET">
             <div class="input">
               <label for="name">Sport: </label>
@@ -50,6 +54,10 @@
               </select>
             </div><!-- end .input -->
             <div class="input">
+              <!--
+                TODO:
+                no functionality for this right now (might need to scrap it)
+              -->
               <label for="radius">Distance You're Prepared to Travel: <span id="range" class="range"></span> <em class="range">(km)</em></label>
               <input id="slider" type="range" name="radius" min="1" max="5" />
             </div><!-- end .input -->
