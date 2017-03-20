@@ -34,7 +34,7 @@
     $_POST["broadcastLat"] = makeSafe($_POST["broadcastLat"]);
     $_POST["disabled"] = makeSafe($_POST[getUserInfo("disabled")]);
     $_POST["sport"] = makeSafe($_SESSION["sport"]);
-    $_POST["BroadcastId"] = makeSafe($_POST[getUserInfo("uuid")]);    
+    $_POST["BroadcastId"] = $userID;    
 
     // insert a new broadcast request
     $db->prepare("INSERT INTO broadcasts (?, ?, ?, ?, ?)");
