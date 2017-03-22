@@ -1,5 +1,4 @@
 <?php
-echo "work for fuck's sake!... please";
 require_once("lib/router.php");
 
 function compileRoutes() {
@@ -7,7 +6,6 @@ function compileRoutes() {
     
   // Add new routes here
   $router->addRoute("GET", "/", "home");
-  echo "work for fuck's sake!";
   // $router->addRoute("GET", "/user/:user", "user");
 
   // $router->addRoute("GET", "/search", "search");
