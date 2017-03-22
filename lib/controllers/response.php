@@ -68,9 +68,9 @@
 
   // get rid of extra spaces, slashes and other nasty things
   function makeSafe($input) {
-    trim($input);
-    stripcslashes($input);
-    htmlspecialchars($input);
+    $input = trim($input);
+    $input = stripcslashes($input);
+    $input = htmlspecialchars($input);
     return $input;
   }
 
