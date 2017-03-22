@@ -1,5 +1,5 @@
 <?php
-
+echo "work for fuck's sake!... please";
 require_once("lib/router.php");
 
 function compileRoutes() {
