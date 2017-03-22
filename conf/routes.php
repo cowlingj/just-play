@@ -9,8 +9,6 @@ function compileRoutes() {
   $router->addRoute("GET", "/", "home");
   echo "work for fuck's sake!";
   // $router->addRoute("GET", "/user/:user", "user");
-  
-  print_r($router);
 
   // $router->addRoute("GET", "/search", "search");
 
@@ -20,8 +18,6 @@ function compileRoutes() {
   $router->addRoute("POST", "/response-map", "response");
   $router->addRoute("GET","/broadcast-request-form","broadcast");
   $router->addRoute("GET","/view-broadcast","view-broadcast");
-
-  print_r($router);
 
   return $router;
 }
