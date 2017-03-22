@@ -47,7 +47,7 @@ function makeSafe($input)
 }
 
 // function returns the value from a field belonging to a specific user
-function getUserInfo(requiredInfo)
+function getUserInfo($requiredInfo)
 {
   // connect to the group db, die if connection fails.
   $mysqli = databaseConnect();

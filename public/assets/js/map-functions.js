@@ -36,11 +36,13 @@ function getUserPosition(mapContainer) {
         var mapOptions = {
           center: new google.maps.LatLng(lat, lng),
           zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          disableDefaultUI: true
         };
 
         map = new google.maps.Map(mapContainer, mapOptions);
 
+        // TODO: we need to get the map center from the server - not the user (rewrite ajax generation)
         // perform ajax request
         if ((ajaxRequest.readyState == 4) && (ajaxRequest.status == 200)) {
           json = ajaxRequest.responseText;
@@ -53,19 +55,3 @@ function getUserPosition(mapContainer) {
     console.log("GeoLocation not supported");
   }
 } // end getUserPosition()
-
-
-// creates the google map object inside the #map div
-function initMap() {
-  // initialising the map's visual settings and theme
-  google.maps.visualRefresh = true;
-  // retrieving element in DOM where map will be
-  var mapElement = document.getElementById("mapContainer");
-  getUserPosition(mapElement);
-} // end initMap()
-
-
-ajaxRequest.open("GET", "markers.json");
-ajaxRequest.send();
-
-google.maps.event.addDomListener(window, 'load', initMap);
