@@ -8,6 +8,9 @@ function compileRoutes() {
   // Add new routes here
   $router->addRoute("GET", "/", "home");
   $router->addRoute("GET", "/user/:user", "user");
+  
+  print_r($router);
+
   // $router->addRoute("GET", "/search", "search");
 
   // Added by Jonathan
@@ -16,6 +19,8 @@ function compileRoutes() {
   $router->addRoute("POST", "/response-map", "response");
   $router->addRoute("GET","/broadcast-request-form","broadcast");
   $router->addRoute("GET","/view-broadcast","view-broadcast");
+
+  print_r($router);
 
   return $router;
 }
