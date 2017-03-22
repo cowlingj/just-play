@@ -82,33 +82,10 @@ if (isset($accessToken)) {
 	print("<br />");
         print("karan is a php g");
 
-require_once('config.inc.php');
-
-// Connect to the database
-$mysqli = new mysqli($database_host, $database_user, $database_pass, $database_name);
-
-// Check for errors before doing anything else
-if($mysqli -> connect_error) {
-    die('Connect Error ('.$mysqli -> connect_errno.') '.$mysqli -> connect_error);
-}
 
 
 $profile_name = $profile["name"];
 $profile_email = $profile["email"];
-
-$sql = 
-
-//INSERT INTO Delegates ([MemNo],[FromYr],[ToYr]) values(@MemNo, @FromYr,@ToYr)
-//where @MemNo not in 
-//(
- //   SELECT MemNo FROM words WHERE FromYr = @FromYr
-//)
-
-"INSERT INTO database (name, email) VALUES ('$profile_name', '$profile_email')";
-mysqli_query($mysqli, $sql);
-mysqli_close($mysqli);
-
-
 
   	// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
