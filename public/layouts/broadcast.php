@@ -1,3 +1,8 @@
+<!--
+  TODO:
+  similar to 'view-broadcast.php', we must retrieve the broadcast information 
+  (if it exists) so that we can autofill the fields for users who are editing their broadcast request
+-->
 <!DOCTYPE html>
 <html>
   <head>
