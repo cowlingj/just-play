@@ -5,7 +5,7 @@
 // This file will create the database connection object, then send the
 // parameters in the URL, along with the connection, to the method that matches
 // a given route
-
+echo "work for fuck's sake!... pretty please";
 require_once("config.inc.php");
 require_once("conf/routes.php");
 
