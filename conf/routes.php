@@ -15,6 +15,7 @@ function compileRoutes() {
   $router->addRoute("GET", "/response-map", "response");
   $router->addRoute("POST", "/response-map", "response");
   $router->addRoute("GET","/broadcast-request-form","broadcast");
+  $router->addRoute("GET","/view-broadcast","view-broadcast");
 
   return $router;
 }
