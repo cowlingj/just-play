@@ -7,6 +7,7 @@ function compileRoutes() {
     
   // Add new routes here
   $router->addRoute("GET", "/", "home");
+  echo "work for fuck's sake!";
   // $router->addRoute("GET", "/user/:user", "user");
   
   print_r($router);
