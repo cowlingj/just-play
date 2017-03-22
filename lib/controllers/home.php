@@ -5,7 +5,7 @@ function read($pathArgs, $queryArgs, $database) {
   $title = "Home | Just Play";
   $text = "Welcome!";
 
-  require layout("home");
+  require layout("search");
 }
 
 ?>
