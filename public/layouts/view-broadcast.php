@@ -53,22 +53,11 @@
           <table>
             <tr>
               <td><em>Status:</em></td>
-
-              <?php
-                if ($accepted) {
-              ?>  
-                  <!-- 
-                    TODO:
-                    create links for game response
-                  -->
-                  <td class="info">
-                    Tell us the result: <a href="#">I Won</a>&nbsp;<a href="#">We Drew</a>&nbsp;<a href="#">I Lost</a>
-                  </td>
-              <?php
-                } else {
-              ?>
-                  <td class="info">Pending</td>
-              <?php } ?>
+              <?php if ($accepted): ?>
+                <td class="info">Check your emails for</td>
+              <?php else: ?>
+                <td class="info">Pending</td>
+              <?php endif; ?>
             </tr>
           </table>
         </div>

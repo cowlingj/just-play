@@ -45,4 +45,8 @@ function sendFeedbackEmailToPerson($userEmail, $location, $userID, $gameID, $sec
     print $e->getMessage() . "\n";
   }
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> General cleaning up
