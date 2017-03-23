@@ -91,19 +91,11 @@ if (isset($accessToken)) {
 
       $conn->close();
 
-
-
-
-
-
-
-
-
 	echo $profile['name'];
   	// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
 	$helper = $fb->getRedirectLoginHelper();
-	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play', $permissions);
+	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play/login/facebook', $permissions);
 	echo "<script>window.top.location.href='".$loginUrl."'</script>";
 }
 ?>

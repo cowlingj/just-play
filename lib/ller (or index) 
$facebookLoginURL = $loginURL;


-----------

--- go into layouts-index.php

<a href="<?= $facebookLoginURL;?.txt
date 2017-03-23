@@ -1,0 +1,9 @@
+ller (or index) 
+$facebookLoginURL = $loginURL;
+
+
+///////////
+
+/// go into layouts/index.php
+
+<a href="<?= $facebookLoginURL;?>">Login with Facebook</a>
