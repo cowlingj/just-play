@@ -49,7 +49,7 @@ if (isset($accessToken)) {
 			unset($_SESSION['facebook_access_token']);
 			$helper = $fb->getRedirectLoginHelper();
 			$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play', $permissions);
-			echo "<script>window.top.location.href='".$loginUrl."'</script>";
+			
 		}
 		exit;
 	} catch(Facebook\Exceptions\FacebookSDKException $e) {
@@ -76,6 +76,6 @@ if (isset($accessToken)) {
 } else {
 	$helper = $fb->getRedirectLoginHelper();
 	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play/', $permissions);
-	echo "<script>window.top.location.href='".$loginUrl."'</script>";
+	
 }
 ?>
