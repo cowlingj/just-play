@@ -10,7 +10,7 @@
     if ($correspondingBroadcast["reciever"] != null) { // THIS MAY CAUSE A NULL POINTER IF THE USER IS CREATIONG A BROADCAST REQUEST
       $accepted = true;
     }
-    require layout("view-broadcast");
+    require layout("broadcast");
   }
 
 ?>
