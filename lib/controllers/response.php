@@ -18,7 +18,7 @@
     $_SESSION["recomendations"] = getRankedRequests($latitude,
                                                       $longitude,
                                                       $allBroadcasts,
-                                                      getElo($userID));
+                                                      getElo($userID, $db));
 
     $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
 
