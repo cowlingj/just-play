@@ -74,7 +74,7 @@
     return $input;
   }
 
-  function getElo($userId, $db) {
+  function getElo($userID, $db) {
     $db -> query("SELECT elo FROM user WHERE id = $userID");
   }
 ?>
