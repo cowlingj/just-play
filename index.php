@@ -37,7 +37,6 @@ function databaseConnection($host, $user, $pass, $db) {
 }
 
 require_once("lib/secrets.php");
-echo "wmlowf";
 function main () {
 
   // config.inc.php declares variables in the global scope
