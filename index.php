@@ -36,6 +36,7 @@ function databaseConnection($host, $user, $pass, $db) {
   return $connection;
 }
 
+require_once("lib/secrets.php");
 function main () {
 
   // config.inc.php declares variables in the global scope

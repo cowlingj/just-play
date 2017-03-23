@@ -1,30 +1,13 @@
 <?php
 // get database connection variables from config file
 require_once("config.inc.php");
-require_once("magic.php");
+require_once("match-making.php");
 // function that connects to the database
 // n.b. config.inc.php must be required
 // For simplicity database connection never closess
-$mysqli = null;
-function databaseConnect() {
-  if ($mysqli != null) return; 
-
-  $mysqli = new mysqli($database_host, $database_user, $database_pass, $database_name);
-
-  // if the connection fails
-  if ($mysqli->connect_error) {
-    die("Connection error (" . $mysqli->connect_errno . ") " . $mysqli->connect_error);
-  } // end if the connection fails
-
-  $mysqli->select_db("2016_comp10120_m3");
-
-  return $mysqli;
-} // end databaseConnectBroadcast()
-
 
 // retrieves array of information about each broadcast request, when given broadcast IDs (from session variable)
-function fetchOrderedRequests($broadcasts) {
-   databaseConnect();
+function fetchOrderedRequests($broadcasts, $db) {
 
   // initialises the loop counter and the 2-d array that markers will be stored in
   $markerCounter = 0;
@@ -34,30 +17,19 @@ function fetchOrderedRequests($broadcasts) {
   foreach ($broadcast as $marker) {
     // fetches unique row for desired broadcast request and stores in array
     $query = "SELECT * FROM broadcast WHERE id=" . $marker . ";";
-    $markers[$markerCounter] = $mysqli->query($query);
+    $markers[$markerCounter] = $db->query($query);
     $markerCounter++;
   } // end for every marker
 
-  $mysqli->close();
   return $markers; 
 } // end fetchOrderedRequests()
-/**
- * !!! ASSUMES INPUT HAS IS STERILE
- * A function called when a player tries to give feedback
- * @param int $gameID the ID of the game that the player is sumbitting feedback for 
- * @param int $playerID the ID of the player who is sumbitting feedback
- * @param MatchOutCome $outcome the outcome in the match represented in an enum
- * @return boolean Did the player successfully submit their feedback
- */
-function givePlayerFeedback($gameID, $playerID, $outcome,$securityKey){
-   //databaseConnect() should be called only once in the  beginning but for safety call it always
-   databaseConnect();
 
+function givePlayerFeedback($gameID, $playerID, $outcome, $db){
    //First get the relevant player from the player table
-   $query = "SELECT * FROM player WHERE game_id=" . $gameID . " AND player_id=".$playerID." AND key=".$securityKey.";";
+   $query = "SELECT * FROM player WHERE game_id=" . $gameID . " AND player_id=".$playerID;
 
-   $playerResult = $mysqli->query($query);
-   //There isn't an active player in the table or key was incorrect
+   $playerResult = $db->query($query);
+
    if($playerResult->num_rows==0)  return false;
 
    $player= $playerResult->fetch_assoc();
@@ -67,43 +39,37 @@ function givePlayerFeedback($gameID, $playerID, $outcome,$securityKey){
    }else return false;
 
    //Finally execute the query
-   $mysqli->query($query);
+   $db->query($query);
+
+   //Get other player id
+   $query = "SELECT * FROM player WHERE game_id=" . $gameID . " AND player_id!=".$playerID;
+   //Hacks
+   $otherPlayerID = $db->query($query);
+   $otherPlayerID =$otherPlayerID["player_id"];
+   //Force update even if half of the time the other player isn't going to have given feedback yet
+   updatePlayersElosOnFeedback($playerID,$otherPlayerID,$db);
    return true;
-   //player :game_id, player_id, starting_elo, feeedback
 }
 
-/**
- * A function called when a player tries to give feedback
- * @param int $playerID  The ID of the player 
- * @return boolean Does the player have a game they haven't given the result of 
- */
-function shouldPlayerGiveFeedback($playerID){
-  databaseConnect();
+function shouldUserGiveFeedback($user, $db){
   //Construct query
   $query = "SELECT * FROM player WHERE player_id=".$playerID.";";
+  $result= $mysqli->query($query);
 
-  $result= $mysqli->query($query)->fetch_assoc();
-
-  if($result==null || $result["feedback"]!=null)
-    return false;
-  else
-    return true;
+  while ( $row = $result->fetch_assoc() ) {
+    if($row["feedback"]==null) return true;
+  }
+  return false;
 }
-/**
- * Updates the player elo's after both players have submitted feedback or the feedback time slot has expired
- * @param int $player1ID  The ID of  player1
- * @param int $player2ID  The ID of  player2
- * @return boolean Was the update successful
- */
-function UpdatePlayersElosOnFeedback($player1ID, $player2ID){
-  databaseConnect();
+
+function updatePlayersElosOnFeedback($player1ID, $player2ID, $db){
 
   //First get player 1 and player 2 elos
   $query = "SELECT * FROM player WHERE player_id=".$player1ID.";";
-  $player1 = $mysqli->query($query)->fetch_assoc();
+  $player1 = $db->query($query)->fetch_assoc();
 
   $query = "SELECT * FROM player WHERE player_id=".$player2ID.";";
-  $player2 = $mysqli->query($query)->fetch_assoc();
+  $player2 = $db->query($query)->fetch_assoc();
   if($player1==null || $player2==null || $player1["feedback"]== null || $player2["feedback"]==null) return false;
   
   //Get get outcome of player1 from both perspectives
@@ -117,22 +83,55 @@ function UpdatePlayersElosOnFeedback($player1ID, $player2ID){
 
   //Player 1 
   $query = "UPDATE user set elo=".$newElo["ply1"]." WHERE id=".$player1ID.";";
-  $mysqli->query($query);
+  $db->query($query);
 
   //Player 2
   $query = "UPDATE user set elo=".$newElo["ply2"]." WHERE id=".$player2ID.";";
-  $mysqli->query($query);
+  $db->query($query);
 
   //Finally remove the 2 player rows
   $query = "DELETE FROM player WHERE player_id=".$player1ID.";";
-  $mysqli->query($query);
+  $db->query($query);
 
   $query = "DELETE FROM player WHERE player_id=".$player2ID.";";
-  $mysqli->query($query);
+  $db->query($query);
 
 }
-function getCorrespondingBroadcast(){
-  return $mysqli -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')
+function getCorrespondingBroadcast($db){
+  return $db -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')
     ->fetch_assoc();
+}
+
+//A function that checks to see if users is in the right page
+function checkUserState($userID, $db){
+  $result = $db -> query("SELECT * FROM broadcast  WHERE broadcaster = $userID")->fetch_assoc();
+  //User is a broadcaster
+  if(!is_null($result)){
+
+    //view broadcast
+  }else{
+    //Get all the players the user is 
+    $result= $db -> query("SELECT * FROM player WHERE player_id=".$playerID.";");
+    $hasFeedBackToGive=false;
+    while ( $row = $result->fetch_assoc() ) {
+      if($row["feedback"]==null){//If not given feedback for game 
+          //Time for feedback has ended so force feedback
+          //Does not handle the case when a player never searches for a game after the first feedback
+          if(($row["timestamp"]-time())>60*60*24*2){
+            givePlayerFeedback($row["game_id"],$row["player_id"],MatchOutCome::DRAW, $db);
+            break;
+          }
+          $hasFeedBackToGive = true;
+        }
+
+
+      }
+      if($hasFeedBackToGive==true){
+        //View accepted broadcast
+
+      }
+    //User is a player in a game
+    //
+  }
 }
 ?>

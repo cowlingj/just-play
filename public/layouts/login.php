@@ -9,8 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home | JustPlay</title>
     <?= style("style"); ?>
-    <?= script("jquery.min"); ?>
-    <?= script("header-toggle"); ?>>
   </head>
   <body>
     <header class="big">
