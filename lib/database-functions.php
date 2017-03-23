@@ -101,14 +101,20 @@ function getCorrespondingBroadcast($db){
   return $db -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')
     ->fetch_assoc();
 }
-
+function gotoIfNotIn($path){
+  $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+  if($path!=$requestPath){
+    header("Location: " . $path);
+  }
+}
 //A function that checks to see if users is in the right page
 function checkUserState($userID, $db){
   $result = $db -> query("SELECT * FROM broadcast  WHERE broadcaster = $userID")->fetch_assoc();
+
   //User is a broadcaster
   if(!is_null($result)){
-
     //view broadcast
+    gotoIfNotIn("/view-broadcast");
   }else{
     //Get all the players the user is 
     $result= $db -> query("SELECT * FROM player WHERE player_id=".$playerID.";");
@@ -127,8 +133,10 @@ function checkUserState($userID, $db){
 
       }
       if($hasFeedBackToGive==true){
+        gotoIfNotIn("/view-accepted-broadcast");
         //View accepted broadcast
-
+      }else{
+        gotoIfNotIn("/search-form");
       }
     //User is a player in a game
     //
