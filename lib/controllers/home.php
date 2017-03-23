@@ -1,7 +1,11 @@
 <?php
 
 function read($pathArgs, $queryArgs, $database) {
-  layout("search-form");
+
+  $title = "Home | Just Play";
+  $text = "Welcome!";
+
+  require layout("login");
 }
 
 ?>

@@ -21,28 +21,27 @@ EOD;
  * @param string $securityKey A randomly generated key to prevent users from spoofing other player's results
  */
 function sendFeedbackEmailToPerson($userEmail, $location, $userID, $gameID, $securityKey) {
-  $baseURL = $FeedbackBaseURL + "?gameID=" + $gameID + "&userID=" + $userID + "&key=" + $securityKey;
+  $baseURL = $FeedbackBaseURL . "?gameID=" . $gameID . "&userID=" . $userID . "&key=" . $securityKey;
   
-  $winURL  = $baseURL+"&result=WIN";
-  $loseURL = $baseURL+"&result=LOSE";
-  $drawURL = $baseURL+"&result=DRAW";
+  $winURL  = $baseURL . "&result=WIN";
+  $loseURL = $baseURL . "&result=LOSE";
+  $drawURL = $baseURL . "&result=DRAW";
   
   $emailBody = $templateBody;
   
-  str_replace("%Location%", $location,$emailBody);
+  str_replace("%Location%", $location, $emailBody);
   
   str_replace("%WinURL%",   $winURL,  $emailBody);
   str_replace("%LoseURl%",  $loseURL, $emailBody);
   str_replace("%DrawURL%",  $drawURL, $emailBody);
   
-  try{
+  try {
     $mm = new MailManager($database_host, $database_user, $database_pass, $database_name);
     $mm->set_subject('Just play feedback.');
     $mm->add_recipient($userEmail);
     $mm->set_body($emailBody);
     $mm->send();
-  }
-  catch (Exception $e){
+  } catch (Exception $e){
     print $e->getMessage() . "\n";
   }
 }

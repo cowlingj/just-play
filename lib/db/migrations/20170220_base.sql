@@ -104,16 +104,25 @@ CREATE TABLE game (
     REFERENCES  user(id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE gamebuffer (
-  game_id SERIAL PRIMARY KEY,
-  player1_elo BIGINT UNSIGNED NOT NULL,             --Player1 elo at the start of this game
-  player2_elo BIGINT UNSIGNED NOT NULL,             --Player2 elo at the start of this game
-  --If feedback is null the playedr hasn't given feedback
-  player1_feedback ENUM('WIN', 'LOSE', 'DRAW'),     --Feedback of player 1 given after game is played
-  player2_feedback ENUM('WIN', 'LOSE', 'DRAW'),     --Feedback of player 2 given after game is played
-
-  CONSTRAINT gameid_gamebuffer_fk_con
-    FOREIGN KEY gameid_gamebuffer_fk(game_id)
-    REFERENCES  game(id)
+CREATE TABLE player (
+  game_id BIGINT UNSIGNED NOT NULL,
+  player_id BIGINT UNSIGNED NOT NULL,
+  starting_elo BIGINT UNSIGNED NOT NULL,
+  feedback ENUM('WIN', 'LOSE', 'DRAW'),
+  key VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL
+    DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
+​
+  PRIMARY KEY (game_id, player_id),
+​
+  CONSTRAINT game_player_fk_con
+    FOREIGN KEY game_player_fk(game_id)
+    REFERENCES  game(id),
+​
+  CONSTRAINT user_player_fk_con
+    FOREIGN KEY user_player_fk(player_id)
+    REFERENCES  user(id)
 ) ENGINE=InnoDB;
 

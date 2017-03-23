@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /mbax4msk/just_play/
+RewriteBase /mbyxakk2/just_play/
 RewriteCond %{REQUEST_URI} !-f
- 
-RewriteRule ^.*$ lib/server.php
+RewriteCond %{REQUEST_URI} !-d
+RewriteRule ^.*$ index.php
