@@ -6,13 +6,15 @@ define(
   "https://web.cs.manchester.ac.uk/mbax4msk/just_play/login/facebook"
 );
 
-
-function getLoginUrl() {
-  $fb = new Facebook\Facebook([
+function createFacebookObject() {
+  return new Facebook\Facebook([
     'app_id' => $GLOBALS['SECRETS']['facebook_app_id'],
     'app_secret' => $GLOBALS['SECRETS']['facebook_app_secret'],
     'default_graph_version' => 'v2.8',
-    ]);
+  ]);
+}
+
+function getLoginUrl($fb) {
   $permissions = ['email']; // optional
   $helper = $fb->getRedirectLoginHelper();
   return $helper->getLoginUrl(FACEBOOK_REDIRECT_URI, $permissions);
@@ -66,10 +68,10 @@ function redirectHeader() {
 	}
 }
 
-function getBasicInfo() {
+function getBasicInfo($fb) {
   	try {
 		$profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
-		$profile = $profile_request->getGraphNode()->asArray();
+		return $profile_request->getGraphNode()->asArray();
 	} catch(Facebook\Exceptions\FacebookResponseException $e) {
 		// When Graph returns an error
 		echo 'Graph returned an error: ' . $e->getMessage();
