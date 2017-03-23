@@ -10,8 +10,8 @@ define(
 function getLoginUrl() {
   global $SECRETS;
   $fb = new Facebook\Facebook([
-    'app_id' => $SECRETS['facebook_app_id'],
-    'app_secret' => $SECRETS['facebook_app_secret'],
+    'app_id' => $GLOBALS['SECRETS']['facebook_app_id'],
+    'app_secret' => $GLOBALS['SECRETS']['facebook_app_secret'],
     'default_graph_version' => 'v2.8',
     ]);
   $permissions = ['email']; // optional
