@@ -29,7 +29,7 @@ $(document).submit(function(e) {
 
       if (latitude != null && longitude != null) {
         var queryString = "?sport=" + sport + "&radius=" + radius + "&latitude=" + latitude + "&longitude=" + longitude;
-        $(location).attr('href', queryString);
+        $(location).attr('href', "http://web.cs.manchester.ac.uk/mbax4msk/just_play/response" + queryString);
       } else {
         tryToRedirect();
       }
