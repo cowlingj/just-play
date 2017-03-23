@@ -8,6 +8,7 @@ define(
 
 
 function getLoginUrl() {
+  global $SECRETS;
   $fb = new Facebook\Facebook([
     'app_id' => $SECRETS['facebook_app_id'],
     'app_secret' => $SECRETS['facebook_app_secret'],
