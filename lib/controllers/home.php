@@ -9,7 +9,7 @@ function read($pathArgs, $queryArgs, $database) {
 
   $loginURL;
 
-  require layout("index");
+  require layout("login");
 }
 
 ?>
