@@ -1,6 +1,8 @@
 <?php
   // display the map and divs relevant to the user submittin
   function read($path, $query, $db) {
+      
+    require "/lib/match-making.php";
 
     // make inputs safe (prevent XXS)
     $sport = makeSafe($_GET["sport"]);
@@ -26,6 +28,8 @@
 
   // submit the broadcast form and head back to search-response
   function create($path, $query, $db) {
+      
+    require "/lib/match-making.php";
 
     // make inputs safe (prevent XXS)
     $_POST["userLng"] = makeSafe($_POST["lng"]);
