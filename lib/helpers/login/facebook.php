@@ -8,10 +8,6 @@ define(
 
 
 function getLoginUrl() {
-  
-  foreach ($GLOBALS['SECRETS'] as $key => $value) {
-    echo "Key: $key; Value: $value\n";
-  }
   $fb = new Facebook\Facebook([
     'app_id' => $GLOBALS['SECRETS']['facebook_app_id'],
     'app_secret' => $GLOBALS['SECRETS']['facebook_app_secret'],
