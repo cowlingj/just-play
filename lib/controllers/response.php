@@ -6,8 +6,8 @@
 
     // make inputs safe (prevent XXS)
     $sport = makeSafe($_GET["sport"]);
-    $latitude = $_GET["latitude"];
-    $longitude = $_GET["longitude"];
+    $latitude = makeSafe($_GET["latitude"]);
+    $longitude = makeSafe($_GET["longitude"]);
     $disabled = makeSafe($_GET["disabled"]);
     
 
