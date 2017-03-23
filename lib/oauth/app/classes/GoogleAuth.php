@@ -1,23 +1,29 @@
-<?php 
+<?php
 
   class GoogleAuth {
 
     protected $db;
     protected $client;
+    protected $token;
 
-    public function _construct(DB $db = null,Google_Client $googleClient = null) { 
+    public function __construct(DB $db = null, Google_Client $googleClient = null) {
 
       $this->client = $googleClient;
       $this->db = $db;
 
-      if($this->client) { 
-        $this->client->setClientId('759163150676-gs3pf51hrk7cvfo9bgnmcg66uomk01ak.apps.googleusercontent.com ');
-        $this->client->setClientSecret('tmDaqddoAVDSXB4hN1DT6raH');
-        $this->client->setRedirectUri('localhost/tutorial/oauth/index.php');
+	
+
+
+
+      if($this->client) {
+
+	$this->client->setAuthConfig( '/home/pi/oauth/oauth/client_secret_justplay.json');
+        $this->client->setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/');
         $this->client->setScopes('email');
       } // if
 
     } // construct
+
 
     public function isLoggedIn() {
       return isset($_SESSION['access_token']);
@@ -28,13 +34,27 @@
     }
 
     public function checkRedirectCode() {
-      if(isset($_get['code'])) {
-        $this->client->authenticate($_GET['code']);  
+      if(isset($_GET['code'])) {
 
-        $this->setToken($this->client->getAccessToken());
+	echo 'checkRedirectCode';
+
+        $this->client->authenticate($_GET['code']);
+
+        $this->setToken($this->client->setAccessToken());
+
+        $this->storeUser($this->getPayload());
+
+        $payload = $this->getPayload();
+        echo '<pre>', print_r($payload), '</pre>';
 
         return true;
       }
+    }
+
+      // get the payload	
+      public function getPayload() {
+        $token = $this->client->verifyIdToken()->getAttributes()['payload'];
+        return $token; 
     }
 
     public function setToken($token) {
@@ -44,10 +64,22 @@
 
     } // setToken
 
+    protected function storeUser($payload) {
+      $sql = "
+            INSERT INTO user (id, name, email)
+            VALUES ({$payload['id']}, '{$payload['name']}',
+                   '{$payload['email']}')
+            ON DUPLICATE KEY UPDATE id = id
+            ";
+      $this->db->query($sql);
+    }
+
     public function logout() {
       unset($_SESSION['access_token']);
     } // logout
 
-  } // Googleauth 
-  
+
+  } // Googleauth
+
+
  ?>
