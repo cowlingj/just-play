@@ -20,7 +20,7 @@ EOD;
  * @param string $gameID The database key for the game 
  * @param string $securityKey A randomly generated key to prevent users from spoofing other player's results
  */
-function sendFeedbackEmailToPerson($userEmail, $location, $userID, $gameID, $securityKey) {
+function sendFeedbackEmailToPerson($userEmail, $location, $userID, $gameID) {
   $baseURL = $FeedbackBaseURL . "?gameID=" . $gameID . "&userID=" . $userID . "&key=" . $securityKey;
   
   $winURL  = $baseURL . "&result=WIN";
@@ -45,8 +45,5 @@ function sendFeedbackEmailToPerson($userEmail, $location, $userID, $gameID, $sec
     print $e->getMessage() . "\n";
   }
 }
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> General cleaning up
+
