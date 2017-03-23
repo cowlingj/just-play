@@ -1,7 +1,3 @@
-<!-- 
-  TODO:
-  Replace placeholder text in masthead
--->
 <!DOCTYPE html>
 <html>
   <head>
@@ -31,10 +27,10 @@
             Use Facebook or Google+ to login or signup to get started!
           </p>
           <div class="login-buttons">
-            <a href="<?= $loginUrl ?>" class="facebook login-signup">
+            <a href="<?= $loginFacebookUrl; ?>" class="facebook login-signup">
               Login with Facebook
             </a>
-            <a href="#" class="google login-signup">Login with Google+</a>
+            <a href="<?= $loginGoogleUrl; ?>" class="google login-signup">Login with Google+</a>
           </div><!-- end .login-buttons -->
         </div><!-- end .login-signup -->
       </div><!-- end .center-container -->
