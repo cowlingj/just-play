@@ -10,7 +10,12 @@
     -->
     <?= style("style"); ?>
     <?= script("jquery-min"); ?>
+    <script type="text/javascript">
+      var searchLongitude = <?= $longitude; ?>;
+      var searchLatitude = <?= $latitude; ?>;
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP9ofPjKpQ3eRwJFOwPgP-BBXgTn9phis" type="text/javascript"></script>
+
     <?= script("map-functions"); ?>
     <?= script("search-map"); ?>
     <?= script("map-sizing"); ?>

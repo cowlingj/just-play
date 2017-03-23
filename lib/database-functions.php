@@ -98,8 +98,7 @@ function updatePlayersElosOnFeedback($player1ID, $player2ID, $db){
 
 }
 function getCorrespondingBroadcast($db){
-  return $db -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')
-    ->fetch_assoc();
+  return $db -> query('SELECT * FROM broadcasts WHERE id = $_SESSION["userId"]')->fetch_assoc();
 }
 function gotoIfNotIn($path){
   $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -109,7 +108,7 @@ function gotoIfNotIn($path){
 }
 //A function that checks to see if users is in the right page
 function checkUserState($userID, $db){
-  $result = $db -> query("SELECT * FROM broadcast  WHERE broadcaster = $userID")->fetch_assoc();
+  $result = $db -> query("SELECT * FROM broadcast WHERE broadcaster = $userID")->fetch_assoc();
 
   //User is a broadcaster
   if(!is_null($result)){
