@@ -7,7 +7,7 @@ function read($pathArgs, $queryArgs, $database) {
   $title = "Home | Just Play";
   $text = "Welcome!";
 
-  $loginUrl = getLoginUrl(); 
+  $loginUrl = getLoginUrl(createFacebookObject()); 
 
   require layout("login");
 }
