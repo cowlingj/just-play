@@ -42,6 +42,7 @@ function cmp($a, $b)
   return ($a["matchStrength"] < $b["matchStrength"]) ? -1 : 1;
 }
 
+$maximumDistance = 5000;//5km 
 /**
  * Returns a list of the best matches for a given person. Frees $queryResults
  * @param float $playerLatitude Latitude of player [deg decimal]
@@ -51,7 +52,7 @@ function cmp($a, $b)
  * @param maximumDistance (in metres), i.e. the size of the map
  * @return array An ordered array where the best mach is first index - keys is userID and values are distances
  */
-function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $playerELO, $maximumDistance) {
+function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $playerELO) {
   //Auxilary array for sorting the positions
   $auxilaryArray = array();
 
