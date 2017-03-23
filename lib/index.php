@@ -2,12 +2,6 @@
 session_start();
 require_once __DIR__ . '/src/Facebook/autoload.php';
 
-$db = new mysqli('host', username, password)
-
-if($mysqli -> connect_error) {
-    die('Connect Error ('.$mysqli -> connect_errno.') '.$mysqli -> connect_error);
-}
-
 
 $fb = new Facebook\Facebook([
   'app_id' => '422280014788952',
@@ -77,25 +71,11 @@ if (isset($accessToken)) {
 		exit;
 	}
  
-       $name = $profile['name'];
 
-       $sql = "INSERT INTO MyGuests (name, token)
-       VALUES ($name, $accessToken)";
-  
-       if ($db->query($sql) === TRUE) {
-           echo "New record created successfully";
-       }   else {
-              echo "Error: " . $sql . "<br>" . $conn->error;
-       }
-
-
-      $conn->close();
-
-	echo $profile['name'];
   	// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
 	$helper = $fb->getRedirectLoginHelper();
-	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play/login/facebook', $permissions);
+	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play/', $permissions);
 	echo "<script>window.top.location.href='".$loginUrl."'</script>";
 }
 ?>
