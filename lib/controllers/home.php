@@ -1,11 +1,15 @@
 <?php
 
+require 'lib/index.php';
+
 function read($pathArgs, $queryArgs, $database) {
 
   $title = "Home | Just Play";
   $text = "Welcome!";
 
-  require layout("index");
+  $loginURL;
+
+  require layout("login");
 }
 
 ?>

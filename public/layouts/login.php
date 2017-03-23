@@ -33,7 +33,9 @@
             Use Facebook or Google+ to login or signup to get started!
           </p>
           <div class="login-buttons">
-            <a href="#" class="facebook login-signup">Login with Facebook</a>
+            <a href="<?= $loginURL ?>" class="facebook login-signup">
+              Login with Facebook
+            </a>
             <a href="#" class="google login-signup">Login with Google+</a>
           </div><!-- end .login-buttons -->
         </div><!-- end .login-signup -->
@@ -42,8 +44,9 @@
         <div class="center-container">
           <h3>Our Mission</h3>
           <blockquote>
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto incidunt quibusdam eius. Similique deleniti numquam, porro itaque modi, voluptatum esse nobis.'
-          </blockquote>
+            'Here at Just Play we belive in the importance of uniting people and developing a strong community spirit.<br>
+            We do this by providing a platform for you to meet new people through, and have fun; with all the health benefits of playing sports.<br>
+            So make friends, have fun, and be healthy... so what are you waiting for - Just Play!'          </blockquote>
         </div><!-- end .center-container -->
       </div><!-- end .masthead -->
     </main>
