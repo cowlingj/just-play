@@ -8,12 +8,13 @@ $fb = new Facebook\Facebook([
   'default_graph_version' => 'v2.8',
   ]);
 
-$helper = $fb->getCanvasHelper();
-$permissions = ['email']; // optional
+$helper = $fb->getRedirectLoginHelper();
 
+$permissions = ['email']; // optional
+	
 try {
 	if (isset($_SESSION['facebook_access_token'])) {
-	$accessToken = $_SESSION['facebook_access_token'];
+		$accessToken = $_SESSION['facebook_access_token'];
 	} else {
   		$accessToken = $helper->getAccessToken();
 	}
