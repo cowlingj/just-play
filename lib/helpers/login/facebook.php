@@ -43,7 +43,7 @@ function exchangeToken(){
     exchangeTokenHelper();
     redirectHeader(); 
     getBasicInfo();
-  } else redirectLogin();
+  } else header ("Location:https://web.cs.manchester.ac.uk/mbax4msk/just_play/");
 }
 
 function exchangeTokenHelper() {
