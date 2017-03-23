@@ -69,6 +69,7 @@ function main () {
 
 }
 
+session_start();
 main();
 
 

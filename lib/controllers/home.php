@@ -1,13 +1,13 @@
 <?php
 
-require 'lib/index.php';
+require('lib/helpers/login/facebook.php');
 
 function read($pathArgs, $queryArgs, $database) {
 
   $title = "Home | Just Play";
   $text = "Welcome!";
-  global $loginUrl;
-  $loginUrl = "poo";
+
+  $loginUrl = getLoginUrl(); 
 
   require layout("login");
 }
