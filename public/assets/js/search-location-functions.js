@@ -25,9 +25,9 @@ $(document).submit(function(e) {
 
   $(".hidden-allow-location").slideDown(400);
 
-  if (latitude != null && longitude != null) {
+  if (latitude !== null && longitude !== null) {
     console.log("dfsh");
-    var queryString = "?sport=" + sport + "&radius=" + radius + "&latitude=" + latitude + "&longitude=" + longitude;
+    var queryString = "?sport=" + sport + "&latitude=" + latitude + "&longitude=" + longitude;
     $(location).attr('href', "http://web.cs.manchester.ac.uk/mbax4msk/just_play/response" + queryString);
   }
 });
