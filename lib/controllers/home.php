@@ -10,7 +10,7 @@ function read($pathArgs, $queryArgs, $database) {
 
   $facebookLoginUrl = getLoginUrl(createFacebookObject()); 
 
-  // $googleLoginUrl = getAuthUrl(); 
+  $googleLoginUrl = getAuthUrl(); 
 
   require layout("login");
 }
