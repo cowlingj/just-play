@@ -1,6 +1,12 @@
 <?php
 session_start();
-require_once __DIR__ . 'lib/src/Facebook/autoload.php';
+require_once __DIR__ . '/src/Facebook/autoload.php';
+
+$db = new mysqli('host', username, password)
+
+if($mysqli -> connect_error) {
+    die('Connect Error ('.$mysqli -> connect_errno.') '.$mysqli -> connect_error);
+}
 
 
 $fb = new Facebook\Facebook([
@@ -9,20 +15,18 @@ $fb = new Facebook\Facebook([
   'default_graph_version' => 'v2.8',
   ]);
 
-$helper = $fb->getRedirectLoginHelper();
-
+$helper = $fb->getCanvasHelper();
 $permissions = ['email']; // optional
-	
+
 try {
 	if (isset($_SESSION['facebook_access_token'])) {
-		$accessToken = $_SESSION['facebook_access_token'];
+	$accessToken = $_SESSION['facebook_access_token'];
 	} else {
   		$accessToken = $helper->getAccessToken();
 	}
 } catch(Facebook\Exceptions\FacebookResponseException $e) {
  	// When Graph returns an error
  	echo 'Graph returned an error: ' . $e->getMessage();
-
   	exit;
 } catch(Facebook\Exceptions\FacebookSDKException $e) {
  	// When validation fails or other local issues
@@ -34,63 +38,72 @@ if (isset($accessToken)) {
 	if (isset($_SESSION['facebook_access_token'])) {
 		$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 	} else {
-		// getting short-lived access token
 		$_SESSION['facebook_access_token'] = (string) $accessToken;
-
 	  	// OAuth 2.0 client handler
 		$oAuth2Client = $fb->getOAuth2Client();
-
 		// Exchanges a short-lived access token for a long-lived one
 		$longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['facebook_access_token']);
-
 		$_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
-
-		// setting default access token to be used in script
 		$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 	}
-
-	// redirect the user back to the same page if it has "code" GET variable
-	if (isset($_GET['code'])) {
-		header('Location: ./');
-	}
-
-	// getting basic info about user
+	// validating the access token
 	try {
-		$profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
-		$profile = $profile_request->getGraphNode()->asArray();
+		$request = $fb->get('/me');
 	} catch(Facebook\Exceptions\FacebookResponseException $e) {
 		// When Graph returns an error
-		echo 'Graph returned an error: ' . $e->getMessage();
-		session_destroy();
-		// redirecting user back to app login page
-		header("Location: ./");
+		if ($e->getCode() == 190) {
+			unset($_SESSION['facebook_access_token']);
+			$helper = $fb->getRedirectLoginHelper();
+			$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play', $permissions);
+			echo "<script>window.top.location.href='".$loginUrl."'</script>";
+		}
 		exit;
 	} catch(Facebook\Exceptions\FacebookSDKException $e) {
 		// When validation fails or other local issues
 		echo 'Facebook SDK returned an error: ' . $e->getMessage();
 		exit;
 	}
-	
-	// printing $profile array on the screen which holds the basic info about user
-	//print_r($profile);
-	print("<br />");
-	print($profile["name"]);
-	print("<br />");
-	print($profile["email"]);
-	print("<br />");
-	print($profile["id"]);
-	print("<br />");
-        print("karan is a php g");
+	// getting basic info about logged-in user
+	try {
+		$request = $fb->get('/me?fields=name,email');
+		$profile = $request->getGraphNode()->asArray();
+	} catch(Facebook\Exceptions\FacebookResponseException $e) {
+		// When Graph returns an error
+		echo 'Graph returned an error: ' . $e->getMessage();
+		exit;
+	} catch(Facebook\Exceptions\FacebookSDKException $e) {
+		// When validation fails or other local issues
+		echo 'Facebook SDK returned an error: ' . $e->getMessage();
+		exit;
+	}
+ 
+       $name = $profile['name'];
+
+       $sql = "INSERT INTO MyGuests (name, token)
+       VALUES ($name, $accessToken)";
+  
+       if ($db->query($sql) === TRUE) {
+           echo "New record created successfully";
+       }   else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+       }
+
+
+      $conn->close();
 
 
 
-$profile_name = $profile["name"];
-$profile_email = $profile["email"];
 
+
+
+
+
+
+	echo $profile['name'];
   	// Now you can redirect to another page and use the access token from $_SESSION['facebook_access_token']
 } else {
-	// replace your website URL same as added in the developers.facebook.com/apps e.g. if you used http instead of https and you used non-www version or www version of your website then you must add the same here
-	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play/lib/index.php, $permissions);
-	echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+	$helper = $fb->getRedirectLoginHelper();
+	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play', $permissions);
+	echo "<script>window.top.location.href='".$loginUrl."'</script>";
 }
 ?>
