@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/src/Facebook/autoload.php';
 
 
@@ -78,4 +77,5 @@ if (isset($accessToken)) {
 	$loginUrl = $helper->getLoginUrl('http://web.cs.manchester.ac.uk/mbax4msk/just_play/', $permissions);
 	
 }
+
 ?>
