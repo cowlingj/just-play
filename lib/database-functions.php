@@ -38,6 +38,7 @@ function fetchOrderedRequests($broadcasts) {
     $markerCounter++;
   } // end for every marker
 
+  $mysqli->close();
   return $markers; 
 } // end fetchOrderedRequests()
 /**

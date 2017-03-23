@@ -1,6 +1,13 @@
 <?php
 
 // Class representing a route segment
+// 
+// Think of the routing system as a tree
+// Each segment in a URI is represented by a tree node.
+// The Router will step through each node recursively untill it reaches
+// a terminal node. If that node has no targer i.e doesn't point
+// to a controller, then it returns 404. If a node doesn't have a
+// child node for a particular segment, it also returns a 404
 
 class RouteNode {
   // The name given to the node
@@ -13,18 +20,19 @@ class RouteNode {
   private $isParameter;
 
   // Stores the next parameter node for this node
-  private $nextParameter;
+  private $nextParameter = NULL;
 
   // Target file
-  private $target;
+  private $target = NULL;
 
   function __construct($segment, $file = FALSE) {
-    // Parameters have a leading colon
+
     if (empty($segment)) die("Each node requires a name");
+    // Parameters have a leading colon
     if ($segment[0] == ':') {
-      $this->isParameter = true;
+      $this->isParameter = TRUE;
       $segment = substr($segment, 1);
-    } else $this->isParameter = true;
+    } else $this->isParameter = FALSE;
 
     $this->id = $segment;
     $this->target = $file;
@@ -32,7 +40,6 @@ class RouteNode {
   }
 
   private function addNode($segment) {
-    echo "Segment: ".$segment;
     $node = new RouteNode($segment);
     if ($node->isParameter) {
       // We can only have one parameter per node
@@ -42,7 +49,7 @@ class RouteNode {
       } else die("Next parameter already set for segment ".$this->id);
     } else {
       // We cannot overwite segments
-      if ($this->paths[$segment]) {
+      if (isset($this->paths[$segment])) {
         die("Path $segment already set for segment ".$this->id);
       } else {
         $this->paths[$segment] = $node;
@@ -55,7 +62,7 @@ class RouteNode {
     // If there are no more segments to follow
     if (count($route) == 0) {
       // We cannot overwrite targets
-      if ($this->target) die("Target for ".$this->id." already set");
+      if ($this->target != NULL) die("Target for ".$this->id." already set");
       else $this->target = $file;
     } else {
       // Create the node. The new node is returned to us
@@ -93,23 +100,28 @@ class RouteNode {
   }
 }
 
+// The router itself
 
 class Router {
   
-  private $routes = array();
+  // An array of nodes for HTTP Methods, which represent the start of a route
+  private $routes;
+
+  function __construct() {
+    $this->routes = array();
+  }
 
   public function addRoute($method, $uri, $target) {
-    if (!is_array($this->routes)) $this->routes = array();
-    $route = array_filter(explode("/", $uri));
-    $node = NULL;
-    if (array_key_exists($method, $this->routes)) {
-      $node = $this->routes[$method];
-    } else {
-      $this->routes[$method] = $node = new RouteNode($method);
-    }
-    echo "Registering ".$uri, PHP_EOL;
+    // Split the uri into an array of segments, filtering out empty strings
+    $route = array_values(array_filter(explode("/", $uri)));
+    // Check if the node for a route exists
+    $node = array_key_exists($method, $this->routes)
+      ? $this->routes[$method]
+      : $this->routes[$method] = new RouteNode($method)
+    ;
+    // array_filter causes the array to contain an empty string if the uri is
+    // '/'. We reference this as the root of the app
     if (count($route) == 0) {
-      echo "This is root", PHP_EOL;
       $route = array('@root');
     }
     $node->addRoute($route, $target);
@@ -117,14 +129,14 @@ class Router {
   }
 
   public function resolve($method, $uri) {
-    if (!is_array($this->routes)) $this->routes = array();
-    $route = array_filter(array_slice(explode("/", $uri), 2));
+    // We slice te first two segments off because they will be
+    // <username> and 'just-play'
+    $route = array_values(array_filter(array_slice(explode("/", $uri), 3)));
     if (count($route) == 0) $route = array('@root');
-    if (array_key_exists($method, $this->routes)) {
-      return $this->routes[$method]->resolve($route, array());
-    } else {
-      return array("target"=>404, "params"=>array());
-    }
+    return array_key_exists($method, $this->routes)
+      ? $this->routes[$method]->resolve($route, array())
+      : array("target"=>404, "params"=>array())
+    ;
   }
 
 }
