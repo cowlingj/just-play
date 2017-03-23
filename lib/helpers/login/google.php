@@ -16,7 +16,7 @@
     }
 
     public function getAuthUrl() {
-      return $this->client->createAuthUrl();
+      return createAuthUrl();
     }
 
     public function checkRedirectCode() {
