@@ -10,7 +10,7 @@
       <script src="../assets/js/less.min.js" type="text/javascript"></script>
     -->
     <?= style("style"); ?>
-    <?= script("jquery-min"); ?>
+    <?= script("jquery.min"); ?>
     <?= script("search-location-functions"); ?>
   </head>
   <body>
