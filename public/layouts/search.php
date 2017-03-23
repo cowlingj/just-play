@@ -23,13 +23,6 @@
         </h1>
       </div><!-- end .center-container -->
     </header>
-    <header class="small">
-      <div class="center-container">
-        <h1 class="logo">
-          <a href="/mbax4msk/just_play/">J<span>P</span></a>
-        </h1>
-      </div><!-- end .center-container -->
-    </header><!-- end header.small -->
     <div class="clear-header"><!-- --></div><!-- end .empty-header -->
     <main class="search">
       <div class="page-heading">
