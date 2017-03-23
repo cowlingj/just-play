@@ -1,6 +1,7 @@
 <?php
   //Request controller 
   require("email.php");
+  require("sanitizer.php");
 
   function getElo($userID, $db) {
     $result = $db -> query("SELECT elo FROM user WHERE id = $userID")->fetch_assoc();
@@ -17,8 +18,8 @@
   }
   function read($path, $query, $db) {
     // the broadcast information from the query string
-    $broadcastID = $query["broadcastID"];
-    $recieverID =  $query["recieverID"];
+    $broadcastID = makeSafe($query["broadcastID"]);
+    $recieverID =  makeSafe($query["recieverID"]);
 
     // the broadcast information from the database
     $broadcastInfo = $db->query("SELECT * FROM broadcast WHERE id='$broadcastID'")->fetch_assoc();
