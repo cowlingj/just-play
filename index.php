@@ -41,7 +41,8 @@ function main () {
   // config.inc.php declares variables in the global scope
   global $database_host, $database_user, $database_pass, $group_dbnames;
   $router = compileRoutes();
-  $res = $router->resolve($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
+  $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+  $res = $router->resolve($_SERVER["REQUEST_METHOD"], $requestPath);
 
   if ($res["target"] == 404) {
     echo 404;
