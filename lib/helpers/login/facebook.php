@@ -3,7 +3,7 @@ require_once("lib/external/Facebook/autoload.php");
 
 define(
   "FACEBOOK_REDIRECT_URI",
-  "https://web.cs.manchester.ac.uk/mbax4msk/just_play/lib/controllers/login/facebook.php"
+  "https://web.cs.manchester.ac.uk/mbax4msk/just_play/login/facebook.php"
 );
 
 
