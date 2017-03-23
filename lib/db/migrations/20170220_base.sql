@@ -72,6 +72,7 @@ CREATE TABLE broadcast (
     REFERENCES  sport(id)
 ) ENGINE=InnoDB;
 
+
 CREATE TABLE game (
   id SERIAL PRIMARY KEY,
   sport BIGINT UNSIGNED NOT NULL,
@@ -88,5 +89,26 @@ CREATE TABLE game (
   CONSTRAINT location_match_fk_con
     FOREIGN KEY location_match_fk(location)
     REFERENCES  location(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE player (
+  game_id BIGINT UNSIGNED NOT NULL,
+  player_id BIGINT UNSIGNED NOT NULL,
+  starting_elo BIGINT UNSIGNED NOT NULL,
+  feedback ENUM('WIN', 'LOSE', 'DRAW'),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL
+    DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
+​
+  PRIMARY KEY (game_id, player_id),
+​
+  CONSTRAINT game_player_fk_con
+    FOREIGN KEY game_player_fk(game_id)
+    REFERENCES  game(id),
+​
+  CONSTRAINT user_player_fk_con
+    FOREIGN KEY user_player_fk(player_id)
+    REFERENCES  user(id)
 ) ENGINE=InnoDB;
 

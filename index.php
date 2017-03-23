@@ -5,7 +5,6 @@
 // This file will create the database connection object, then send the
 // parameters in the URL, along with the connection, to the method that matches
 // a given route
-
 require_once("config.inc.php");
 require_once("conf/routes.php");
 
@@ -37,12 +36,14 @@ function databaseConnection($host, $user, $pass, $db) {
   return $connection;
 }
 
+require_once("lib/secrets.php");
 function main () {
 
   // config.inc.php declares variables in the global scope
   global $database_host, $database_user, $database_pass, $group_dbnames;
   $router = compileRoutes();
-  $res = $router->resolve($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
+  $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+  $res = $router->resolve($_SERVER["REQUEST_METHOD"], $requestPath);
 
   if ($res["target"] == 404) {
     echo 404;
@@ -69,6 +70,7 @@ function main () {
 
 }
 
+session_start();
 main();
 
 
