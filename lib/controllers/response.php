@@ -75,6 +75,6 @@
   }
 
   function getElo($userID, $db) {
-    $db -> query("SELECT elo FROM user WHERE id = $userID");
+    return ($db -> query("SELECT elo FROM user WHERE id = $userID")->fetch_assoc())["elo"];
   }
 ?>
