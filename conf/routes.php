@@ -18,6 +18,7 @@ function compileRoutes() {
   $router->addRoute("GET","/view-broadcast","view-broadcast");
   $router->addRoute("GET","/request","request");
   $router->addRoute("GET", "/login-with-facebook","login/facebook");
+  $router->addRoute("GET", "/view-accepted-broadcast", "view-accepted-broadcast");
   return $router;
 }
 
