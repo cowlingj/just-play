@@ -12,6 +12,7 @@ $permissions = ['email']; // optional
 
 
 function getLoginUrl() {
+  global $fb, $permissions;
   $helper = $fb->getRedirectLoginHelper();
 	return $helper->getLoginUrl(FACEBOOK_REDIRECT_URI, $permissions);
 }
