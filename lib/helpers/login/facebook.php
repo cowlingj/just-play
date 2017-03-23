@@ -75,6 +75,7 @@ function getBasicInfo($fb) {
                 $id = $profile['id'];
                 $name = $profile['name'];
                 $email = $profile['email'];
+                echo "knjbdaf";
                 $db ->query("INSERT INTO user (id, name, email) VALUES ('$id', '$name', '$email')"); 
 	} catch(Facebook\Exceptions\FacebookResponseException $e) {
 		// When Graph returns an error
