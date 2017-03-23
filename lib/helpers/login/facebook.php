@@ -39,10 +39,15 @@ function getAccessToken() {
 }
 
 function exchangeToken(){
+    echo "checking for access token";
   if (isset($accessToken)) {
+      echo "access token found";
     exchangeTokenHelper();
+      echo "helper method helped... maybe";
     redirectHeader(); 
+      echo "what ever this thing does";
     getBasicInfo();
+      echo "i know what your name is ;)";
   } else header ("Location:https://web.cs.manchester.ac.uk/mbax4msk/just_play/");
 }
 
@@ -75,7 +80,7 @@ function getBasicInfo($fb) {
                 $id = $profile['id'];
                 $name = $profile['name'];
                 $email = $profile['email'];
-                $db ->query("INSERT INTO user (id, name, email) VALUES ('$id', '$name', '$email')"); 
+                $db ->query("INSERT INTO user (id, name, email) VALUES (1, 'jytd', 'liuyf')"); 
 	} catch(Facebook\Exceptions\FacebookResponseException $e) {
 		// When Graph returns an error
 		echo 'Graph returned an error: ' . $e->getMessage();
