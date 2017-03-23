@@ -10,7 +10,7 @@
     <title>Home | JustPlay</title>
     <?= style("style"); ?>
     <?= script("jquery.min"); ?>
-    <?= script("header-toggle"); ?>>
+    <?= script("header-toggle"); ?>
   </head>
   <body>
     <header class="big">
