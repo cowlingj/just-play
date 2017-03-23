@@ -11,15 +11,15 @@
   } // init
 
 
-    public function isLoggedIn() {
+    function isLoggedIn() {
       return isset($_SESSION['access_token']);
     }
 
-    public function getAuthUrl() {
+    function getAuthUrl() {
       return createAuthUrl();
     }
 
-    public function checkRedirectCode() {
+    function checkRedirectCode() {
 
       if(isset($_GET['code'])) {
 
@@ -36,33 +36,29 @@
     } // checkRedirectCode
 
       // get the payload  
-    public function getPayload() {
+    function getPayload() {
       $token = verifyIdToken()->getAttributes()['payload'];
       return $token; 
     } // getPayload
 
-    public function setToken($token) {
+    function setToken($token) {
 
       $_SESSION['access_token'] = $token;
       setAccessToken($token);
 
     } // setToken
 
-    protected function storeUser($payload) {
+    function storeUser($payload) {
       $sql = "
             INSERT INTO user (id, name, email)
             VALUES ({$payload['id']}, '{$payload['name']}',
                    '{$payload['email']}')
             ON DUPLICATE KEY UPDATE id = id
             ";
-      $this->db->query($sql);
     }
 
-    public function logout() {
+    function logout() {
       unset($_SESSION['access_token']);
     } // logout
-
-
-  } // GoogleAuth
 
  ?>
