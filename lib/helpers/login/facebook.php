@@ -39,10 +39,15 @@ function getAccessToken() {
 }
 
 function exchangeToken(){
+    echo "checking for access token";
   if (isset($accessToken)) {
+      echo "access token found";
     exchangeTokenHelper();
+      echo "helper method helped... maybe";
     redirectHeader(); 
+      echo "what ever this thing does"
     getBasicInfo();
+      echo "i know what your name is ;)";
   } else header ("Location:https://web.cs.manchester.ac.uk/mbax4msk/just_play/");
 }
 
