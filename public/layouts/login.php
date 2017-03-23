@@ -27,7 +27,7 @@
             Use Facebook or Google+ to login or signup to get started!
           </p>
           <div class="login-buttons">
-            <a href="<?= $facebookLoginUrl; ?>" class="facebook login-signup">
+            <a href="<?= $loginUrl; ?>" class="facebook login-signup">
               Login with Facebook
             </a>
             <a href="<?= $googleLoginUrl; ?>" class="google login-signup">Login with Google+</a>
