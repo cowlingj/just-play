@@ -13,8 +13,9 @@
     die("Could not load application configuration");
 
   $data = array_reduce($res->fetch_array(), function ($config, $row) {
+    print_r($row);
     $config[$row[0]] = $row[1];
-    return config;
+    return $config;
   }, array());
 
   define("SECRETS", $data);
