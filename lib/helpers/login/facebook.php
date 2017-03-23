@@ -1,7 +1,7 @@
 <?php
 require_once("lib/external/Facebook/autoload.php");
 
-define(FACEBOOK_REDIRECT_URI, "http://web.cs.manchester.ac.uk/mbax4msk/just_play/");
+define("FACEBOOK_REDIRECT_URI", "http://web.cs.manchester.ac.uk/mbax4msk/just_play/");
 
 $fb = new Facebook\Facebook([
   'app_id' => '422280014788952',
