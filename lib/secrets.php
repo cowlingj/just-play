@@ -12,7 +12,7 @@
   if ($res == FALSE)
     die("Could not load application configuration");
 
-  $GLOBALS['SECRETS'] = array_reduce($res->fetch_array(), function ($config, $row) {
+  $GLOBALS['SECRETS'] = array_reduce($res->fetch_array(MYSQLI_NUM), function ($config, $row) {
     $config[$row[0]] = $row[1];
     return $config;
   }, array());
