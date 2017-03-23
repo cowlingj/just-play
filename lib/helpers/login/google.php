@@ -1,10 +1,10 @@
 <?php 
 
-  require_once '/home/pi/Downloads/Google-API/vendor/autoload.php';
+  require_once 'lib/google-api/vendor/autoload.php';
 
   function init(){
 
-  setAuthConfig( '/home/pi/oauth/oauth/client_secret_justplay.json');
+  setAuthConfig( 'lib/helpers/google-oauth');
   setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/');
   setScopes('email');
     

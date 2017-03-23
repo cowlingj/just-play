@@ -1,6 +1,7 @@
 <?php
 
 require('lib/helpers/login/facebook.php');
+require('lib/helpers/login/google.php');
 
 function read($pathArgs, $queryArgs, $database) {
 
