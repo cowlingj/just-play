@@ -13,7 +13,6 @@
     die("Could not load application configuration");
 
   $GLOBALS['SECRETS'] = array_reduce($res->fetch_array(MYSQLI_NUM), function ($config, $row) {
-    print_r($row);
     $config[$row[0]] = $row[1];
     return $config;
   }, array());
