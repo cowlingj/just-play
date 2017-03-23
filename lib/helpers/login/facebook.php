@@ -39,7 +39,6 @@ function getAccessToken() {
 }
 
 function exchangeToken(){
-  echo "iposv";
   if (isset($accessToken)) {
     exchangeTokenHelper();
     redirectHeader(); 
