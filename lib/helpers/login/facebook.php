@@ -39,6 +39,7 @@ function getAccessToken() {
 }
 
 function exchangeToken(){
+   $fb = createFacebookObject();
     echo "checking for access token";
   if (isset($accessToken)) {
       echo "access token found";
@@ -46,7 +47,7 @@ function exchangeToken(){
       echo "helper method helped... maybe";
     redirectHeader(); 
       echo "what ever this thing does";
-    getBasicInfo();
+    getBasicInfo($fb, $db);
       echo "i know what your name is ;)";
   } else header ("Location:https://web.cs.manchester.ac.uk/mbax4msk/just_play/");
 }
@@ -73,7 +74,7 @@ function redirectHeader() {
 	}
 }
 
-function getBasicInfo($fb) {
+function getBasicInfo($fb, $db) {
   	try {
 		$profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
 		$profile = $profile_request->getGraphNode()->asArray();
