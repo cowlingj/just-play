@@ -20,7 +20,7 @@
 
     $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
 
-    require layout("response-map");
+    require layout("search-map");
 
   }
 
