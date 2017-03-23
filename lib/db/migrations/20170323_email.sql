@@ -1,0 +1,2 @@
+ALTER TABLE user
+ADD email VARCHAR(50);
