@@ -2,7 +2,7 @@
   // display the map and divs relevant to the user submittin
   function read($path, $query, $db) {
       
-    require "/lib/match-making.php";
+    require "../match-making.php";
 
     // make inputs safe (prevent XXS)
     $sport = makeSafe($_GET["sport"]);
