@@ -41,7 +41,7 @@
       </div><!-- end .page-heading -->
       <div class="center-container">
         <div class="form">
-          <form action="/mbax4msk/just_play/response-map" method="GET">
+          <form action="/mbax4msk/just_play/response" method="GET">
             <div class="input">
               <label for="name">Sport: </label>
               <select name="sport" id="sport">
