@@ -1,5 +1,17 @@
+var latitude;
+var longitude;
+
 $(document).ready(function() {
   $(".hidden-allow-location").hide();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+      }
+    );
+  }
 });
 
 
@@ -13,28 +25,9 @@ $(document).submit(function(e) {
 
   $(".hidden-allow-location").slideDown(400);
 
-  var latitude;
-  var longitude;
-
-  function tryToRedirect() {
-    setTimeout(function() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          function (position) {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-          }
-        );
-      } // end if (navigator.geolocation)
-
-      if (latitude != null && longitude != null) {
-        var queryString = "?sport=" + sport + "&radius=" + radius + "&latitude=" + latitude + "&longitude=" + longitude;
-        $(location).attr('href', "http://web.cs.manchester.ac.uk/mbax4msk/just_play/response" + queryString);
-      } else {
-        tryToRedirect();
-      }
-    }, 2000);
-  } // end tryToRedirect()
-  
-  tryToRedirect();
+  if (latitude != null && longitude != null) {
+    console.log("dfsh");
+    var queryString = "?sport=" + sport + "&radius=" + radius + "&latitude=" + latitude + "&longitude=" + longitude;
+    $(location).attr('href', "http://web.cs.manchester.ac.uk/mbax4msk/just_play/response" + queryString);
+  }
 });
