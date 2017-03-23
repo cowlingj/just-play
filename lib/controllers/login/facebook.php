@@ -1,6 +1,6 @@
 <?php
 
-require('mbax4msk/just_play/lib/helpers/login/facebook.php');
+require('lib/helpers/login/facebook.php');
 
 function read($pathArgs, $queryArgs, $database) {
 
