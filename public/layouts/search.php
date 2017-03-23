@@ -11,8 +11,6 @@
     -->
     <?= style("style"); ?>
     <?= script("jquery-min"); ?>
-    <?= script("header-toggle"); ?>
-    <?= script("slider-text"); ?>
     <?= script("search-location-functions"); ?>
   </head>
   <body>
@@ -49,14 +47,16 @@
                 <option value="badminton">Badminton</option>
               </select>
             </div><!-- end .input -->
+            <!--
             <div class="input">
-              <!--
+               
                 TODO:
                 no functionality for this right now (might need to scrap it)
-              -->
+              
               <label for="radius">Distance You're Prepared to Travel: <span id="range" class="range"></span> <em class="range">(km)</em></label>
               <input id="slider" type="range" name="radius" min="1" max="5" />
-            </div><!-- end .input -->
+            </div> end .input
+            -->
             <div class="hidden-allow-location">
               <em>You must allow Location services in order to use JustPlay.</em>
             </div><!-- end .hidden-allow-location -->
