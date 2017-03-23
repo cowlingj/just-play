@@ -16,5 +16,7 @@
     $config[$row[0]] = $row[1];
     return $config;
   }, array());
+  
+  $connection->close();
 
 ?>
