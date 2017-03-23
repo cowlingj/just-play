@@ -7,7 +7,10 @@ function read($pathArgs, $queryArgs, $database) {
   $title = "Home | Just Play";
   $text = "Welcome!";
 
-  $loginUrl = getLoginUrl(createFacebookObject()); 
+
+  $facebookLoginUrl = getLoginUrl(createFacebookObject()); 
+
+  $googleLoginUrl = getAuthUrl(); 
 
   require layout("login");
 }
