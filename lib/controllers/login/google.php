@@ -11,9 +11,9 @@ function read($pathArgs, $queryArgs, $database) {
 
   if ($googleAuth->checkRedirectCode()) {
 
-    $payload = $this->getPayload();
+    $payload = $googleAuth->getPayload();
     $name = null;
-    if (isset($payload['name'])
+    if (isset($payload['name']))
       $name = $payload['name'];
     else
       $name =$payload['email'];
