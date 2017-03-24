@@ -47,16 +47,15 @@ function exchangeToken(){
    $accessToken =  getAccessToken($fb);
   if (isset($accessToken)) {
       echo "access token found";
-    exchangeTokenHelper();
+    exchangeTokenHelper($fb, $accessToken);
       echo "helper method helped... maybe";
     redirectHeader(); 
       echo "what ever this thing does";
-    addFacebookDB();
-      echo "i know what your name is ;)";
+    return addFacebookDB();
   } else header ("Location:https://web.cs.manchester.ac.uk/mbax4msk/just_play/");
 }
 
-function exchangeTokenHelper() {
+function exchangeTokenHelper($fb, $accessToken) {
   if (isset($_SESSION['facebook_access_token'])) {
     $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
   } else {
@@ -79,7 +78,6 @@ function redirectHeader() {
 }
 
 function addFacebookDB() {
-  $db = databaseConnection();
   $profile = getBasicInfo ($fb);
     return $profile;
 }
