@@ -40,19 +40,17 @@ class RouteNode {
   }
 
   private function addNode($segment) {
-    $node = new RouteNode($segment);
-    if ($node->isParameter) {
-      // We can only have one parameter per node
-      // The parameter that is already there takes priority
-      if ($this->nextParameter == NULL) {
-        $this->nextParameter = $node;
-      } else die("Next parameter already set for segment ".$this->id);
+    $node = NULL;
+    if (isset($this->paths[$segment])) {
+      $node = $this->paths[$segment];
     } else {
-      // We cannot overwite segments
-      if (isset($this->paths[$segment])) {
-        die("Path $segment already set for segment ".$this->id);
-      } else {
-        $this->paths[$segment] = $node;
+      $node = new RouteNode($segment);
+      if ($node->isParameter) {
+        // We can only have one parameter per node
+        // The parameter that is already there takes priority
+        if ($this->nextParameter == NULL) {
+          $this->nextParameter = $node;
+        } else die("Next parameter already set for segment ".$this->id);
       }
     }
     return $node;
