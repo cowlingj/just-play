@@ -5,6 +5,8 @@ require('lib/helpers/auth.php');
 
 function read($pathArgs, $queryArgs, $database) {
   $fb = createFacebookObject();
+  echo "this second thing works";
+  die();
   exchangeToken();
   if (!userExists("facebook", $id)) 
     registerUser($name, $email, "facebook", $serviceID);
