@@ -52,14 +52,13 @@ function cmp($a, $b)
  * @return array An ordered array where the best mach is first index - keys is userID and values are distances
  */
 //5km
-$maximumDistance =5000;
+
 function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $playerELO ) {
   //Auxilary array for sorting the positions
   $auxilaryArray = array();
 
 	// loop through each row for
 	foreach ($queryResults as $row) {
-	  print_r($row);
     $broadcaster = $row["broadcaster"];
     $latitude = $row["latitude"];
 		$longitude = $row["longitude"];
@@ -69,6 +68,7 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
     $ELODiff = $elo-$playerELO;
 
     // if this broadcast is inside the player radius
+    $maximumDistance =5000;
     if ($distance < $maximumDistance) {
       //--
       $auxilaryArray[$broadcaster]=array (
@@ -149,5 +149,5 @@ function recalculateElo($player1ELO ,$player2ELO, $outcome) {
 	);
 	return $updatedElos;
 }
-//TODO:Implement this https://www.cs.cmu.edu/~wjh/go/Ratings.pseudo-code
+/  ODO:Implement this https://www.cs.cmu.edu/~wjh/go/Ratings.pseudo-code
 ?>
