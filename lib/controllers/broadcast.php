@@ -6,7 +6,7 @@
     $sports = $db->query("SELECT * FROM sport")->fetch_all();
 
     // an array or null containing the users broadcast
-    $correspondingBroadcast = $db-> query("SELECT * FROM broadcast WHERE id = $_SESSION['userId']")->fetch_assoc();
+    $correspondingBroadcast = $db-> query("SELECT * FROM broadcast WHERE id = $_SESSION['userID']")->fetch_assoc();
 
     // the location of that broadcast
     $correspondingBroadcastQuery = $db-> query("SELECT * FROM location WHERE id = $correspondingBroadcast['location']")->fetch_assoc();
