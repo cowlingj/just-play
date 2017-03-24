@@ -16,8 +16,20 @@
     $allBroadcasts = $db->query("SELECT * FROM broadcast WHERE sport='$sport'")->fetch_all(MYSQLI_ASSOC);
 
     // An ordered array of broadcast recomendation IDs 
+    
+    $results = array_map(function ($broadcast) {
+      $user = $db->query("SELECT * FROM user WHERE id=".$broadcast["broadcaster"])->fetch_assoc();
+      $loc = $db->query("SELECT * FROM location WHERE id=".$broadcast["location"])->fetch_assoc();
+      return array(
+        "broadcaster" => $broadcast["broadcaster"],
+        "latitude" => $loc["latitude"],
+        "longitude" => $loc["longitude"],
+        "elo" => $user["elo"]
+      );
+    }, $allBroadcasts);
+    
     $_SESSION["recomendations"] =
-      getRankedRequests($latitude, $longitude, $allBroadcasts, getElo($userID, $db));
+      getRankedRequests($latitude, $longitude, $results, getElo($userID, $db));
 
     // ordered array of broadcasts and their information
     $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"], $db);
