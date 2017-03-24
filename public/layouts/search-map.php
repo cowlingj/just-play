@@ -33,14 +33,24 @@
       <aside class="map-sidebar">
         <h3 id="search-results">Your Search Results</h3>
         <table class="search-results">
+          <tr class="result this" id="0">
+            <td class="pad"><!-- --></td>
+            <td class="info">
+              John is <em>3</em> miles away
+            </td>
+            <td class="button">
+              <a href="#">Accept</a>
+            </td>
+          </tr>
+        <table class="search-results">
         <?php
           $requestCount = 0;
           foreach ($orderedRequests as $request): 
 
               if ($requestCount == 0) {
-                print("<tr class=\"result " . $requestCount . "\" id=\"this\">");
+                print("<tr class=\"result this\" id=\"" . $requestCount . "\">");
               } else {
-                print("<tr class=\"result " . $requestCount . "\">");
+                print("<tr class=\"result\" id=\"" . $requestCount . "\">");
               }
         ?>
             <td class="pad"><!-- --></td>
