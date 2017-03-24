@@ -35,6 +35,7 @@
         <?php
           $requestCount = 0;
           foreach ($orderedRequests as $request): 
+
               if ($requestCount == 0) {
                 print("<tr class=\"result " . $requestCount . "\" id=\"this\">");
               } else {
@@ -45,12 +46,8 @@
             <td class="info">
               <?= $request["broadcaster"]; ?> is <em><?= $request["dist"]; ?></em> km away
             </td>
-            <!-- 
-              TODO:
-              is there functionality (or even a url) that accepts a request?
-            -->
             <td class="button">
-              <a href="#">Accept</a>
+              <a href="/mbax4msk/response.php?broadcastID=<?= $request["id"]; ?>&recieverId=<?= $userID; ?>">Accept</a>
             </td>
           </tr>
         <?php

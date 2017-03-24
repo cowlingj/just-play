@@ -1,4 +1,5 @@
 <?php
+  require_once("lib/helpers/auth.php");
   require("lib/database-functions.php");
 
   // display the map and divs relevant to the user submittin
@@ -11,7 +12,7 @@
     $latitude = floatval(makeSafe($_GET["latitude"]));
     $longitude = floatval(makeSafe($_GET["longitude"]));
     $disabled = makeSafe($_GET["disabled"]);
-    
+    $userID = getCurrentUser();
 
     // All the current broadcasts for desired sport
     $allBroadcasts = $db->query("SELECT * FROM broadcasts WHERE sport='" . $sport ."'")->fetch_all();

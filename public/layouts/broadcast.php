@@ -42,8 +42,9 @@
               <div class="input">
                 <label for="name">Sport: </label>
                 <select name="sport" id="sport">
-                  <option value="tennis">Tennis</option>
-                  <option value="badminton">Badminton</option>
+                  <? foreach($sports as $sport): ?>
+                    <option value="<?=$sport["id"];?>"><?=$sport["name"];?></option>
+                  <? endforeach; ?>
                 </select>
               </div><!-- end .input -->
               <div class="input">

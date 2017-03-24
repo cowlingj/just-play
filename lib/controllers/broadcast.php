@@ -2,6 +2,9 @@
   // display the broadcast form
   function read($path, $query, $db) {
     
+    // retrieve reference to all sports in database
+    $sports = $db->query("SELECT * FROM sport")->fetch_all();
+
     // an array or null containing the users broadcast
     $correspondingBroadcast = $db-> query("SELECT * FROM broadcast WHERE id = $_SESSION['userId']")->fetch_assoc();
 
