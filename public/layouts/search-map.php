@@ -32,6 +32,7 @@
       <section id="map"><!-- google map goes inside here --></section>
       <aside class="map-sidebar">
         <h3 id="search-results">Your Search Results</h3>
+        <table>
         <?php
           $requestCount = 0;
           foreach ($orderedRequests as $request): 
