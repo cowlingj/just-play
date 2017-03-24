@@ -16,7 +16,7 @@
     -->
     <?= style("style"); ?>
     <?= script("jquery-min"); ?>
-    <?= script("header-toggle"); ?>
+    <?= script("broadcast-map"); ?>
   </head>
   <body>
     <header class="big">
@@ -28,13 +28,6 @@
         </h1>
       </div><!-- end .center-container -->
     </header>
-    <header class="small">
-      <div class="center-container">
-        <h1 class="logo">
-          <a href="#">J<span>P</span></a>
-        </h1>
-      </div><!-- end .center-container -->
-    </header><!-- end header.small -->
     <div class="clear-header"><!-- --></div><!-- end .empty-header -->
     <main class="search">
       <div class="page-heading">
@@ -54,11 +47,13 @@
                 </select>
               </div><!-- end .input -->
               <div class="input">
-                <label for="location">Location: </label>
-                <input type="text" /><!-- this is a dropdown menu from google maps api -->
-                <input type="hidden" name="latitude" value="google will autofill in this field" />
-                <input type="hidden" name="longitude" value="google will autofill in this field" />
+                <label for="latitude">Latitude: </label>
+                <input id="latitude" type="text" name="latitude" value="" />
               </div>
+              <div class="input">
+                <label for="longitude">Longitude: </label>
+                <input id="longitude" type="text" name="longitude" value="" />
+              </div><!-- end .input -->
               <div id="map-search"><!-- google map goes here --></div>
               <div class="submit">
                 <input type="submit" value="Place Request" />
