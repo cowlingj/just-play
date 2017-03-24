@@ -3,7 +3,7 @@ require_once ('config.inc.php');
 require_once ('MailManager.php');
 
 require_once("database-functions.php");
-$FeedbackBaseURL = "justplay.com/feedback";
+$FeedbackBaseURL = "http://web.cs.manchester.ac.uk/mbax4msk/just_play/feedback";
 
 $templateBody=<<<EOD
 You recently played a game at %Location%.
