@@ -16,7 +16,7 @@ function fetchOrderedRequests($broadcasts, $db) {
   $markers =  [];
   
   // for every marker given as argument
-  foreach ($broadcast as $marker) {
+  foreach ($broadcasts as $marker) {
     // fetches unique row for desired broadcast request and stores in array
     $query = "SELECT * FROM broadcast WHERE id=" . $marker . ";";
     $markers[$markerCounter] = $db->query($query);
