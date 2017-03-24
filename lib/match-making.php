@@ -80,7 +80,7 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
   }
 
   // orders the auxilary array  by 'best match'
-	uasort($a, "cmp");
+	uasort($auxilaryArray, "cmp");
   //Move sorted data in a convinient to use array
 
   $returnArray = array();
