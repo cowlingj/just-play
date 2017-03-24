@@ -74,6 +74,7 @@ function redirectHeader() {
 }
 
 function addFacebookDB() {
+  $fb = createFacebookObject();    
   $profile = getBasicInfo ($fb);
     return $profile;
 }
