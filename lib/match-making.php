@@ -149,5 +149,5 @@ function recalculateElo($player1ELO ,$player2ELO, $outcome) {
 	);
 	return $updatedElos;
 }
-/  ODO:Implement this https://www.cs.cmu.edu/~wjh/go/Ratings.pseudo-code
+//  ODO:Implement this https://www.cs.cmu.edu/~wjh/go/Ratings.pseudo-code
 ?>
