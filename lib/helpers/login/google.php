@@ -1,64 +1,67 @@
-<?php 
+<?php
 
-  require_once 'lib/google-api/vendor/autoload.php';
+  require('/lib/helpers/google-ouath/app/init.php');
 
-  function init(){
+  class GoogleAuth {
 
-  setAuthConfig( 'lib/helpers/google-oauth');
-  setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/');
-  setScopes('email');
-    
-  } // init
+    protected $db;
+    protected $client;
+    protected $token;
 
+    public function __construct(DB $db = null, Google_Client $googleClient = null) {
 
-    function isLoggedIn() {
-      return isset($_SESSION['access_token']);
+      $this->client = $googleClient;
+      $this->db = $db;
+
+      if($this->client) {
+
+        $this->client->setAuthConfig('/home/pi/oauth/oauth/client_secret_justplay.json');
+        $this->client->setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/');
+        $this->client->setScopes('email');
+      } // if
+
+    } // construct
+
+    public function getAuthUrl() {
+      return $this->client->createAuthUrl();
     }
 
-    function getAuthUrl() {
-      return createAuthUrl();
-    }
-
-    function checkRedirectCode() {
-
+    public function checkRedirectCode() {
       if(isset($_GET['code'])) {
 
-        authenticate($_GET['code']);
+        $this->client->authenticate($_GET['code']);
 
-        setToken(setAccessToken());
+        $this->setToken($this->client->setAccessToken());
 
-        storeUser(getPayload());
+        $this->storeUser($this->getPayload());
 
-        $payload = getPayload();
+        $payload = $this->getPayload();
 
         return true;
-      } // if 
-    } // checkRedirectCode
+      }
+    }
 
-      // get the payload  
-    function getPayload() {
-      $token = verifyIdToken()->getAttributes()['payload'];
+    // get the payload  
+    public function getPayload() {
+      $token = $this->client->verifyIdToken()->getAttributes()['payload'];
       return $token; 
-    } // getPayload
+    }
 
-    function setToken($token) {
+    public function setToken($token) {
 
       $_SESSION['access_token'] = $token;
-      setAccessToken($token);
+      $this->client->setAccessToken($token);
 
     } // setToken
 
-    function storeUser($payload) {
+    protected function storeUser($payload) {
       $sql = "
             INSERT INTO user (id, name, email)
             VALUES ({$payload['id']}, '{$payload['name']}',
                    '{$payload['email']}')
             ON DUPLICATE KEY UPDATE id = id
             ";
+      $this->db->query($sql);
     }
-
-    function logout() {
-      unset($_SESSION['access_token']);
-    } // logout
 
  ?>

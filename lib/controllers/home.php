@@ -8,10 +8,14 @@ function read($pathArgs, $queryArgs, $database) {
   $title = "Home | Just Play";
   $text = "Welcome!";
 
+  // Create a GoogleAuth object.
+  $db = new DB();
+  $googleClient = new Google_Client();
+  $auth = new GoogleAuth($db, $googleClient);
 
   $facebookLoginUrl = getLoginUrl(createFacebookObject()); 
 
-  $googleLoginUrl = getAuthUrl(); 
+  $googleLoginUrl = auth->getAuthUrl(); 
 
   require layout("login");
 }
