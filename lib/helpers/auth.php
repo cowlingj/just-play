@@ -9,7 +9,8 @@
     $rowCount = databaseConnection(function ($db) use ($service, $id, $query) {
       $result = $db->query($query);
       if (!$result) die("Database Error in userExists function");
-
+    
+      print_r($result->fetch_all());
       return $result->num_rows;
     });
 
