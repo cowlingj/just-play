@@ -85,7 +85,7 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
 
   $returnArray = array();
 
-  foreach ($auxilaryArrr as $key => $value) {
+  foreach ($auxilaryArray as $key => $value) {
       array_push(
           $returnArray,array (
                                   "broadcaster" => $key,
@@ -95,7 +95,6 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
     );
   }
 
-	$queryResults::free();
 
 	return $returnArray;
 }
