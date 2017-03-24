@@ -45,7 +45,7 @@
 
     // get the payload  
     public function getPayload() {
-      $payload = $this->client->verifyIdToken()->getAttributes()['payload'];
+      $payload = $this->client->verifyIdToken();
       return $payload; 
     }
 
