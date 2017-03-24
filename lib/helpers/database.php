@@ -13,7 +13,7 @@
 
     if ($connection->connect_error)
       die('Connect Error ('.$mysqli->connect_errno.') '.$mysqli->connect_error);
-    if ($func == NULL) return $connection;
+    if (is_callable($func)) return $connection;
     else {
       $result = $func($connection);
       $connection->close();
