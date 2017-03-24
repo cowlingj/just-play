@@ -1,8 +1,7 @@
 <?php
 
-require('lib/helpers/login/google.php');
-require('lib/helpers/database.php');
-require('lib/helpers/auth.php');
+require_once('lib/helpers/login/google.php');
+require_once('lib/helpers/auth.php');
 
 function read($pathArgs, $queryArgs, $database) {
 
