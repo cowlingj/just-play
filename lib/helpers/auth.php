@@ -6,11 +6,7 @@
       . "WHERE service='$service' "
       . "AND service_id=$id;";
 
-    $rowCount = databaseConnection(function ($db) {
-      $query =
-        "SELECT * FROM credentials "
-        . "WHERE service='$service' "
-        . "AND service_id=$id;";
+    $rowCount = databaseConnection(function ($db) use ($service, $id, $query) {
       $result = $db->query($query);
       if (!$result) die("Database Error in userExists function");
 
@@ -21,7 +17,7 @@
   }
 
   function registerUser($name, $email, $service, $serviceID) {
-    databaseConnection(function ($db) {
+    databaseConnection(function ($db) use ($name, $email, $service, $serviceID){
 
       $sql = "INSERT INTO user (name, email) VALUES ('$name', '$email')";
       if (!$db->query($sql)) die("Could not create user");
@@ -44,7 +40,7 @@
   function login($service, $id) {
     global $currentUser;
 
-    $currentUser = databaseConnection(function ($db) {
+    $currentUser = databaseConnection(function ($db) use ($service, $id) {
       $query =
         "SELECT * FROM credentials WHERE service='$service' AND service_id='$id'";
 
