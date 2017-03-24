@@ -1,19 +1,32 @@
-var ajaxRequest = new XMLHttpRequest;
 var json;
 var map;
 
 
 // takes parsed JSON object containing marker information and creates a pin on the google map
-function printMarkers(object) {
+function printMarkers(markers) {
   var markerCounter = 0;
   var markerArray = [];
 
   // loop through every marker that has been generated inside the JSON file
-  object.markers.marker.forEach(function(marker) {
+  markers.forEach(function(marker) {
     markerArray[markerCounter] = new google.maps.Marker({
       position: new google.maps.LatLng(marker.latitude, marker.longitude),
       map: map
     }); // end marker object
+
+    markerArray[markerCounter].addListener("click", function() {
+      document.getElementById();
+    });
+
+    marker.addListener('click', function() {
+      var rowIdString = "tr#" + markerCounter;
+
+      // remove the 'this' class from the currently selected row
+      $("tr.result.this").attr("class", "result");
+      // add the 'this' class to the table row that corresponds to this marker
+      $(rowIdString).attr("class", "result this");
+    });
+
     
     markerCounter++;
   });
@@ -21,16 +34,18 @@ function printMarkers(object) {
 
 
 // function that retrieves the user'scurrent gps position
-function getUserPosition(mapContainer) {
+function getUserPosition(mapContainer, lat, lng) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       // taking the position reference of user's location 
       // information from the GeoLocation API to 
       // create new LatLng object with new center
       function getPosition(position) {
+        /* this is removed so that I can get the map center from session variable
         // getting the user's gps position
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
+        */
 
         // options and settings for map
         var mapOptions = {

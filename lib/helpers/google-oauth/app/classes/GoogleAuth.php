@@ -1,7 +1,5 @@
 <?php
 
-  require('lib/helpers/google-oauth/app/init.php');
-
   class GoogleAuth {
 
     protected $db;
@@ -12,16 +10,24 @@
 
       $this->client = $googleClient;
       $this->db = $db;
-      $config = json_decode($GLOBALS['SECRETS']['google_client_secret'], true);
+
+	
+
+
 
       if($this->client) {
 
-        $this->client->setAuthConfig($config);
+	      $this->client->setAuthConfig( '/home/pi/oauth/oauth/client_secret_justplay.json');
         $this->client->setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/');
         $this->client->setScopes('email');
       } // if
 
     } // construct
+
+
+    public function isLoggedIn() {
+      return isset($_SESSION['access_token']);
+    }
 
     public function getAuthUrl() {
       return $this->client->createAuthUrl();
@@ -30,6 +36,8 @@
     public function checkRedirectCode() {
       if(isset($_GET['code'])) {
 
+	echo 'checkRedirectCode';
+
         $this->client->authenticate($_GET['code']);
 
         $this->setToken($this->client->setAccessToken());
@@ -37,15 +45,16 @@
         $this->storeUser($this->getPayload());
 
         $payload = $this->getPayload();
+        echo '<pre>', print_r($payload), '</pre>';
 
         return true;
       }
     }
 
-    // get the payload  
-    public function getPayload() {
-      $token = $this->client->verifyIdToken()->getAttributes()['payload'];
-      return $token; 
+      // get the payload	
+      public function getPayload() {
+        $token = $this->client->verifyIdToken()->getAttributes()['payload'];
+        return $token; 
     }
 
     public function setToken($token) {
@@ -64,6 +73,13 @@
             ";
       $this->db->query($sql);
     }
-  } // google auth 
+
+    public function logout() {
+      unset($_SESSION['access_token']);
+    } // logout
+
+
+  } // Googleauth
+
 
  ?>

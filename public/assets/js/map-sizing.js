@@ -24,8 +24,8 @@ $(document).ready(function () {
   var mapHeight;
 
   $("tr.result").click(function() {
-    $("tr#this").attr("id", "");
-    $(this).attr("id", "this");
+    $("tr.this.result").attr("class", "result");
+    $(this).attr("class", "result this");
   });
 
 
@@ -103,6 +103,3 @@ $(document).ready(function () {
     });
   } // end if (isMobile)
 });
-
-
-// TODO: fix this

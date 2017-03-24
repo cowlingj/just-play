@@ -10,6 +10,10 @@
     -->
     <?= style("style"); ?>
     <?= script("jquery-min"); ?>
+    <script type="text/javascript">
+      var searchLongitude = <?= $longitude; ?>;
+      var searchLatitude = <?= $latitude; ?>;
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP9ofPjKpQ3eRwJFOwPgP-BBXgTn9phis" type="text/javascript"></script>
     <?= script("map-functions"); ?>
     <?= script("search-map"); ?>
@@ -32,9 +36,9 @@
           $requestCount = 0;
           foreach ($orderedRequests as $request): 
               if ($requestCount == 0) {
-                print("<tr class=\"result\" id=\"this\">");
+                print("<tr class=\"result " . $requestCount . "\" id=\"this\">");
               } else {
-                print("<tr class=\"result\">");
+                print("<tr class=\"result " . $requestCount . "\">");
               }
         ?>
           <td class="pad"><!-- --></td>
