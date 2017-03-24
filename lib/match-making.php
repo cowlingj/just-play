@@ -51,7 +51,9 @@ function cmp($a, $b)
  * @param maximumDistance (in metres), i.e. the size of the map
  * @return array An ordered array where the best mach is first index - keys is userID and values are distances
  */
-function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $playerELO, $maximumDistance) {
+//5km
+$maximumDistance =5000;
+function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $playerELO ) {
   //Auxilary array for sorting the positions
   $auxilaryArray = array();
 
