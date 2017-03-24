@@ -34,6 +34,8 @@
     // ordered array of broadcasts and their information
     $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"], $db);
 
+    print_r($orderedRequests);
+
     require layout("search-map");
   }
 
