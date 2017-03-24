@@ -12,7 +12,7 @@ function read($path, $query, $db) {
     // if it has a row, that row will be the users broadcast request
     $correspondingBroadcast = $db->query("SELECT * FROM broadcast WHERE broadcaster='".$currentUser['id']."'");
     
-    if ($correspondingBroadcast) {
+    if (!$correspondingBroadcast) {
       echo $db->error."<br>";
       die("Failed to fetch broadcast");
     }
