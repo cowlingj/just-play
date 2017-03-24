@@ -24,7 +24,10 @@
 
       $userID = $db->insert_id;
       $sql = "INSERT INTO credentials (user_id, service, service_id) VALUES ($userID, '$service', '$serviceID')";
-      if (!$db->query($sql)) die("Could not create user credentials");
+      if (!$db->query($sql)){
+        echo $db->error;
+        die("Could not create user credentials");
+      }
 
     });
   }
