@@ -22,11 +22,12 @@ function getLoginUrl($fb) {
   return $helper->getLoginUrl(FACEBOOK_REDIRECT_URI, $permissions);
 }
 
-function getAccessToken() {
+function getAccessToken($fb) {
   try {
     if (isset($_SESSION['facebook_access_token'])) {
       return $_SESSION['facebook_access_token'];
     } else {
+      $helper = $fb->getRedirectLoginHelper();
       return $helper->getAccessToken();
     }
   } catch(Facebook\Exceptions\FacebookResponseException $e) {
