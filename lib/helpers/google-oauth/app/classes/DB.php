@@ -5,7 +5,7 @@
     protected $mysqli;
 
     public function _construct(){
-      $this->mysqli = new mysqli()
+      $this->mysqli = new mysqli();
     } // _construct
 
     public function query($sql) {
