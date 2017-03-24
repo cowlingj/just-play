@@ -9,10 +9,10 @@ function read($pathArgs, $queryArgs, $database) {
   $name = $profile['name'];
   $email = $profile['email'];
   $serviceID = $profile['id'];
-  if (!userExists("facebook", $id)) 
+  if (!userExists("facebook", $serviceID)) 
     registerUser($name, $email, "facebook", $serviceID);
 
-  login("facebook", $id);
+  login("facebook", $serviceID);
   header("Location: /mbax4msk/just_play/search-form");
 }
 
