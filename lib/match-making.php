@@ -74,7 +74,7 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
       //--
       $auxilaryArray[$broadcaster]=array (
                                   "distance"  => $distance,
-                                  "ELODiff" => $ELODiff,
+                                  "ELODiff" => $eloDifference,
                                   "matchStrength" =>  $distance * $dist_att + abs($eloDifference) * $elo_att
       );
       //--
