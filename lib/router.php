@@ -93,6 +93,7 @@ class RouteNode {
       }
     }
 
+    die("Failed to find path");
     // If all else fails, we say we can't find it
     return array("target"=>404, "params"=>$params);
   }
