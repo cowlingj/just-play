@@ -23,7 +23,7 @@ function read($path, $query, $db) {
       require layout("view-broadcast");
     }
     else
-      require layout("search-form");
+      require layout("search");
   } else header("Location: /mbax4msk/just_play/");
 }
 ?>
