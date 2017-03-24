@@ -24,6 +24,7 @@ function getLoginUrl($fb) {
 
 function getAccessToken($fb) {
   try {
+      $fb = createFacebookObject();
     if (isset($_SESSION['facebook_access_token'])) {
       return $_SESSION['facebook_access_token'];
     } else {
