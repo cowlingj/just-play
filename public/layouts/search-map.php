@@ -43,7 +43,7 @@
                 print("<tr class=\"result " . $requestCount . "\">");
               }
         ?>
-          <td class="pad"><!-- --></td>
+            <td class="pad"><!-- --></td>
             <td class="info">
               <?= $request["broadcaster"]; ?> is <em><?= $request["dist"]; ?></em> km away
             </td>
