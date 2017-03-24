@@ -83,8 +83,10 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
   // orders the auxilary array  by 'best match'
 	if(!uasort($auxilaryArray, "cmp"))
     die("Killed by konst");
-  //Move sorted data in a convinient to use array
 
+  //Move sorted data in a convinient to use array
+  print_r($auxilaryArray);
+  die("ded");
   $returnArray = array();
 
   foreach ($auxilaryArray as $key => $value) {
