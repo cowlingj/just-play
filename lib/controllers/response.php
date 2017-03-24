@@ -48,7 +48,7 @@
     $broadcastLng = makeSafe($_POST["longitude"]);
     $broadcastLat = makeSafe($_POST["latitude"]);
     $_POST["sport"] = makeSafe($_SESSION["sport"]);
-    $_POST["BroadcastId"] = $userID;
+    $_POST["BroadcastId"] = getCurrentUser()["id"];
     $locationName = makeSafe($_POST["location"]);
     
     $db->query("INSERT INTO location (name, latitude, longitude) VALUES ($locationName, $broadcastLat, $broadcastLng)");
