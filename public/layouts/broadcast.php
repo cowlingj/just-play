@@ -47,14 +47,15 @@
                 </select>
               </div><!-- end .input -->
               <div class="input">
-                <label for="latitude">Latitude: </label>
-                <input id="latitude" type="text" name="latitude" value="" />
-              </div>
+                <label for="location">Name of Location</label>
+                <input type="text" name="location" />
+              </div><!-- end .input -->
               <div class="input">
-                <label for="longitude">Longitude: </label>
+                <label for="latitude">Location<br /><em>(autofilled by Clicking Desired Location on Map):</em> </label>
+                <input id="latitude" type="text" name="latitude" value="" />
                 <input id="longitude" type="text" name="longitude" value="" />
               </div><!-- end .input -->
-              <div id="map-search"><!-- google map goes here --></div>
+              <div id="google-map" style="height:360px; width:100%;"><!-- google map goes here --></div>
               <div class="submit">
                 <input type="submit" value="Place Request" />
               </div><!-- end .submit -->
@@ -62,6 +63,7 @@
           </form>
         </div><!-- end .form -->
       </div><!-- end .center-container -->
+      <div class="clear-header"></div>
     </main>
     <footer>
       <div class="center-container">
