@@ -11,21 +11,11 @@ require_once("lib/helpers/auth.php");
 // retrieves array of information about each broadcast request, when given broadcast IDs (from session variable)
 function fetchOrderedRequests($broadcasts, $db) {
 
-  // initialises the loop counter and the 2-d array that markers will be stored in
-  $markerCounter = 0;
-  $markers = array();
+  return array_map(function ($broadcast) use ($db) {
+    $sql = "SELECT * FROM broadcast WHERE broadcaster=".$id["broadcaster"];
+    return $db->query($sql)->fetch_assoc();
+  }, $broadcasts);
   
-  // for every marker given as argument
-  foreach ($broadcasts as $id) {
-    // fetches unique row for desired broadcast request and stores in array
-    $query = "SELECT * FROM broadcast WHERE id=".$id["broadcaster"];
-    $markers[$markerCounter] = $db->query($query)->fetch_assoc();
-    print_r($markers[$markerCounter]);
-    $markerCounter++;
-  } // end for every marker
-  die("Killed by Melvin");
-
-  return $markers; 
 } // end fetchOrderedRequests()
 
 function givePlayerFeedback($gameID, $playerID, $outcome, $db){
