@@ -42,9 +42,11 @@
               <div class="input">
                 <label for="name">Sport: </label>
                 <select name="sport" id="sport">
-                  <? foreach($sports as $sport): ?>
-                    <option value="<?=$sport["id"];?>"><?=$sport["name"];?></option>
-                  <? endforeach; ?>
+                <?php
+                  foreach($sports as $sport) {
+                    echo "<option value=\"".$sport["id"]."\">".$sport["name"]."</option>";
+                  }
+                ?>
                 </select>
               </div><!-- end .input -->
               <div class="input">
