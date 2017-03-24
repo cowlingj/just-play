@@ -12,10 +12,11 @@
 
       $this->client = $googleClient;
       $this->db = $db;
+      $config = json_decode($GLOBALS['SECRETS']['google_client_secret'], true);
 
       if($this->client) {
 
-        $this->client->setAuthConfig('/home/pi/oauth/oauth/client_secret_justplay.json');
+        $this->client->setAuthConfig($config);
         $this->client->setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/');
         $this->client->setScopes('email');
       } // if
