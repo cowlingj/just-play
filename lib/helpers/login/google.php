@@ -32,7 +32,7 @@
 
         $this->client->authenticate($_GET['code']);
 
-        $this->setToken($this->client->setAccessToken());
+        $this->setToken($this->client->setAccessToken($_GET['code']));
 
         $this->storeUser($this->getPayload());
 
