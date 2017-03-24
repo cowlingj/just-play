@@ -20,7 +20,10 @@ function compileRoutes() {
   $router->addRoute("GET", "/login-with-facebook","login/facebook");
   $router->addRoute("GET", "/view-accepted-broadcast", "view-accepted-broadcast");
   $router->addRoute("GET", "/login/facebook","login/facebook");
+  $router->addRoute("GET", "/login/google","login/google");
+
   $router->addRoute("GET", "/markers", "markers");
+
 
 
   return $router;
