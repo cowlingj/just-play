@@ -20,7 +20,7 @@
       getRankedRequests($latitude, $longitude, $allBroadcasts, getElo($userID, $db));
 
     // ordered array of broadcasts and their information
-    $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
+    $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"], $db);
 
     require layout("search-map");
   }
