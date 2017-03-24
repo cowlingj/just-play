@@ -6,7 +6,7 @@ function read($path, $query, $db) {
    $currentUser = getCurrentUser();
 
     // retrieve reference to all sports in database
-    $sports = $db->query("SELECT * FROM sport")->fetch_all();
+    $sports = $db->query("SELECT * FROM sport")->fetch_all(MYSQLI_ASSOC);
 
     print_r($sports);
     die("END");
