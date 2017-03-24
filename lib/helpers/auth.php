@@ -72,6 +72,23 @@
 
   function getCurrentUser() {
     global $currentUser;
+    
+    if (!is_array($currentUser))
+      $currentUser = databaseConnection(function ($db) {
+        $id = $_SESSION['current_user_id'];
+        $query =
+          "SELECT * FROM user WHERE id='$id'";
+
+        $result = $db->query($query);
+        if (!$result) {
+          echo "Error: ".$db->error."<br>";
+          die("Database Error in login (getting current user)");
+        }
+
+        return $result->fetch_assoc();
+
+      });
+    
     return $currentUser;
   }
 
