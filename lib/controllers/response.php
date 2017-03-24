@@ -5,13 +5,11 @@
   // display the map and divs relevant to the user submittin
   function read($path, $query, $db) {
       
-    require("lib/match-making.php");
 
     // make inputs safe (prevent XXS)
     $sport = makeSafe($_GET["sport"]);
     $latitude = floatval(makeSafe($_GET["latitude"]));
     $longitude = floatval(makeSafe($_GET["longitude"]));
-    $disabled = makeSafe($_GET["disabled"]);
     $userID = getCurrentUser();
 
     // All the current broadcasts for desired sport
@@ -29,7 +27,6 @@
   // submit the broadcast form and head back to search-response
   function create($path, $query, $db) {
       
-    require "/lib/match-making.php";
 
     // make inputs safe (prevent XXS)
     $_POST["userLng"] = floatval(makeSafe($_POST["lng"]));
@@ -58,7 +55,7 @@
     $_SESSION["recomendations"] = getRankedRequests($_POST["userLat"],
                                                       $_POST["userLng"],
                                                       $allBroadcasts,
-                                                      getElo($userID));
+                                                        getElo($userID));
 
     $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
 
