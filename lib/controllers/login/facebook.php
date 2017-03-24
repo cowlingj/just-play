@@ -1,9 +1,10 @@
 <?php
-
 require('lib/helpers/login/facebook.php');
 require('lib/helpers/auth.php');
 
 function read($pathArgs, $queryArgs, $database) {
+  $fb = createFacebookObject();
+  
   exchangeToken();
   if (!userExists("facebook", $id)) 
     registerUser($name, $email, "facebook", $serviceID);

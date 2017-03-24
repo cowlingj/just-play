@@ -64,7 +64,9 @@ class RouteNode {
       else $this->target = $file;
     } else {
       // Create the node. The new node is returned to us
-      $this->addNode($route[0])->addRoute(array_slice($route, 1), $file);
+      $node = $this->addNode($route[0]);
+      $this->paths[$route[0]] = $node;
+      $node->addRoute(array_slice($route, 1), $file);
     }
   }
 
@@ -117,11 +119,6 @@ class Router {
       ? $this->routes[$method]
       : $this->routes[$method] = new RouteNode($method)
     ;
-    // array_filter causes the array to contain an empty string if the uri is
-    // '/'. We reference this as the root of the app
-    // if (count($route) == 0) {
-    //   $route = array('@root');
-    // }
     $node->addRoute($route, $target);
     return $this;
   }
