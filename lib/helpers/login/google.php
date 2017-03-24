@@ -63,5 +63,6 @@
             ";
       $this->db->query($sql);
     }
+  } // google auth 
 
  ?>
