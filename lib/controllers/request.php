@@ -22,11 +22,12 @@
     $recieverID =  makeSafe($query["recieverID"]);
 
     // the broadcast information from the database
-    $broadcastInfo = $db->query("SELECT * FROM broadcast WHERE id='$broadcastID'")->fetch_assoc();
+    $broadcastInfo = $db->query("SELECT * FROM broadcast WHERE id='$broadcastID'");
     //There isn't a broadcast here
-    if ($broadcastInfo==NULL) return;
-    
-    $sport = $broadcastInfo["sport"];
+    if ($broadcastInfo==false && $broadcastInfo->num_rows==0) return;
+    $broadcastInfo=$broadcastInfo->fetch_assoc();
+
+    $sport    = $broadcastInfo["sport"];
     $location = $broadcastInfo["location"];
 
     // creating the game from broadcast information
@@ -44,7 +45,7 @@
       die("Couldn't create broadcaster with id:$broadcasterID");
     //Receiver
     if($db->query("INSERT INTO player (game_id, player_id, starting_elo) VALUES ($gameID, $recieverID, $recieverELO)"))
-      die("Couldn't create receiver with id:$recieverID");s
+      die("Couldn't create receiver with id:$recieverID");
 
     // physically deleting the broadcast from the table
     $db->query("DELETE * FROM broadcast WHERE id='$broadcastID'");

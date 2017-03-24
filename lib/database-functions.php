@@ -2,6 +2,8 @@
 // get database connection variables from config file
 require_once("config.inc.php");
 require_once("match-making.php");
+require_once("lib/helpers/auth.php");
+
 // function that connects to the database
 // n.b. config.inc.php must be required
 // For simplicity database connection never closess
@@ -30,7 +32,7 @@ function givePlayerFeedback($gameID, $playerID, $outcome, $db){
 
    $playerResult = $db->query($query);
 
-   if($playerResult->num_rows==0)  return false;
+   if($playerResult == false && $playerResult->num_rows==0)  return false;
 
    $player= $playerResult->fetch_assoc();
 
@@ -109,17 +111,22 @@ function gotoIfNotIn($path){
 }
 //A function that checks to see if users is in the right page
 function checkUserState($userID, $db){
+  if(!isLoggedIn()){
+    gotoIfNotIn("/mbax4msk/just_play/");
+    return;
+  }
   $result = $db -> query("SELECT * FROM broadcast WHERE broadcaster = $userID")->fetch_assoc();
-
+  
   //User is a broadcaster
-  if(!is_null($result)){
+  if($result != false ){
     //view broadcast
-    gotoIfNotIn("/view-broadcast");
+    gotoIfNotIn("/mbax4msk/just_play/view-broadcast");
+    return;
   }else{
     //Get all the players the user is 
-    $result= $db -> query("SELECT * FROM player WHERE player_id=".$playerID.";");
+    $result= $db -> query("SELECT * FROM player WHERE player_id=".$userID.";");
     $hasFeedBackToGive=false;
-    while ( $row = $result->fetch_assoc() ) {
+    while ($result!=false && $row = $result->fetch_assoc() ) {
       if($row["feedback"]==null){//If not given feedback for game 
           //Time for feedback has ended so force feedback
           //Does not handle the case when a player never searches for a game after the first feedback
@@ -129,14 +136,15 @@ function checkUserState($userID, $db){
           }
           $hasFeedBackToGive = true;
         }
+      }//while
 
-
-      }
       if($hasFeedBackToGive==true){
-        gotoIfNotIn("/view-accepted-broadcast");
+        gotoIfNotIn("/mbax4msk/just_play/view-accepted-broadcast");
+        return;
         //View accepted broadcast
       }else{
-        gotoIfNotIn("/search-form");
+        gotoIfNotIn("/mbax4msk/just_play/search-form");
+        return;
       }
     //User is a player in a game
     //
