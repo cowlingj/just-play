@@ -20,10 +20,11 @@ function read($pathArgs, $queryArgs, $database) {
     $email = $payload['email'];
     $id = $payload['sub'];
     
-    die("Killed by Melvin");
+    
     if (!userExists("google", $id))
       registerUser($name, $email, "google", $id);
-
+    
+    die("Killed by Melvin");
     login("google", $id);
     header("Location: /mbax4msk/just_play/search-form");
 
