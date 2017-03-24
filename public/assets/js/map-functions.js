@@ -19,9 +19,13 @@ function printMarkers(markers) {
     });
 
     marker.addListener('click', function() {
-    map.setZoom(8);
-    map.setCenter(marker.getPosition());
-  });
+      var rowIdString = "tr#" + markerCounter;
+
+      // remove the 'this' class from the currently selected row
+      $("tr.result.this").attr("class", "result");
+      // add the 'this' class to the table row that corresponds to this marker
+      $(rowIdString).attr("class", "result this");
+    });
 
     
     markerCounter++;
