@@ -58,8 +58,8 @@
 
     protected function storeUser($payload) {
       $sql = "
-            INSERT INTO user (name, email)
-            VALUES ('{$payload['name']}',
+            INSERT INTO user (profile, email)
+            VALUES ('{$payload['profile']}',
                    '{$payload['email']}')
             ";
       $this->db->query($sql);

@@ -9,8 +9,8 @@ function read($pathArgs, $queryArgs, $database) {
   $db = databaseConnection();
   $googleAuth = new GoogleAuth($db, $googleClient);
   if ($googleAuth->checkRedirectCode()) {
-    print_r($payload);
-    die();
+        print_r($googleAuth->getPayload());  
+        die();
     header("Location: /mbax4msk/just_play/search-form");
   } 
 }
