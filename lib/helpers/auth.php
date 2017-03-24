@@ -36,6 +36,7 @@
   }
 
   function isLoggedIn() {
+    print_r($_SESSION['current_user_id']);
     return isset($_SESSION['current_user_id']);
   }
 
