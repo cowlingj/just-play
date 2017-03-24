@@ -13,7 +13,9 @@ function fetchOrderedRequests($broadcasts, $db) {
 
   return array_map(function ($broadcast) use ($db) {
     $sql = "SELECT * FROM broadcast WHERE broadcaster=".$broadcast["broadcaster"];
-    return $db->query($sql)->fetch_assoc();
+    $record = $db->query($sql)->fetch_assoc();
+    $record["dist"] = $broadcast["distance"];
+    return $record;
   }, $broadcasts);
   
 } // end fetchOrderedRequests()
