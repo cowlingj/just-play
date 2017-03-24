@@ -6,7 +6,7 @@
     $currentUser = getCurrentUser();
     
     // retrieve reference to all sports in database
-    $sports = $db->query("SELECT * FROM sport")->fetch_all();
+    $sports = $db->query("SELECT * FROM sport")->fetch_all(MYSQLI_ASSOC);
 
     // an array or null containing the users broadcast
     $correspondingBroadcast = $db->query("SELECT * FROM broadcast WHERE id=".$currentUser['id'])->fetch_assoc();
