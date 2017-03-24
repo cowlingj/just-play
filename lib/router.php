@@ -64,7 +64,9 @@ class RouteNode {
       else $this->target = $file;
     } else {
       // Create the node. The new node is returned to us
-      $this->addNode($route[0])->addRoute(array_slice($route, 1), $file);
+      $node = $this->addNode($route[0]);
+      $this->paths[$route[0]] - $node;
+      $node->addRoute(array_slice($route, 1), $file);
     }
   }
 
@@ -78,9 +80,6 @@ class RouteNode {
       // The head of the array will be considered
       $segment = $route[0];
       $rest = array_slice($route, 1);
-      echo $this->id;
-      echo $segment;
-      print_r($this->paths);
       // If we have a path with the given segment name
       if (array_key_exists($segment, $this->paths)) {
         // We follow that path
@@ -120,11 +119,6 @@ class Router {
       ? $this->routes[$method]
       : $this->routes[$method] = new RouteNode($method)
     ;
-    // array_filter causes the array to contain an empty string if the uri is
-    // '/'. We reference this as the root of the app
-    // if (count($route) == 0) {
-    //   $route = array('@root');
-    // }
     $node->addRoute($route, $target);
     return $this;
   }
