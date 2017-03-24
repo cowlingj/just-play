@@ -68,7 +68,7 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
     $ELODiff = $elo-$playerELO;
 
     // if this broadcast is inside the player radius
-    $maximumDistance =5000;
+    $maximumDistance =50000000;
     if ($distance < $maximumDistance) {
       //--
       $auxilaryArray[$broadcaster]=array (
