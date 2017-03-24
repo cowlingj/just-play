@@ -22,6 +22,8 @@ function compileRoutes() {
   $router->addRoute("GET", "/login/facebook","login/facebook");
   $router->addRoute("GET", "/login/google","login/google");
 
+  $router->addRoute("GET", "/feedback","feedback");
+
   $router->addRoute("GET", "/markers", "markers");
 
 
