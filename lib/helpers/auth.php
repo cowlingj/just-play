@@ -16,6 +16,19 @@
     return $rowCount > 0;
   }
 
+  function registerUser($name, $email, $service, $serviceID) {
+    databaseConnection(function ($db) {
+
+      $sql = "INSERT INTO user (name, email) VALUES ('$name', '$email')";
+      if (!$db->query($sql)) die("Could not create user");
+
+      $userID = $db->insert_id;
+      $sql = "INSERT INTO credentials (user_id, service, service_id) VALUES ($userID, $service, $serviceID)";
+      if (!$db->query($sql)) die("Could not create user credentials");
+
+    });
+  }
+
   function isLoggedIn() {
     return isset($_SESSION['current_user_id']);
   }
@@ -24,7 +37,7 @@
     return isLoggedIn() && $_SESSION['current_user_id'] == $id;
   }
 
-  function login($userID) {
+  function login($service, $id) {
     global $currentUser;
 
     $_SESSION['current_user_id'] = $userID;
