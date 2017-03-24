@@ -1,7 +1,7 @@
 <?php
   //Request controller 
-  require("email.php");
-  require("sanitizer.php");
+  require("lib/email.php");
+  require("lib/helpers/sanitizer.php");
 
   function getElo($userID, $db) {
     $result = $db -> query("SELECT elo FROM user WHERE id = $userID")->fetch_assoc();
