@@ -42,7 +42,7 @@
 
   // submit the broadcast form and head back to search-response
   function create($path, $query, $db) {
-      
+      print_r($_POST);
 
     // make inputs safe (prevent XXS)
     $_POST["userLng"] = makeSafe($_POST["lng"]);
