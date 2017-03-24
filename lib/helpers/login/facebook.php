@@ -53,25 +53,6 @@ function exchangeToken(){
       echo "i know what your name is ;)";
   } else header ("Location:https://web.cs.manchester.ac.uk/mbax4msk/just_play/");
 }
-function getAccessToken() {
-  if (isset($_SESSION['facebook_access_token'])) {
-    return $_SESSION['facebook_access_token'];
-  } else {
-      return $helper->getAccessToken();
-  }
-} catch(Facebook\Exceptions\FacebookResponseException $e) {
-   // When Graph returns an error
-   echo 'Graph returned an error: ' . $e->getMessage();
-    exit;
-} catch(Facebook\Exceptions\FacebookSDKException $e) {
-   // When validation fails or other local issues
-  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-    exit;
- }
-}
-
-
-
 
 function exchangeTokenHelper() {
   if (isset($_SESSION['facebook_access_token'])) {
