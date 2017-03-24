@@ -6,7 +6,7 @@ function read($pathArgs, $queryArgs, $database) {
   $fb = createFacebookObject();
   
   exchangeToken();
-  echo("lets hope this works")
+  echo("lets hope this works");
   die();
   if (!userExists("facebook", $id)) 
     registerUser($name, $email, "facebook", $serviceID);
