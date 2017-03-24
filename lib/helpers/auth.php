@@ -40,18 +40,27 @@
   function login($service, $id) {
     global $currentUser;
 
-    $_SESSION['current_user_id'] = $userID;
-
     $currentUser = databaseConnection(function ($db) {
       $query =
-        "SELECT * FROM user WHERE id=$userID";
+        "SELECT * FROM credentials WHERE service='$service' AND service_id='$id'";
 
       $result = $db->query($query);
-      if (!$result) die("Database Error in userExists function");
+      if (!$result) die("Database Error in login");
+
+      $credentials = $result->fetch_assoc();
+      $query =
+        "SELECT * FROM user WHERE id='".$credentials['user_id']."'";
+
+      $result->free();
+      $result = $db->query($query);
+      if (!$result) die("Database Error in login (getting user)");
 
       return $result->fetch_assoc();
 
     });
+
+    $_SESSION['current_user_id'] = $currentUser['id'];
+
   }
 
   function getCurrentUser() {
