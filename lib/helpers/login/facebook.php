@@ -79,12 +79,7 @@ function redirectHeader() {
 function addFacebookDB() {
   $db = databaseConnection();
   $profile = getBasicInfo ($fb);
-    $id = $profile['id'];
-    $name = $profile['name'];
-    $email = $profile['email'];
-    $db ->query("INSERT INTO user (id, name, email) VALUES ($id, $name,  $email)"); 
-    $db->close();
-    return $userToDB;
+    return $profile;
 }
 
 function getBasicInfo($fb) {

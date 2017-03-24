@@ -40,19 +40,17 @@ class RouteNode {
   }
 
   private function addNode($segment) {
-    $node = new RouteNode($segment);
-    if ($node->isParameter) {
-      // We can only have one parameter per node
-      // The parameter that is already there takes priority
-      if ($this->nextParameter == NULL) {
-        $this->nextParameter = $node;
-      } else die("Next parameter already set for segment ".$this->id);
+    $node = NULL;
+    if (isset($this->paths[$segment])) {
+      $node = $this->paths[$segment];
     } else {
-      // We cannot overwite segments
-      if (isset($this->paths[$segment])) {
-        die("Path $segment already set for segment ".$this->id);
-      } else {
-        $this->paths[$segment] = $node;
+      $node = new RouteNode($segment);
+      if ($node->isParameter) {
+        // We can only have one parameter per node
+        // The parameter that is already there takes priority
+        if ($this->nextParameter == NULL) {
+          $this->nextParameter = $node;
+        } else die("Next parameter already set for segment ".$this->id);
       }
     }
     return $node;
@@ -80,7 +78,6 @@ class RouteNode {
       // The head of the array will be considered
       $segment = $route[0];
       $rest = array_slice($route, 1);
-
       // If we have a path with the given segment name
       if (array_key_exists($segment, $this->paths)) {
         // We follow that path
@@ -95,6 +92,7 @@ class RouteNode {
       }
     }
 
+    die("Failed to find path");
     // If all else fails, we say we can't find it
     return array("target"=>404, "params"=>$params);
   }
@@ -121,9 +119,9 @@ class Router {
     ;
     // array_filter causes the array to contain an empty string if the uri is
     // '/'. We reference this as the root of the app
-    if (count($route) == 0) {
-      $route = array('@root');
-    }
+    // if (count($route) == 0) {
+    //   $route = array('@root');
+    // }
     $node->addRoute($route, $target);
     return $this;
   }
@@ -132,7 +130,7 @@ class Router {
     // We slice te first two segments off because they will be
     // <username> and 'just-play'
     $route = array_values(array_filter(array_slice(explode("/", $uri), 3)));
-    if (count($route) == 0) $route = array('@root');
+    // if (count($route) == 0) $route = array('@root');
     return array_key_exists($method, $this->routes)
       ? $this->routes[$method]->resolve($route, array())
       : array("target"=>404, "params"=>array())
