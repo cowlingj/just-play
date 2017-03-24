@@ -1,6 +1,6 @@
 <?php
 
-  require('/lib/helpers/google-ouath/app/init.php');
+  require('lib/helpers/google-ouath/app/init.php');
 
   class GoogleAuth {
 
