@@ -13,6 +13,16 @@ function printMarkers(markers) {
       position: new google.maps.LatLng(marker.latitude, marker.longitude),
       map: map
     }); // end marker object
+
+    markerArray[markerCounter].addListener("click", function() {
+      document.getElementById();
+    });
+
+    marker.addListener('click', function() {
+    map.setZoom(8);
+    map.setCenter(marker.getPosition());
+  });
+
     
     markerCounter++;
   });
