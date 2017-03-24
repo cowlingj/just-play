@@ -46,13 +46,9 @@ function exchangeToken(){
    $fb = createFacebookObject();
    $accessToken =  getAccessToken($fb);
   if (isset($accessToken)) {
-      echo "access token found";
     exchangeTokenHelper($fb, $accessToken);
-      echo "helper method helped... maybe";
-    redirectHeader(); 
-      echo "what ever this thing does";
     return addFacebookDB();
-  } else header ("Location:https://web.cs.manchester.ac.uk/mbax4msk/just_play/");
+  } else header ("Location: /mbax4msk/just_play/");
 }
 
 function exchangeTokenHelper($fb, $accessToken) {
