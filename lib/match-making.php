@@ -65,15 +65,16 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
     $elo = $row["elo"];
 
  		$distance = vincentyGreatCircleDistance($playerLatitude, $playerLongitude, $latitude, $longitude);
-    $ELODiff = $elo-$playerELO;
+    $eloDifference = $elo-$playerELO;
 
     // if this broadcast is inside the player radius
-    $maximumDistance =5000;
+    $maximumDistance =50000000;
+    global $dist_att, $elo_att, $disable_att, $k_constant;
     if ($distance < $maximumDistance) {
       //--
       $auxilaryArray[$broadcaster]=array (
                                   "distance"  => $distance,
-                                  "ELODiff" => $ELODiff,
+                                  "ELODiff" => $eloDifference,
                                   "matchStrength" =>  $distance * $dist_att + abs($eloDifference) * $elo_att
       );
       //--
@@ -81,9 +82,10 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
   }
 
   // orders the auxilary array  by 'best match'
-	uasort($auxilaryArray, "cmp");
-  //Move sorted data in a convinient to use array
+	if(!uasort($auxilaryArray, "cmp"))
+    die("Killed by konst");
 
+  //Move sorted data in a convinient to use array
   $returnArray = array();
 
   foreach ($auxilaryArray as $key => $value) {
