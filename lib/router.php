@@ -65,7 +65,7 @@ class RouteNode {
     } else {
       // Create the node. The new node is returned to us
       $node = $this->addNode($route[0]);
-      $this->paths[$route[0]] - $node;
+      $this->paths[$route[0]] = $node;
       $node->addRoute(array_slice($route, 1), $file);
     }
   }
