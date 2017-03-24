@@ -85,7 +85,7 @@ function addFacebookDB() {
 function getBasicInfo($fb) {
     try {
     $profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
-    echo $profile_request['name'];
+    echo "this works";
     die();
     return $profile_request->getGraphNode()->asArray();
   } catch(Facebook\Exceptions\FacebookResponseException $e) {
