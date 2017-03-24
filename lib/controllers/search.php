@@ -4,6 +4,8 @@ function read($path, $query, $db) {
 
   if(isLoggedIn()) {
    $currentUser = getCurrentUser();
+   print_r($currentUser);
+   die("Killed by Melvin");
 
     // db query will have 0 or 1 row depending on whether or not the user has a broadcast request
     // if it has a row, that row will be the users broadcast request
