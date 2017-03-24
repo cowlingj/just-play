@@ -42,9 +42,10 @@ function getAccessToken() {
 
 function exchangeToken(){
    $fb = createFacebookObject();
+   echo $_SESSION['facebook_access_token'];
+   die();
   if (isset($accessToken)) {
       echo "access token found";
-      die();
     exchangeTokenHelper();
       echo "helper method helped... maybe";
     redirectHeader(); 
