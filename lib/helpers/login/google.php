@@ -8,7 +8,7 @@
     protected $client;
     protected $token;
 
-    public function __construct(DB $db = null, Google_Client $googleClient = null) {
+    public function __construct($db, Google_Client $googleClient = null) {
 
       $this->client = $googleClient;
       $this->db = $db;
@@ -44,8 +44,8 @@
 
     // get the payload  
     public function getPayload() {
-      $token = $this->client->verifyIdToken()->getAttributes()['payload'];
-      return $token; 
+      $payload = $this->client->verifyIdToken()->getAttributes()['payload'];
+      return $payload; 
     }
 
     public function setToken($token) {
@@ -57,10 +57,9 @@
 
     protected function storeUser($payload) {
       $sql = "
-            INSERT INTO user (id, name, email)
-            VALUES ({$payload['id']}, '{$payload['name']}',
+            INSERT INTO user (name, email)
+            VALUES ('{$payload['name']}',
                    '{$payload['email']}')
-            ON DUPLICATE KEY UPDATE id = id
             ";
       $this->db->query($sql);
     }
