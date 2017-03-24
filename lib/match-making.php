@@ -65,7 +65,7 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
     $elo = $row["elo"];
 
  		$distance = vincentyGreatCircleDistance($playerLatitude, $playerLongitude, $latitude, $longitude);
-    $ELODiff = $elo-$playerELO;
+    $eloDifference = $elo-$playerELO;
 
     // if this broadcast is inside the player radius
     $maximumDistance =50000000;
