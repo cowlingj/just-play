@@ -17,7 +17,7 @@
 
     // An ordered array of broadcast recomendation IDs 
     
-    $results = array_map(function ($broadcast) {
+    $results = array_map(function ($broadcast) use ($db) {
       $user = $db->query("SELECT * FROM user WHERE id=".$broadcast["broadcaster"])->fetch_assoc();
       $loc = $db->query("SELECT * FROM location WHERE id=".$broadcast["location"])->fetch_assoc();
       return array(
