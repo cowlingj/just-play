@@ -20,8 +20,10 @@ function fetchOrderedRequests($broadcasts, $db) {
     // fetches unique row for desired broadcast request and stores in array
     $query = "SELECT * FROM broadcast WHERE id=".$id["broadcaster"];
     $markers[$markerCounter] = $db->query($query)->fetch_assoc();
+    print_r($markers[$markerCounter]);
     $markerCounter++;
   } // end for every marker
+  die("Killed by Melvin");
 
   return $markers; 
 } // end fetchOrderedRequests()
