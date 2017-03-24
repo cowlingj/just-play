@@ -44,10 +44,10 @@ function getAccessToken($fb) {
 
 function exchangeToken(){
    $fb = createFacebookObject();
-   $accessToken =  getAccessToken($fb);
+   $accessToken = getAccessToken($fb);
   if (isset($accessToken)) {
     exchangeTokenHelper($fb, $accessToken);
-    return addFacebookDB();
+    return getBasicInfo($fb);
   } else header ("Location: /mbax4msk/just_play/");
 }
 
@@ -81,6 +81,7 @@ function addFacebookDB() {
 
 function getBasicInfo($fb) {
     try {
+        
     $profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
     return $profile_request->getGraphNode()->asArray();
   } catch(Facebook\Exceptions\FacebookResponseException $e) {
@@ -88,7 +89,7 @@ function getBasicInfo($fb) {
     echo 'Graph returned an error: ' . $e->getMessage();
     session_destroy();
     // redirecting user back to app login page
-    header("Location: /public/layouts/search.php");
+    header("Location: /mbax4msk/just_play/");
     exit;
   } catch(Facebook\Exceptions\FacebookSDKException $e) {
     // When validation fails or other local issues
