@@ -4,8 +4,6 @@ function read($path, $query, $db) {
 
   if(isLoggedIn()) {
    $currentUser = getCurrentUser();
-   print_r($currentUser);
-   die("Killed by Melvin");
 
     // retrieve reference to all sports in database
     $sports = $db->query("SELECT * FROM sport")->fetch_all();
