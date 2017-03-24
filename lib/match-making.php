@@ -58,7 +58,7 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
   $auxilaryArray = array();
 
 	// loop through each row for
-	while ($row = $queryResults->fetch_array()) {
+	while ($row = $queryResults) {
     $broadcaster = $row["broadcaster"];
     $latitude = $row["latitude"];
 		$longitude = $row["longitude"];
