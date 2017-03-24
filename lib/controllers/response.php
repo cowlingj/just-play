@@ -9,7 +9,8 @@
     $sport = makeSafe($_GET["sport"]);
     $latitude = floatval(makeSafe($_GET["latitude"]));
     $longitude = floatval(makeSafe($_GET["longitude"]));
-    $userID = getCurrentUser();
+    $currentUser = getCurrentUser();
+    $userID = $currentUser["id"];
 
     // All the current broadcasts for desired sport
     $allBroadcasts = $db->query("SELECT * FROM broadcast WHERE sport='$sport'")->fetch_all();
@@ -71,7 +72,7 @@
   }
 
   function getElo($userID, $db) {
-    $result = $db -> query("SELECT elo FROM user WHERE id = $userID")->fetch_assoc();
+    $result = $db ->query("SELECT elo FROM user WHERE id=$userID")->fetch_assoc();
     return $result["elo"];
   }
 ?>
