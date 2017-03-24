@@ -10,7 +10,6 @@ function read($pathArgs, $queryArgs, $database) {
   $googleAuth = new GoogleAuth($db, $googleClient);
 
   if ($googleAuth->checkRedirectCode()) {
-
     $payload = $googleAuth->getPayload();
     $name = null;
     if (isset($payload['name']))
@@ -20,11 +19,12 @@ function read($pathArgs, $queryArgs, $database) {
 
     $email = $payload['email'];
     $id = $payload['sub'];
-
-    if (!userExists("google", $id)) 
+    
+    
+    if (!userExists("google", $id))
       registerUser($name, $email, "google", $id);
-
-    login("google", $serviceID);
+    
+    login("google", $id);
     header("Location: /mbax4msk/just_play/search-form");
 
   } 
