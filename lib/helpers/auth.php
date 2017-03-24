@@ -7,6 +7,10 @@
       . "AND service_id=$id;";
 
     $rowCount = databaseConnection(function ($db) {
+      $query =
+        "SELECT * FROM credentials "
+        . "WHERE service='$service' "
+        . "AND service_id=$id;";
       $result = $db->query($query);
       if (!$result) die("Database Error in userExists function");
 
