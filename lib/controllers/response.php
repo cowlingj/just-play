@@ -12,7 +12,7 @@
     $userID = getCurrentUser();
 
     // All the current broadcasts for desired sport
-    $allBroadcasts = $db->query("SELECT * FROM broadcasts WHERE sport='" . $sport ."'")->fetch_all();
+    $allBroadcasts = $db->query("SELECT * FROM broadcast WHERE sport='$sport'")->fetch_all();
 
     // An ordered array of broadcast recomendation IDs 
     $_SESSION["recomendations"] = getRankedRequests($latitude, $longitude, $allBroadcasts, getElo($userID, $db));
