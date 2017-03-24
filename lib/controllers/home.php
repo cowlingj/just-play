@@ -15,7 +15,7 @@ function read($pathArgs, $queryArgs, $database) {
 
   $facebookLoginUrl = getLoginUrl(createFacebookObject()); 
 
-  $googleLoginUrl = auth->getAuthUrl(); 
+  $googleLoginUrl = auth->client->getAuthUrl(); 
 
   require layout("login");
 }
