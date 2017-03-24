@@ -30,6 +30,9 @@
     
     $_SESSION["recomendations"] =
       getRankedRequests($latitude, $longitude, $results, getElo($userID, $db));
+     
+    print_r($_SESSION["recomendations"]);
+    die("Killed by Melvin");
 
     // ordered array of broadcasts and their information
     $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"], $db);
