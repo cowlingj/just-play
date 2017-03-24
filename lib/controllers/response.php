@@ -45,21 +45,20 @@
       print_r($_POST);
 
     // make inputs safe (prevent XXS)
-    $_POST["userLng"] = makeSafe($_POST["lng"]);
-    $_POST["userLat"] = makeSafe($_POST["lat"]);
-    $_POST["broadcastLng"] = floatval(makeSafe($_POST["broadcastLng"]));
-    $_POST["broadcastLat"] = floatval(makeSafe($_POST["broadcastLat"]));
-    $_POST["disabled"] = makeSafe($_POST[getUserInfo("disabled")]);
+    $broadcastLng = makeSafe($_POST["longitude"]);
+    $broadcastLat = makeSafe($_POST["latitude"]);
     $_POST["sport"] = makeSafe($_SESSION["sport"]);
-    $_POST["BroadcastId"] = $userID;    
+    $_POST["BroadcastId"] = $userID;
+    $locationName = makeSafe($_POST["location"]);
+    
+    $db->query("INSERT INTO location (name, latitude, longitude) VALUES ($locationName, $broadcastLat, $broadcastLng)");
 
     // insert a new broadcast request
-    $db->prepare("INSERT INTO broadcasts (?, ?, ?, ?, ?)");
-    $db->bind_param("dddsb", $_POST["BroadcastId"],
-                             $_POST["broadcastLng"],
-                             $_POST["broadcastLat"],
-                             $_POST["sport"],
-                             $_POST["disabled"]);
+    $db->prepare("INSERT INTO broadcasts (broadcaster, reciever, location, sport) VALUES (?, ?, ?, ?)");
+    $db->bind_param("ddds", $_POST["BroadcastId"],
+                             $_POST["BroadcastId"],
+                             $location["id"],
+                             $_POST["sport"]);
     $db->execute();
     
     // READ response.php  
