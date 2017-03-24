@@ -86,8 +86,6 @@ function getRankedRequests($playerLatitude, $playerLongitude, $queryResults, $pl
     die("Killed by konst");
 
   //Move sorted data in a convinient to use array
-  print_r($auxilaryArray);
-  die("ded");
   $returnArray = array();
 
   foreach ($auxilaryArray as $key => $value) {
