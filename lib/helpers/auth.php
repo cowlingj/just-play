@@ -20,12 +20,15 @@
     databaseConnection(function ($db) use ($name, $email, $service, $serviceID){
 
       $sql = "INSERT INTO user (name, email) VALUES ('$name', '$email')";
-      if (!$db->query($sql)) die("Could not create user");
+      if (!$db->query($sql)) {
+        echo "Error: ".$db->error."<br>";
+        die("Could not create user");
+      }
 
       $userID = $db->insert_id;
       $sql = "INSERT INTO credentials (user_id, service, service_id) VALUES ($userID, '$service', '$serviceID')";
       if (!$db->query($sql)){
-        echo $db->error;
+        echo "Error: ".$db->error."<br>";
         die("Could not create user credentials");
       }
 
