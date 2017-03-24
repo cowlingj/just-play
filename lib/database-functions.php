@@ -13,13 +13,13 @@ function fetchOrderedRequests($broadcasts, $db) {
 
   // initialises the loop counter and the 2-d array that markers will be stored in
   $markerCounter = 0;
-  $markers =  [];
+  $markers = array();
   
   // for every marker given as argument
-  foreach ($broadcasts as $marker) {
+  foreach ($broadcasts as $id) {
     // fetches unique row for desired broadcast request and stores in array
-    $query = "SELECT * FROM broadcast WHERE id=" . $marker . ";";
-    $markers[$markerCounter] = $db->query($query);
+    $query = "SELECT * FROM broadcast WHERE id=$id";
+    $markers[$markerCounter] = $db->query($query)->fetch_assoc();
     $markerCounter++;
   } // end for every marker
 
