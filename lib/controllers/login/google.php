@@ -10,7 +10,7 @@ function read($pathArgs, $queryArgs, $database) {
   $googleAuth = new GoogleAuth($db, $googleClient);
 
   if ($googleAuth->checkRedirectCode()) {
-
+    die("Killed by Melvin");
     $payload = $googleAuth->getPayload();
     $name = null;
     if (isset($payload['name']))
@@ -21,7 +21,7 @@ function read($pathArgs, $queryArgs, $database) {
     $email = $payload['email'];
     $id = $payload['sub'];
 
-    if (!userExists("google", $id)) die("Killed by Melvin");
+    if (!userExists("google", $id))
       registerUser($name, $email, "google", $id);
 
     login("google", $serviceID);
