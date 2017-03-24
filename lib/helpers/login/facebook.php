@@ -78,10 +78,10 @@ function getBasicInfo($fb, $db) {
   	try {
 		$profile_request = $fb->get('/me?fields=name,first_name,last_name,email');
 		$profile = $profile_request->getGraphNode()->asArray();
-                $id = $profile['id'];
-                $name = $profile['name'];
-                $email = $profile['email'];
-                $db ->query("INSERT INTO user (id, name, email) VALUES (1, 'jytd', 'liuyf')"); 
+    $id = $profile['id'];
+    $name = $profile['name'];
+    $email = $profile['email'];
+    $db ->query("INSERT INTO user (id, name, email) VALUES ($id, $name,  $email)"); 
 	} catch(Facebook\Exceptions\FacebookResponseException $e) {
 		// When Graph returns an error
 		echo 'Graph returned an error: ' . $e->getMessage();
