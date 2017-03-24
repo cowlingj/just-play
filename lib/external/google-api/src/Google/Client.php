@@ -23,7 +23,6 @@ use Google\Auth\OAuth2;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Auth\Credentials\UserRefreshCredentials;
 use GuzzleHttp\Client;
-        $this->client->authenticate($_GET['code']);
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Ring\Client\StreamHandler;
 use GuzzleHttp\Psr7;
