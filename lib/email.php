@@ -1,6 +1,6 @@
 <?php
-require_once 'config.inc.php';
-require_once 'MailManager.php';
+require_once ('config.inc.php');
+require_once ('MailManager.php');
 
 require_once("database-functions.php");
 $FeedbackBaseURL = "justplay.com/feedback";
