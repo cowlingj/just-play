@@ -78,6 +78,7 @@ class RouteNode {
       // The head of the array will be considered
       $segment = $route[0];
       $rest = array_slice($route, 1);
+      print_r($this->paths);
       // If we have a path with the given segment name
       if (array_key_exists($segment, $this->paths)) {
         // We follow that path
