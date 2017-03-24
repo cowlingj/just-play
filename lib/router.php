@@ -124,6 +124,7 @@ class Router {
     // if (count($route) == 0) {
     //   $route = array('@root');
     // }
+    print_r($route);
     $node->addRoute($route, $target);
     return $this;
   }
