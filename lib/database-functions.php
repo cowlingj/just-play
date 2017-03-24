@@ -36,7 +36,7 @@ function givePlayerFeedback($gameID, $playerID, $outcome, $db){
 
    if($player["feedback"]==null){
    	$query= "UPDATE player SET feedback=".MatchOutCome::toString($outcome)." WHERE player_id=".$player_id." AND game_id=".$game_id.";";
-   }else return false;
+   }else die("Player already gave feedback.");
 
    //Finally execute the query
    $db->query($query);
@@ -83,11 +83,12 @@ function updatePlayersElosOnFeedback($player1ID, $player2ID, $db){
 
   //Player 1 
   $query = "UPDATE user set elo=".$newElo["ply1"]." WHERE id=".$player1ID.";";
-  $db->query($query);
+  if(!$db->query($query)) die("1Failed to update elo of user:$player1ID");
 
   //Player 2
   $query = "UPDATE user set elo=".$newElo["ply2"]." WHERE id=".$player2ID.";";
-  $db->query($query);
+  if(!$db->query($query)) die("2Failed to update elo of user:$player2ID");
+
 
   //Finally remove the 2 player rows
   $query = "DELETE FROM player WHERE player_id=".$player1ID.";";

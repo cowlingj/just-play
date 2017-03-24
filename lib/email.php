@@ -42,7 +42,7 @@ function sendFeedbackEmailToPerson($userEmail, $location, $userID, $gameID) {
     $mm->set_body($emailBody);
     $mm->send();
   } catch (Exception $e){
-    print $e->getMessage() . "\n";
+    die("Email error: ".$e->getMessage()."\n");
   }
 }
 ?>

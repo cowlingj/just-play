@@ -41,11 +41,10 @@
     $broacastELO=getElo($broadcasterID,$db);
     //Broadcaster
     if(!$db->query("INSERT INTO player (game_id, player_id, starting_elo) VALUES ($gameID, $broadcasterID, $broacastELO)"))
-      return;
+      die("Couldn't create broadcaster with id:$broadcasterID");
     //Receiver
     if($db->query("INSERT INTO player (game_id, player_id, starting_elo) VALUES ($gameID, $recieverID, $recieverELO)"))
-      return;
-
+      die("Couldn't create receiver with id:$recieverID");s
 
     // physically deleting the broadcast from the table
     $db->query("DELETE * FROM broadcast WHERE id='$broadcastID'");
