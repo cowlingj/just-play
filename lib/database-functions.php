@@ -12,7 +12,7 @@ require_once("lib/helpers/auth.php");
 function fetchOrderedRequests($broadcasts, $db) {
 
   return array_map(function ($broadcast) use ($db) {
-    $sql = "SELECT * FROM broadcast WHERE broadcaster=".$id["broadcaster"];
+    $sql = "SELECT * FROM broadcast WHERE broadcaster=".$broadcast["broadcaster"];
     return $db->query($sql)->fetch_assoc();
   }, $broadcasts);
   
