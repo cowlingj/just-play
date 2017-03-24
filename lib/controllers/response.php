@@ -8,8 +8,8 @@
 
     // make inputs safe (prevent XXS)
     $sport = makeSafe($_GET["sport"]);
-    $latitude = makeSafe($_GET["latitude"]);
-    $longitude = makeSafe($_GET["longitude"]);
+    $latitude = floatval(makeSafe($_GET["latitude"]));
+    $longitude = floatval(makeSafe($_GET["longitude"]));
     $disabled = makeSafe($_GET["disabled"]);
     
 
@@ -31,10 +31,10 @@
     require "/lib/match-making.php";
 
     // make inputs safe (prevent XXS)
-    $_POST["userLng"] = makeSafe($_POST["lng"]);
-    $_POST["userLat"] = makeSafe($_POST["lat"]);
-    $_POST["broadcastLng"] = makeSafe($_POST["broadcastLng"]);
-    $_POST["broadcastLat"] = makeSafe($_POST["broadcastLat"]);
+    $_POST["userLng"] = floatval(makeSafe($_POST["lng"]));
+    $_POST["userLat"] = floatval(makeSafe($_POST["lat"]));
+    $_POST["broadcastLng"] = floatval(makeSafe($_POST["broadcastLng"]));
+    $_POST["broadcastLat"] = floatval(makeSafe($_POST["broadcastLat"]));
     $_POST["disabled"] = makeSafe($_POST[getUserInfo("disabled")]);
     $_POST["sport"] = makeSafe($_SESSION["sport"]);
     $_POST["BroadcastId"] = $userID;    
