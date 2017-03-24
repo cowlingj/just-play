@@ -13,10 +13,11 @@
     $userID = $currentUser["id"];
 
     // All the current broadcasts for desired sport
-    $allBroadcasts = $db->query("SELECT * FROM broadcast WHERE sport='$sport'")->fetch_all();
+    $allBroadcasts = $db->query("SELECT * FROM broadcast WHERE sport='$sport'")->fetch_all(MYSQLI_ASSOC);
 
     // An ordered array of broadcast recomendation IDs 
-    $_SESSION["recomendations"] = getRankedRequests($latitude, $longitude, $allBroadcasts, getElo($userID, $db));
+    $_SESSION["recomendations"] =
+      getRankedRequests($latitude, $longitude, $allBroadcasts, getElo($userID, $db));
 
     // ordered array of broadcasts and their information
     $orderedRequests = fetchOrderedRequests($_SESSION["recomendations"]);
