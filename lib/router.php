@@ -124,7 +124,6 @@ class Router {
     // if (count($route) == 0) {
     //   $route = array('@root');
     // }
-    print_r($route);
     $node->addRoute($route, $target);
     return $this;
   }
@@ -134,6 +133,7 @@ class Router {
     // <username> and 'just-play'
     $route = array_values(array_filter(array_slice(explode("/", $uri), 3)));
     // if (count($route) == 0) $route = array('@root');
+    print_r($route);
     return array_key_exists($method, $this->routes)
       ? $this->routes[$method]->resolve($route, array())
       : array("target"=>404, "params"=>array())
