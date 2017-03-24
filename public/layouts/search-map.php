@@ -48,7 +48,7 @@
               <?= $request["broadcaster"]; ?> is <em><?= $request["dist"]; ?></em> km away
             </td>
             <td class="button">
-              <a href="/mbax4msk/request?broadcastID=<?= $request["id"]; ?>&recieverId=<?= $userID; ?>">Accept</a>
+              <a href="/mbax4msk/just_play/request?broadcastID=<?= $request["id"]; ?>&recieverId=<?= $userID; ?>">Accept</a>
             </td>
           </tr>
         <?php
