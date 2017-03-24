@@ -35,10 +35,6 @@
 
         $this->setToken($this->client->getAccessToken());
 
-        $this->storeUser($this->getPayload());
-
-        $payload = $this->getPayload();
-
         return true;
       }
     }

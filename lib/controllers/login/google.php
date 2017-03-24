@@ -8,10 +8,25 @@ function read($pathArgs, $queryArgs, $database) {
   $googleClient = new Google_Client();
   $db = databaseConnection();
   $googleAuth = new GoogleAuth($db, $googleClient);
+
   if ($googleAuth->checkRedirectCode()) {
-        print_r($googleAuth->getPayload());  
-        die();
+
+    $payload = $this->getPayload();
+    $name = null;
+    if (isset($payload['name'])
+      $name = $payload['name'];
+    else
+      $name =$payload['email'];
+
+    $email = $payload['email'];
+    $id = $payload['sub'];
+
+    if (!userExists("google", $id)) 
+      registerUser($name, $email, "google", $id);
+
+    login("google", $serviceID);
     header("Location: /mbax4msk/just_play/search-form");
+
   } 
 }
 

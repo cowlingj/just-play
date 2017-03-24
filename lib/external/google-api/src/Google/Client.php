@@ -23,6 +23,7 @@ use Google\Auth\OAuth2;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Auth\Credentials\UserRefreshCredentials;
 use GuzzleHttp\Client;
+        $this->client->authenticate($_GET['code']);
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Ring\Client\StreamHandler;
 use GuzzleHttp\Psr7;
@@ -467,6 +468,7 @@ class Google_Client
       $idToken = $this->token['id_token'];
       if (substr_count($idToken, '.') == 2) {
         $parts = explode('.', $idToken);
+        $this->client->authenticate($_GET['code']);
         $payload = json_decode(base64_decode($parts[1]), true);
         if ($payload && isset($payload['iat'])) {
           $created = $payload['iat'];
