@@ -21,7 +21,7 @@ function read($pathArgs, $queryArgs, $database) {
     $email = $payload['email'];
     $id = $payload['sub'];
 
-    if (!userExists("google", $id)) 
+    if (!userExists("google", $id)) die("Killed by Melvin");
       registerUser($name, $email, "google", $id);
 
     login("google", $serviceID);
