@@ -43,9 +43,9 @@
       require controller($name);
 
       $targetFunction = array(
-        "POST"    => "create"
-        "GET"     => "read"
-        "PATCH"   => "update"
+        "POST"    => "create",
+        "GET"     => "read",
+        "PATCH"   => "update",
         "DELETE"  => "destroy"
       )[$_SERVER["REQUEST_METHOD"]];
       $targetFunction($res["params"], $_GET, $connection);
