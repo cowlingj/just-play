@@ -78,7 +78,6 @@ class RouteNode {
       // The head of the array will be considered
       $segment = $route[0];
       $rest = array_slice($route, 1);
-      print_r($this->paths);
       // If we have a path with the given segment name
       if (array_key_exists($segment, $this->paths)) {
         // We follow that path
@@ -120,9 +119,9 @@ class Router {
     ;
     // array_filter causes the array to contain an empty string if the uri is
     // '/'. We reference this as the root of the app
-    if (count($route) == 0) {
-      $route = array('@root');
-    }
+    // if (count($route) == 0) {
+    //   $route = array('@root');
+    // }
     $node->addRoute($route, $target);
     return $this;
   }
@@ -131,7 +130,7 @@ class Router {
     // We slice te first two segments off because they will be
     // <username> and 'just-play'
     $route = array_values(array_filter(array_slice(explode("/", $uri), 3)));
-    if (count($route) == 0) $route = array('@root');
+    // if (count($route) == 0) $route = array('@root');
     return array_key_exists($method, $this->routes)
       ? $this->routes[$method]->resolve($route, array())
       : array("target"=>404, "params"=>array())
