@@ -18,7 +18,7 @@ function read($path, $query, $db) {
     }
     // test whether the user has a broadcast request
     // if so view that request else view the search form
-    if($correspondingBroadcast->num_rows() > 0) {
+    if($correspondingBroadcast->num_rows > 0) {
       $correspondingBroadcast = $correspondingBroadcast->fetch_assoc();
       require layout("view-broadcast");
     }
