@@ -43,6 +43,7 @@ function getAccessToken() {
 function exchangeToken(){
    $fb = createFacebookObject();
     echo "checking for access token";
+   die("losoubvos");
   if (isset($accessToken)) {
       echo "access token found";
     exchangeTokenHelper();
