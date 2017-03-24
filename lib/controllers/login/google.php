@@ -11,7 +11,8 @@ function read($pathArgs, $queryArgs, $database) {
   $googleAuth = new GoogleAuth($db, $googleClient);
   $googleAuth->checkRedirectCode();
   $payload = $googleAuth->getPayload();
-  login('google', payload['']) 
+  print_r($payload);
+  die();
   // Send to databse 
 
   header("Location: /mbax4msk/just_play/search-form");

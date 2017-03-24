@@ -17,8 +17,8 @@
       if($this->client) {
 
         $this->client->setAuthConfig($config);
-        $this->client->setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/');
-        $this->client->setScopes('email');
+        $this->client->setRedirectUri('http://web.cs.manchester.ac.uk/mbax4msk/just_play/lib/conrollers/login/google.php');
+        $this->client->setScopes('email', 'profile');
       } // if
 
     } // construct
