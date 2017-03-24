@@ -4,6 +4,7 @@
 
   // display the map and divs relevant to the user submittin
   function read($path, $query, $db) {
+
     // make inputs safe (prevent XXS)
     $sport = makeSafe($_GET["sport"]);
     $latitude = floatval(makeSafe($_GET["latitude"]));
@@ -27,8 +28,8 @@
       
 
     // make inputs safe (prevent XXS)
-    $_POST["userLng"] = floatval(makeSafe($_POST["l
-    $_POST["userLat"] = floatval(makeSafe($_POST["at"]));
+    $_POST["userLng"] = makeSafe($_POST["lng"]);
+    $_POST["userLat"] = makeSafe($_POST["lat"]);
     $_POST["broadcastLng"] = floatval(makeSafe($_POST["broadcastLng"]));
     $_POST["broadcastLat"] = floatval(makeSafe($_POST["broadcastLat"]));
     $_POST["disabled"] = makeSafe($_POST[getUserInfo("disabled")]);
