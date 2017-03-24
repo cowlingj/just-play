@@ -28,11 +28,12 @@
     }
 
     public function checkRedirectCode() {
+
       if(isset($_GET['code'])) {
 
         $this->client->authenticate($_GET['code']);
 
-        $this->setToken($this->client->setAccessToken());
+        $this->setToken($this->client->getAccessToken());
 
         $this->storeUser($this->getPayload());
 
