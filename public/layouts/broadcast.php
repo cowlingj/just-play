@@ -16,7 +16,7 @@
     -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP9ofPjKpQ3eRwJFOwPgP-BBXgTn9phis" type="text/javascript"></script>
     <?= style("style"); ?>
-    <?= script("jquery-min"); ?>
+    <?= script("jquery.min"); ?>
     <?= script("broadcast-map"); ?>
   </head>
   <body>
