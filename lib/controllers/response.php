@@ -54,10 +54,11 @@
     $db->query("INSERT INTO location (name, latitude, longitude) VALUES ($locationName, $broadcastLat, $broadcastLng)");
 
     // insert a new broadcast request
-    $db->prepare("INSERT INTO broadcasts (broadcaster, reciever, location, sport) VALUES (?, ?, ?, ?)")->bind_param("ddds", $_POST["BroadcastId"],
+    $q = $db->prepare("INSERT INTO broadcasts (broadcaster, reciever, location, sport) VALUES (?, ?, ?, ?)")->bind_param("ddds", $_POST["BroadcastId"],
                              $_POST["BroadcastId"],
                              $location["id"],
-                             $_POST["sport"])->execute();
+                             $_POST["sport"]);
+                             $q->execute();
     
     // READ response.php  
 
