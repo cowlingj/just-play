@@ -11,6 +11,7 @@
       if (!$result) die("Database Error in userExists function");
     
       print_r($result->fetch_all());
+      die("Killed my Melvin");
       return $result->num_rows;
     });
 
