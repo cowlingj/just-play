@@ -9,7 +9,7 @@ function read($pathArgs, $queryArgs, $database) {
   $text = "Welcome!";
 
   // Create a GoogleAuth object.
-  $db = new DB();
+  $db = databaseConnection();
   $googleClient = new Google_Client();
   $auth = new GoogleAuth($db, $googleClient);
 
